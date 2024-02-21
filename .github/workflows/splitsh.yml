@@ -1,0 +1,19 @@
+on: [push]
+
+jobs:
+    split:
+        runs-on: ubuntu-22.04
+        name: split
+        steps:
+            - name: Get branch name
+              shell: bash
+              run: echo "branch=${GITHUB_REF#refs/heads/}" >> $GITHUB_OUTPUT
+              id: branch
+            - name: Split
+              id: splitsh
+              uses: docker://k0d3r1s/alpine:action-split
+              env:
+                  BRANCH: ${{ steps.branch.outputs.branch }}
+                  REPO: ${{ github.repository }}
+                  GH_TOKEN: ${{ secrets.GH_TOKEN }}
+                  COMPONENTS_URL: https://raw.githubusercontent.com/vairogs/vairogs/${{ steps.branch.outputs.branch }}/.github/deploy/components.json

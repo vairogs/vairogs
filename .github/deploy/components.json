@@ -1,0 +1,14 @@
+[
+    {
+        "path": "src/Vairogs/Bundle",
+        "repo": "https://GH_TOKEN@github.com/vairogs/bundle.git"
+    },
+    {
+        "path": "src/Vairogs/Component/Functions",
+        "repo": "https://GH_TOKEN@github.com/vairogs/functions.git"
+    },
+    {
+        "path": "src/Vairogs/Component/Settings",
+        "repo": "https://GH_TOKEN@github.com/vairogs/settings.git"
+    }
+]
