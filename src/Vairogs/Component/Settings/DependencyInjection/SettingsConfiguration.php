@@ -10,6 +10,7 @@ use Vairogs\Bundle\DependencyInjection\Dependency;
 use Vairogs\Component\Settings\Constants\Enum\Storage;
 
 use function class_exists;
+use function dirname;
 
 final readonly class SettingsConfiguration implements Dependency
 {
@@ -69,6 +70,6 @@ final readonly class SettingsConfiguration implements Dependency
             return;
         }
 
-        $container->import(__DIR__ . '/../Resources/config/services.php');
+        $container->import(dirname(__DIR__) . '/Resources/config/services.php');
     }
 }

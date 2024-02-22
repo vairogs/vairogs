@@ -9,6 +9,6 @@ return static function (ContainerConfigurator $container): void {
         ->autowire()
         ->autoconfigure();
 
-    $services->load(namespace: 'Vairogs\\Components\\Settings\\', resource: __DIR__ . '/../*')
-        ->exclude(excludes: [__DIR__ . '/../{Entity}']);
+    $services->load(namespace: 'Vairogs\\Component\\Settings\\', resource: dirname(__DIR__, 2) . '/*')
+        ->exclude(excludes: [dirname(__DIR__, 2) . '/{Entity,Resources}']);
 };
