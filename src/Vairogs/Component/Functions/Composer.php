@@ -3,6 +3,7 @@
 namespace Vairogs\Component\Functions;
 
 use Composer\InstalledVersions;
+use LogicException;
 
 use function class_exists;
 use function getenv;
@@ -11,18 +12,16 @@ use function phpversion;
 use function sprintf;
 use function trait_exists;
 
-use const PHP_VERSION_ID;
-
 final class Composer
 {
     public function isInstalled(array $packages, bool $incDevReq = false): bool
     {
-        foreach ($packages as $package) {
-            if (false !== phpversion(extension: $package)) {
+        foreach ($packages as $packageName) {
+            if (false !== phpversion(extension: $packageName)) {
                 continue;
             }
 
-            if (!InstalledVersions::isInstalled(packageName: $package, includeDevRequirements: $incDevReq)) {
+            if (!InstalledVersions::isInstalled(packageName: $packageName, includeDevRequirements: $incDevReq)) {
                 return false;
             }
         }
@@ -40,33 +39,28 @@ final class Composer
         return getenv($name, local_only: $localOnly) ?: ($_ENV[$name] ?? $name);
     }
 
-    public function checkPhpVersion(int $phpVersionId): bool
+    public function willBeAvailable(string $package, string $class, array $parentPackages, string $rootPackageCheck = 'vairogs/vairogs'): bool
     {
-        return PHP_VERSION_ID >= $phpVersionId;
-    }
-
-    public function willBeAvailable(string $package, string $class, array $parentPackages): bool
-    {
-        if (!class_exists(InstalledVersions::class)) {
-            throw new \LogicException(sprintf('Calling "%s" when dependencies have been installed with Composer 1 is not supported. Consider upgrading to Composer 2.', __METHOD__));
+        if (!class_exists(class: InstalledVersions::class)) {
+            throw new LogicException(message: sprintf('Calling "%s" when dependencies have been installed with Composer 1 is not supported. Consider upgrading to Composer 2.', __METHOD__));
         }
 
-        if (!class_exists($class) && !interface_exists($class, false) && !trait_exists($class, false)) {
+        if (!$this->exists(class: $class)) {
             return false;
         }
 
-        if (!InstalledVersions::isInstalled($package) || InstalledVersions::isInstalled($package, false)) {
+        if (!InstalledVersions::isInstalled(packageName: $package) || InstalledVersions::isInstalled(packageName: $package, includeDevRequirements: false)) {
             return true;
         }
 
         $rootPackage = InstalledVersions::getRootPackage()['name'] ?? '';
 
-        if ('vairogs/vairogs' === $rootPackage) {
+        if ($rootPackageCheck === $rootPackage) {
             return true;
         }
 
         foreach ($parentPackages as $parentPackage) {
-            if ($rootPackage === $parentPackage || (InstalledVersions::isInstalled($parentPackage) && !InstalledVersions::isInstalled($parentPackage, false))) {
+            if ($rootPackage === $parentPackage || (InstalledVersions::isInstalled(packageName: $parentPackage) && !InstalledVersions::isInstalled(packageName: $parentPackage, includeDevRequirements: false))) {
                 return true;
             }
         }

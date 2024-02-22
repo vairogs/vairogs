@@ -12,9 +12,9 @@ abstract class Abstraction
 {
     protected bool $isSupported;
 
-    public function __construct(int $minimum = 80200)
+    public function __construct()
     {
-        $this->isSupported = (new Composer())->checkPhpVersion(phpVersionId: $minimum) && (new Composer())->isInstalled(packages: ['random']);
+        $this->isSupported = (new Composer())->isInstalled(packages: ['random']);
     }
 
     public function shuffle(string $string): string
