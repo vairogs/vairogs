@@ -10,5 +10,9 @@
     {
         "path": "src/Vairogs/Component/Settings",
         "repo": "https://GH_TOKEN@github.com/vairogs/settings.git"
+    },
+    {
+        "path": "src/Vairogs/Component/Mapper",
+        "repo": "https://GH_TOKEN@github.com/vairogs/mapper.git"
     }
 ]
