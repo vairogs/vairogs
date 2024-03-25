@@ -8,6 +8,7 @@ enum Storage: string
 {
     use Cases;
 
-    case JSON = 'json';
     case ORM = 'orm';
+    case MEMORY = 'memory';
+    case FILE = 'file';
 }
