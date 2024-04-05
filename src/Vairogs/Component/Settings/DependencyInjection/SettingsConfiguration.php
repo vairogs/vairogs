@@ -72,7 +72,7 @@ final readonly class SettingsConfiguration implements Dependency
 
     public function registerConfiguration(ContainerConfigurator $container, ContainerBuilder $builder): void
     {
-        if (!VairogsBundle::componentEnabled($builder, Dependency::COMPONENT_SETTINGS)) {
+        if (!VairogsBundle::enabled($builder, Dependency::COMPONENT_SETTINGS)) {
             return;
         }
 

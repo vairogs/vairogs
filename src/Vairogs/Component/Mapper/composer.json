@@ -1,10 +1,10 @@
 {
-    "name": "vairogs/functions",
+    "name": "vairogs/mapper",
     "type": "library",
     "license": "BSD-3-Clause",
     "autoload": {
         "psr-4": {
-            "Vairogs\\Component\\Functions\\": ""
+            "Vairogs\\Component\\Mapper\\": ""
         }
     },
     "minimum-stability": "dev",

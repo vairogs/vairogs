@@ -8,12 +8,14 @@ use Vairogs\Component\Functions\Constants\Enum\StartsEnds;
 use function array_diff;
 use function array_filter;
 use function array_flip;
+use function array_intersect;
 use function array_intersect_key;
 use function array_keys;
 use function array_map;
 use function array_replace;
 use function array_unique;
 use function array_values;
+use function explode;
 use function gettype;
 use function is_array;
 use function ltrim;
@@ -182,5 +184,29 @@ final class Iteration
         }
 
         return $result;
+    }
+
+    public function unpack(array $oneDimension): array
+    {
+        $multiDimension = [];
+
+        foreach ($oneDimension as $key => $value) {
+            $path = explode(separator: '.', string: $key);
+            $temp = &$multiDimension;
+            foreach ($path as $segment) {
+                if (!isset($temp[$segment])) {
+                    $temp[$segment] = [];
+                }
+                $temp = &$temp[$segment];
+            }
+            $temp = $value;
+        }
+
+        return $multiDimension;
+    }
+
+    public function haveCommonElements(array $array1, array $array2): bool
+    {
+        return [] !== array_intersect($array1, $array2);
     }
 }

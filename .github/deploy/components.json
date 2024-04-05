@@ -14,5 +14,9 @@
     {
         "path": "src/Vairogs/Component/Mapper",
         "repo": "https://GH_TOKEN@github.com/vairogs/mapper.git"
+    },
+    {
+        "path": "src/Vairogs/Component/DoctrineTools",
+        "repo": "https://GH_TOKEN@github.com/vairogs/doctrine-tools.git"
     }
 ]

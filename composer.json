@@ -1,7 +1,7 @@
 {
     "name": "vairogs/vairogs",
     "type": "library",
-    "license": "MIT",
+    "license": "BSD-3-Clause",
     "autoload": {
         "psr-4": {
             "Vairogs\\": "src/Vairogs/"
@@ -11,18 +11,26 @@
     "prefer-stable": false,
     "config": {
         "sort-packages": true,
-        "allow-plugins": {
-            "symfony/runtime": true
-        }
     },
     "extra": {
         "branch-alias": {
-            "dev-master": "1.x-dev"
+            "dev-master": "0.1.x-dev"
         }
     },
     "replace": {
+        "vairogs/bundle": "self.version",
+        "vairogs/cache": "self.version",
         "vairogs/functions": "self.version",
-        "vairogs/settings": "self.version",
-        "vairogs/bundle": "self.version"
+        "vairogs/mapper": "self.version",
+        "vairogs/settings": "self.version"
+    },
+    "require": {
+        "php": ">=8.3",
+        "doctrine/dbal": "*"
+    },
+    "require-dev": {
+    },
+    "conflict": {
+        "doctrine/dbal": "<4.0"
     }
 }
