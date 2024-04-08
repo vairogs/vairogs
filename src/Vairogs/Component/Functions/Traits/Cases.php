@@ -13,6 +13,6 @@ trait Cases
             return [];
         }
 
-        return array_map(static fn ($enum) => $enum->value, self::cases());
+        return array_map(callback: static fn ($enum) => $enum->value, array: self::cases());
     }
 }

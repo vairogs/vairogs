@@ -10,12 +10,12 @@ use function trim;
 
 final class Time
 {
-    public const HOUR = 60 * self::MIN;
-    public const MIN = 60 * self::SEC;
-    public const MS = 1;
-    public const SEC = 1000 * self::MS;
+    public const int HOUR = 60 * self::MIN;
+    public const int MIN = 60 * self::SEC;
+    public const int MS = 1;
+    public const int SEC = 1000 * self::MS;
 
-    public const TIME = [
+    public const array TIME = [
         'hour' => self::HOUR,
         'minute' => self::MIN,
         'second' => self::SEC,

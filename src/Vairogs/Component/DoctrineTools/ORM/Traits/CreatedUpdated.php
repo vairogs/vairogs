@@ -21,8 +21,9 @@ trait CreatedUpdated
         return $this->updatedAt;
     }
 
-    public function setUpdatedAt(?DateTimeImmutable $updatedAt): static
-    {
+    public function setUpdatedAt(
+        ?DateTimeImmutable $updatedAt,
+    ): static {
         $this->updatedAt = $this->modifyTimezone(dateTimeImmutable: $updatedAt);
 
         return $this;
@@ -49,15 +50,17 @@ trait CreatedUpdated
         return $this->createdAt;
     }
 
-    public function setCreatedAt(?DateTimeImmutable $createdAt): static
-    {
+    public function setCreatedAt(
+        ?DateTimeImmutable $createdAt,
+    ): static {
         $this->createdAt = $this->modifyTimezone(dateTimeImmutable: $createdAt);
 
         return $this;
     }
 
-    protected function modifyTimezone(?DateTimeImmutable $dateTimeImmutable): ?DateTimeImmutable
-    {
+    protected function modifyTimezone(
+        ?DateTimeImmutable $dateTimeImmutable,
+    ): ?DateTimeImmutable {
         if (null !== $dateTimeImmutable) {
             return UTCDateTimeImmutable::createFromInterface(object: $dateTimeImmutable);
         }

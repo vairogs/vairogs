@@ -16,8 +16,10 @@ use function sprintf;
 
 final readonly class SettingsConfiguration implements Dependency
 {
-    public function addSection(ArrayNodeDefinition $rootNode, callable $enableIfStandalone): void
-    {
+    public function addSection(
+        ArrayNodeDefinition $rootNode,
+        callable $enableIfStandalone,
+    ): void {
         $rootNode
             ->children()
                 ->arrayNode(Dependency::COMPONENT_SETTINGS)
@@ -57,7 +59,8 @@ final readonly class SettingsConfiguration implements Dependency
                 })
             ->end()
             ->validate()
-                ->ifTrue(static fn (array $v) => $v[Dependency::COMPONENT_SETTINGS][VairogsBundle::ENABLED]
+                ->ifTrue(
+                    static fn (array $v) => $v[Dependency::COMPONENT_SETTINGS][VairogsBundle::ENABLED]
                     && $v[Dependency::COMPONENT_SETTINGS][Storage::ORM->value][VairogsBundle::ENABLED]
                     && (
                         null === $v[Dependency::COMPONENT_SETTINGS][Storage::ORM->value]['entity_class']
@@ -70,8 +73,10 @@ final readonly class SettingsConfiguration implements Dependency
             ->end();
     }
 
-    public function registerConfiguration(ContainerConfigurator $container, ContainerBuilder $builder): void
-    {
+    public function registerConfiguration(
+        ContainerConfigurator $container,
+        ContainerBuilder $builder,
+    ): void {
         if (!VairogsBundle::enabled($builder, Dependency::COMPONENT_SETTINGS)) {
             return;
         }

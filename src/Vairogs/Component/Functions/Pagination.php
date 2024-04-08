@@ -11,7 +11,7 @@ use function sprintf;
 
 final class Pagination
 {
-    private const MIN_VISIBLE = 5;
+    private const int MIN_VISIBLE = 5;
 
     private int $visible;
     private int $total;

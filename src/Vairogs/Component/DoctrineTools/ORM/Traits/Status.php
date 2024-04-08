@@ -17,8 +17,9 @@ trait Status
         return $this->status;
     }
 
-    public function setStatus(int $status): static
-    {
+    public function setStatus(
+        int $status,
+    ): static {
         $this->status = $status;
 
         return $this;

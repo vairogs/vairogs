@@ -15,8 +15,12 @@ trait ConvertToPHPValue
     /**
      * @throws ConversionException
      */
-    private function convertToPHPValueForType($value, AbstractPlatform $platform, DateTimeInterface $object, string $function): DateTime|DateTimeImmutable|null
-    {
+    private function convertToPHPValueForType(
+        $value,
+        AbstractPlatform $platform,
+        DateTimeInterface $object,
+        string $function,
+    ): DateTime|DateTimeImmutable|null {
         if (null === $value || $value instanceof DateTimeImmutable) {
             return $value;
         }

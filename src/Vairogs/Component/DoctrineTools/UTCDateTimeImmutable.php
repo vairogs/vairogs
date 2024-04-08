@@ -14,8 +14,9 @@ class UTCDateTimeImmutable extends DateTimeImmutable
     /**
      * @throws Exception
      */
-    public function __construct(string $datetime = 'now')
-    {
+    public function __construct(
+        string $datetime = 'now',
+    ) {
         parent::__construct(datetime: $datetime, timezone: self::getUTCTimeZone());
     }
 
@@ -24,8 +25,9 @@ class UTCDateTimeImmutable extends DateTimeImmutable
         return new DateTimeZone(timezone: self::UTC);
     }
 
-    public static function createFromInterface(DateTimeInterface $object): DateTimeImmutable
-    {
+    public static function createFromInterface(
+        DateTimeInterface $object,
+    ): DateTimeImmutable {
         return parent::createFromInterface(object: $object)->setTimezone(timezone: self::getUTCTimeZone());
     }
 }

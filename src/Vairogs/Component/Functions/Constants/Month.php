@@ -4,17 +4,17 @@ namespace Vairogs\Component\Functions\Constants;
 
 final class Month
 {
-    public const JAN = 31;
-    public const FEB = 28;
-    public const FEB_LONG = 29;
-    public const MAR = 31;
-    public const APR = 30;
-    public const MAY = 31;
-    public const JUN = 30;
-    public const JUL = 31;
-    public const AUG = 31;
-    public const SEP = 30;
-    public const OCT = 31;
-    public const NOV = 30;
-    public const DEC = 31;
+    public const int JAN = 31;
+    public const int FEB = 28;
+    public const int FEB_LONG = 29;
+    public const int MAR = 31;
+    public const int APR = 30;
+    public const int MAY = 31;
+    public const int JUN = 30;
+    public const int JUL = 31;
+    public const int AUG = 31;
+    public const int SEP = 30;
+    public const int OCT = 31;
+    public const int NOV = 30;
+    public const int DEC = 31;
 }

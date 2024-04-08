@@ -18,28 +18,43 @@ class UTCDateTimeNormalizer implements NormalizerInterface, DenormalizerInterfac
     /**
      * @throws Exception
      */
-    public function denormalize(mixed $data, string $type, ?string $format = null, array $context = []): ?UTCDateTimeImmutable
-    {
+    public function denormalize(
+        mixed $data,
+        string $type,
+        ?string $format = null,
+        array $context = [],
+    ): ?UTCDateTimeImmutable {
         return new UTCDateTimeImmutable($data);
     }
 
-    public function supportsDenormalization(mixed $data, string $type, ?string $format = null, array $context = []): bool
-    {
+    public function supportsDenormalization(
+        mixed $data,
+        string $type,
+        ?string $format = null,
+        array $context = [],
+    ): bool {
         return UTCDateTimeImmutable::class === $type;
     }
 
-    public function normalize(mixed $object, ?string $format = null, array $context = []): string
-    {
+    public function normalize(
+        mixed $object,
+        ?string $format = null,
+        array $context = [],
+    ): string {
         return $object->format($context['datetime_format'] ?? DateTimeInterface::RFC3339);
     }
 
-    public function supportsNormalization(mixed $data, ?string $format = null, array $context = []): bool
-    {
+    public function supportsNormalization(
+        mixed $data,
+        ?string $format = null,
+        array $context = [],
+    ): bool {
         return $data instanceof UTCDateTimeImmutable;
     }
 
-    public function getSupportedTypes(?string $format): array
-    {
+    public function getSupportedTypes(
+        ?string $format,
+    ): array {
         return [
             UTCDateTimeImmutable::class => true,
         ];

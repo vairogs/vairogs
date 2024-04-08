@@ -15,8 +15,10 @@ class UTCDateTimeType extends DateTimeType
     /**
      * @throws ConversionException
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform): ?DateTime
-    {
+    public function convertToPHPValue(
+        $value,
+        AbstractPlatform $platform,
+    ): ?DateTime {
         return $this->convertToPHPValueForType(value: $value, platform: $platform, object: new DateTime(), function: 'date_create');
     }
 }

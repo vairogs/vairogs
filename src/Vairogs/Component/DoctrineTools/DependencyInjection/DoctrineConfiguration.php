@@ -13,8 +13,10 @@ use function sprintf;
 
 final readonly class DoctrineConfiguration implements Dependency
 {
-    public function addSection(ArrayNodeDefinition $rootNode, callable $enableIfStandalone): void
-    {
+    public function addSection(
+        ArrayNodeDefinition $rootNode,
+        callable $enableIfStandalone,
+    ): void {
         $rootNode
             ->children()
             ->arrayNode(Dependency::COMPONENT_DOCTRINE)
@@ -22,8 +24,10 @@ final readonly class DoctrineConfiguration implements Dependency
         ->end();
     }
 
-    public function registerConfiguration(ContainerConfigurator $container, ContainerBuilder $builder): void
-    {
+    public function registerConfiguration(
+        ContainerConfigurator $container,
+        ContainerBuilder $builder,
+    ): void {
         if (!VairogsBundle::enabled($builder, Dependency::COMPONENT_DOCTRINE)) {
             return;
         }

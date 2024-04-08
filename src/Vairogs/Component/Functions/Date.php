@@ -14,10 +14,10 @@ use function substr;
 
 final class Date
 {
-    public const FORMAT = 'd-m-Y H:i:s';
-    public const FORMAT_TS = 'D M d Y H:i:s T';
+    public const string FORMAT = 'd-m-Y H:i:s';
+    public const string FORMAT_TS = 'D M d Y H:i:s T';
 
-    public const EXTRA_FORMATS = [
+    public const array EXTRA_FORMATS = [
         self::FORMAT,
         self::FORMAT_TS,
     ];
@@ -100,6 +100,7 @@ final class Date
      */
     public function createFromUnixTimestamp(int $timestamp = 0, ?string $format = null): string
     {
+        /* @noinspection PhpNamedArgumentMightBeUnresolvedInspection */
         return (new DateTimeImmutable())->setTimestamp(timestamp: $timestamp)->format(format: $format ?? self::FORMAT);
     }
 

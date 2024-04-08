@@ -4,16 +4,16 @@ namespace Vairogs\Component\Functions\Constants;
 
 final class Status
 {
-    public const DISABLED = 'disabled';
-    public const ENABLED = 'enabled';
-    public const ERROR = 'error';
-    public const N = 'n';
-    public const NO = 'no';
-    public const OFF = 'off';
-    public const ON = 'on';
-    public const ONE = 1;
-    public const SUCCESS = 'success';
-    public const Y = 'y';
-    public const YES = 'yes';
-    public const ZERO = 0;
+    public const string DISABLED = 'disabled';
+    public const string ENABLED = 'enabled';
+    public const string ERROR = 'error';
+    public const string N = 'n';
+    public const string NO = 'no';
+    public const string OFF = 'off';
+    public const string ON = 'on';
+    public const int ONE = 1;
+    public const string SUCCESS = 'success';
+    public const string Y = 'y';
+    public const string YES = 'yes';
+    public const int ZERO = 0;
 }

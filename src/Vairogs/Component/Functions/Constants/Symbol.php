@@ -4,14 +4,14 @@ namespace Vairogs\Component\Functions\Constants;
 
 final class Symbol
 {
-    public const BASIC = self::EN_LOWERCASE . self::EN_UPPERCASE . self::DIGITS;
-    public const DIGITS = '0123456789';
-    public const EN_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
-    public const EN_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
-    public const EXTENDED = self::BASIC . self::SYMBOLS;
-    public const LV_LOWERCASE = 'aābcčdeēfgģhiījkķlļmnņoprsštuūvzž';
-    public const LV_UPPERCASE = 'AāBCČDEĒFGĢHIĪJKĶLĻMNŅOPRSŠTUŪVZŽ';
-    public const SYMBOLS = '!@#$%^&*()_-=+;:.,?';
-    public const UTF32LE = 'UTF-32LE';
-    public const UTF8 = 'UTF-8';
+    public const string BASIC = self::EN_LOWERCASE . self::EN_UPPERCASE . self::DIGITS;
+    public const string DIGITS = '0123456789';
+    public const string EN_LOWERCASE = 'abcdefghijklmnopqrstuvwxyz';
+    public const string EN_UPPERCASE = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+    public const string EXTENDED = self::BASIC . self::SYMBOLS;
+    public const string LV_LOWERCASE = 'aābcčdeēfgģhiījkķlļmnņoprsštuūvzž';
+    public const string LV_UPPERCASE = 'AāBCČDEĒFGĢHIĪJKĶLĻMNŅOPRSŠTUŪVZŽ';
+    public const string SYMBOLS = '!@#$%^&*()_-=+;:.,?';
+    public const string UTF32LE = 'UTF-32LE';
+    public const string UTF8 = 'UTF-8';
 }

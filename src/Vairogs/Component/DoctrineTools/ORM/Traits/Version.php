@@ -18,8 +18,9 @@ trait Version
         return $this->version;
     }
 
-    public function setVersion(?int $version): static
-    {
+    public function setVersion(
+        ?int $version,
+    ): static {
         $this->version = $version;
 
         return $this;

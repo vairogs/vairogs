@@ -16,8 +16,10 @@ class UTCDateTimeImmutableType extends DateTimeImmutableType
     /**
      * @throws ConversionException
      */
-    public function convertToPHPValue($value, AbstractPlatform $platform): ?DateTimeImmutable
-    {
+    public function convertToPHPValue(
+        $value,
+        AbstractPlatform $platform,
+    ): ?DateTimeImmutable {
         return $this->convertToPHPValueForType(value: $value, platform: $platform, object: new UTCDateTimeImmutable(), function: 'date_create_immutable');
     }
 }

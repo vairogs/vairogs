@@ -12,8 +12,10 @@ trait ConvertToDatabaseValue
     /**
      * @throws InvalidType
      */
-    public function convertToDatabaseValue($value, AbstractPlatform $platform): ?string
-    {
+    public function convertToDatabaseValue(
+        $value,
+        AbstractPlatform $platform,
+    ): ?string {
         if ($value instanceof DateTimeInterface) {
             $value = $value->setTimezone(timezone: UTCDateTimeImmutable::getUTCTimeZone());
         }
