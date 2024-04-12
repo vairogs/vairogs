@@ -27,7 +27,8 @@ class UTCDateTimeImmutable extends DateTimeImmutable
 
     public static function createFromInterface(
         DateTimeInterface $object,
-    ): DateTimeImmutable {
+    ): self {
+        /* @noinspection PhpIncompatibleReturnTypeInspection */
         return parent::createFromInterface(object: $object)->setTimezone(timezone: self::getUTCTimeZone());
     }
 }

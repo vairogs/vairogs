@@ -1,10 +1,10 @@
 {
-    "name": "vairogs/settings",
+    "name": "vairogs/doctrine-tools",
     "type": "library",
     "license": "BSD-3-Clause",
     "autoload": {
         "psr-4": {
-            "Vairogs\\Component\\Settings\\": ""
+            "Vairogs\\Component\\DoctrineTools\\": ""
         }
     },
     "minimum-stability": "dev",
@@ -19,9 +19,16 @@
     },
     "require": {
         "php": ">=8.3",
+        "doctrine/dbal": "*",
+        "doctrine/orm": "*",
         "symfony/config": "*",
         "symfony/dependency-injection": "*",
-        "vairogs/bundle": "*",
-        "vairogs/functions": "*"
+        "symfony/doctrine-bridge": "*",
+        "symfony/serializer": "*",
+        "symfony/uid": "*",
+        "vairogs/bundle": "*"
+    },
+    "conflict": {
+        "doctrine/dbal": "<4.0"
     }
 }

@@ -18,5 +18,9 @@
     {
         "path": "src/Vairogs/Component/DoctrineTools",
         "repo": "https://GH_TOKEN@github.com/vairogs/doctrine-tools.git"
+    },
+    {
+        "path": "src/Vairogs/Component/Cache",
+        "repo": "https://GH_TOKEN@github.com/vairogs/cache.git"
     }
 ]

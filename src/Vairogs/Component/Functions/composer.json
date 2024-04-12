@@ -10,14 +10,25 @@
     "minimum-stability": "dev",
     "prefer-stable": false,
     "config": {
-        "sort-packages": true,
-        "allow-plugins": {
-            "symfony/runtime": true
-        }
+        "sort-packages": true
     },
     "extra": {
         "branch-alias": {
             "dev-master": "0.1.x-dev"
         }
+    },
+    "require": {
+        "php": ">=8.3",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-random": "*",
+        "composer-runtime-api": "^2",
+        "symfony/http-foundation": "*",
+        "symfony/intl": "*",
+        "symfony/routing": "*",
+        "symfony/type-info": "*"
+    },
+    "suggest": {
+        "ext-gmp": "*"
     }
 }

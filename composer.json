@@ -20,15 +20,40 @@
     "replace": {
         "vairogs/bundle": "self.version",
         "vairogs/cache": "self.version",
+        "vairogs/doctrine-tools": "self.version",
         "vairogs/functions": "self.version",
         "vairogs/mapper": "self.version",
         "vairogs/settings": "self.version"
     },
     "require": {
         "php": ">=8.3",
-        "doctrine/dbal": "*"
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-random": "*",
+        "api-platform/core": ">=3.2",
+        "composer-runtime-api": "^2",
+        "doctrine/collections": "*",
+        "doctrine/dbal": "*",
+        "doctrine/orm": "*",
+        "doctrine/persistence": "*",
+        "symfony/config": "*",
+        "symfony/dependency-injection": "*",
+        "symfony/doctrine-bridge": "*",
+        "symfony/http-foundation": "*",
+        "symfony/http-kernel": "*",
+        "symfony/intl": "*",
+        "symfony/property-access": "*",
+        "symfony/routing": "*",
+        "symfony/security-bundle": "*",
+        "symfony/security-core": "*",
+        "symfony/serializer": "*",
+        "symfony/translation": "*",
+        "symfony/type-info": "*",
+        "symfony/uid": "*"
     },
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "*",
+        "roave/security-advisories": "dev-latest"
     },
     "conflict": {
         "doctrine/dbal": "<4.0"
