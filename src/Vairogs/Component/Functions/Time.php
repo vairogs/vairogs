@@ -2,7 +2,7 @@
 
 namespace Vairogs\Component\Functions;
 
-use Symfony\Component\PropertyInfo\Type;
+use Symfony\Component\TypeInfo\TypeIdentifier;
 
 use function floor;
 use function round;
@@ -33,7 +33,7 @@ final class Time
                 $time = (int) floor(num: $timestamp / $value);
                 if ($time > 0) {
                     match ($type) {
-                        Type::BUILTIN_TYPE_ARRAY => $result[$unit] = $time,
+                        TypeIdentifier::ARRAY => $result[$unit] = $time,
                         default => $result .= $time . ' ' . $unit . (1 === $time ? '' : 's') . ' ',
                     };
                 }
@@ -43,7 +43,7 @@ final class Time
         }
 
         return match ($type) {
-            Type::BUILTIN_TYPE_ARRAY => $result,
+            TypeIdentifier::ARRAY => $result,
             default => trim(string: $result),
         };
     }
