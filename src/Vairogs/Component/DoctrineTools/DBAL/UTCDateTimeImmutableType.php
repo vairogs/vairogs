@@ -10,8 +10,8 @@ use Vairogs\Component\DoctrineTools\UTCDateTimeImmutable;
 
 class UTCDateTimeImmutableType extends DateTimeImmutableType
 {
-    use Traits\ConvertToDatabaseValue;
-    use Traits\ConvertToPHPValue;
+    use Traits\_ConvertToDatabaseValue;
+    use Traits\_ConvertToPHPValue;
 
     /**
      * @throws ConversionException

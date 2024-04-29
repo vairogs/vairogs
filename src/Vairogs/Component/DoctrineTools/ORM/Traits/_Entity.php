@@ -2,10 +2,10 @@
 
 namespace Vairogs\Component\DoctrineTools\ORM\Traits;
 
-trait Entity
+trait _Entity
 {
-    use _Id;
-    use CreatedUpdated;
-    use IsActive;
-    use Version;
+    use __Id;
+    use _CreatedUpdated;
+    use _IsActive;
+    use _Version;
 }

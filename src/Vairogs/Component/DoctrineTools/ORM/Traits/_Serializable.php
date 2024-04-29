@@ -4,7 +4,7 @@ namespace Vairogs\Component\DoctrineTools\ORM\Traits;
 
 use function get_object_vars;
 
-trait Serializable
+trait _Serializable
 {
     public function jsonSerialize(): array
     {

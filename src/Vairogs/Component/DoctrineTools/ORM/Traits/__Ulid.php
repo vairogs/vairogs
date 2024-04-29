@@ -7,7 +7,7 @@ use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;
 use Symfony\Bridge\Doctrine\Types\UlidType;
 use Symfony\Component\Uid;
 
-trait Ulid
+trait __Ulid
 {
     #[ORM\Id]
     #[ORM\Column(type: UlidType::NAME, unique: true)]

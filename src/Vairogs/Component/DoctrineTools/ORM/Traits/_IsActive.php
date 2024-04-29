@@ -4,7 +4,7 @@ namespace Vairogs\Component\DoctrineTools\ORM\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 
-trait IsActive
+trait _IsActive
 {
     #[ORM\Column(options: ['default' => false])]
     private bool $isActive = false;

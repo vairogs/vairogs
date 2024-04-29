@@ -9,8 +9,8 @@ use Doctrine\DBAL\Types\DateTimeType;
 
 class UTCDateTimeType extends DateTimeType
 {
-    use Traits\ConvertToDatabaseValue;
-    use Traits\ConvertToPHPValue;
+    use Traits\_ConvertToDatabaseValue;
+    use Traits\_ConvertToPHPValue;
 
     /**
      * @throws ConversionException

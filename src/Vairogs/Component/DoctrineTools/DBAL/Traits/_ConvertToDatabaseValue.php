@@ -7,7 +7,7 @@ use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\Exception\InvalidType;
 use Vairogs\Component\DoctrineTools\UTCDateTimeImmutable;
 
-trait ConvertToDatabaseValue
+trait _ConvertToDatabaseValue
 {
     /**
      * @throws InvalidType

@@ -49,8 +49,9 @@ abstract class BaseFunction extends FunctionNode
         $this->functionPrototype = $functionPrototype;
     }
 
-    protected function addNodeMapping(string $parserMethod): void
-    {
+    protected function addNodeMapping(
+        string $parserMethod,
+    ): void {
         $this->nodesMapping[] = $parserMethod;
     }
 

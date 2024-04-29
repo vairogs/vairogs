@@ -10,7 +10,7 @@ use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\Exception\InvalidFormat;
 use Vairogs\Component\DoctrineTools\UTCDateTimeImmutable;
 
-trait ConvertToPHPValue
+trait _ConvertToPHPValue
 {
     /**
      * @throws ConversionException

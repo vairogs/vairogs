@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 
 use function in_array;
 
-trait Status
+trait _Status
 {
     #[ORM\Column(type: Types::INTEGER, nullable: false, options: ['default' => 0])]
     private int $status = 0;

@@ -6,7 +6,7 @@ use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Serializer\Annotation\Ignore;
 
-trait Version
+trait _Version
 {
     #[ORM\Column(type: Types::INTEGER)]
     #[ORM\Version]

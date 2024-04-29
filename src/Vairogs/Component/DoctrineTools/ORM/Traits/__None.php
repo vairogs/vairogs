@@ -5,7 +5,7 @@ namespace Vairogs\Component\DoctrineTools\ORM\Traits;
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
 
-trait None
+trait __None
 {
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: 'NONE')]
