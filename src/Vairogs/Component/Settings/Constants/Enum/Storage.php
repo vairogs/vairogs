@@ -2,11 +2,11 @@
 
 namespace Vairogs\Component\Settings\Constants\Enum;
 
-use Vairogs\Component\Functions\Traits\Cases;
+use Vairogs\Component\Functions\Iteration\_Cases;
 
 enum Storage: string
 {
-    use Cases;
+    use _Cases;
 
     case ORM = 'orm';
     case MEMORY = 'memory';
