@@ -4,7 +4,11 @@ namespace Vairogs\Component\Functions\Handler;
 
 interface Handler
 {
-    public function next(self $handler): self;
+    public function next(
+        self $handler,
+    ): self;
 
-    public function handle(...$arguments): mixed;
+    public function handle(
+        ...$arguments,
+    ): mixed;
 }

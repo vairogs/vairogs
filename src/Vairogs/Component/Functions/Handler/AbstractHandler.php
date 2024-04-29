@@ -6,15 +6,17 @@ abstract class AbstractHandler implements Handler
 {
     private ?Handler $handler = null;
 
-    public function next(Handler $handler): Handler
-    {
+    public function next(
+        Handler $handler,
+    ): Handler {
         $this->handler = $handler;
 
         return $this;
     }
 
-    public function handle(...$arguments): mixed
-    {
+    public function handle(
+        ...$arguments,
+    ): mixed {
         return $this->handler?->handle(...$arguments);
     }
 }

@@ -25,6 +25,7 @@
         "composer-runtime-api": "^2",
         "symfony/http-foundation": "*",
         "symfony/intl": "*",
+        "symfony/property-access": "*",
         "symfony/routing": "*",
         "symfony/type-info": "*"
     },

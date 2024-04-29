@@ -1,0 +1,32 @@
+<?php declare(strict_types = 1);
+
+namespace Vairogs\Component\Functions\Web;
+
+use ReflectionException;
+use Symfony\Component\HttpFoundation\Request;
+use Vairogs\Component\Functions\Text;
+
+use function array_merge;
+use function file_get_contents;
+
+trait _RequestIdentity
+{
+    /**
+     * @throws ReflectionException
+     */
+    public function requestIdentity(
+        Request $request,
+        string $ipUrl = 'https://api.ipify.org/',
+    ): array {
+        $additionalData = [
+            'actualIp' => file_get_contents(filename: $ipUrl),
+            'uuid' => $request->server->get(key: 'REQUEST_TIME', default: '') . (new class() {
+                use Text\_UniqueId;
+            })->uniqueId(),
+        ];
+
+        return array_merge((new class() {
+            use _BuildArrayFromObject;
+        })->buildArrayFromObject(object: $request), $additionalData);
+    }
+}
