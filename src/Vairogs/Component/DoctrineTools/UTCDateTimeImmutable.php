@@ -10,6 +10,7 @@ use Exception;
 class UTCDateTimeImmutable extends DateTimeImmutable
 {
     public const string UTC = 'UTC';
+    public const string FORMAT = 'Y-m-d H:i:s.u';
 
     /**
      * @throws Exception
@@ -25,10 +26,29 @@ class UTCDateTimeImmutable extends DateTimeImmutable
         return new DateTimeZone(timezone: self::UTC);
     }
 
+    /**
+     * @throws Exception
+     */
     public static function createFromInterface(
         DateTimeInterface $object,
-    ): self {
-        /* @noinspection PhpIncompatibleReturnTypeInspection */
-        return parent::createFromInterface(object: $object)->setTimezone(timezone: self::getUTCTimeZone());
+    ): static {
+        return new static(datetime: $object->setTimezone(timezone: self::getUTCTimeZone())->format(format: self::FORMAT));
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function createFromFormat(
+        string $format,
+        string $datetime,
+        ?DateTimeZone $timezone = null,
+    ): static|false {
+        $object = parent::createFromFormat(format: $format, datetime: $datetime, timezone: $timezone ?? self::getUTCTimeZone());
+
+        if (false !== $object) {
+            return self::createFromInterface(object: $object);
+        }
+
+        return false;
     }
 }
