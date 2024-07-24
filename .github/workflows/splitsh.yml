@@ -2,7 +2,7 @@ on: [push]
 
 jobs:
     split:
-        runs-on: ubuntu-22.04
+        runs-on: ubuntu-24.04
         name: split
         steps:
             -
@@ -13,7 +13,7 @@ jobs:
             -
                 name: Split
                 id: splitsh
-                uses: docker://k0d3r1s/alpine:action-split
+                uses: docker://ghcr.io/ozo2003/action-split:latest
                 env:
                     BRANCH: ${{ steps.branch.outputs.branch }}
                     REPO: ${{ github.repository }}
