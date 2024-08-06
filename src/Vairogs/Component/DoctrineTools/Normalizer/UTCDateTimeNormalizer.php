@@ -4,17 +4,14 @@ namespace Vairogs\Component\DoctrineTools\Normalizer;
 
 use DateTimeInterface;
 use Exception;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
 use Vairogs\Component\DoctrineTools\UTCDateTimeImmutable;
 
+#[Autoconfigure(lazy: true)]
 class UTCDateTimeNormalizer implements NormalizerInterface, DenormalizerInterface
 {
-    public function hasCacheableSupportsMethod(): bool
-    {
-        return __CLASS__ === static::class;
-    }
-
     /**
      * @throws Exception
      */
@@ -37,11 +34,11 @@ class UTCDateTimeNormalizer implements NormalizerInterface, DenormalizerInterfac
     }
 
     public function normalize(
-        mixed $object,
+        mixed $data,
         ?string $format = null,
         array $context = [],
     ): string {
-        return $object->format($context['datetime_format'] ?? DateTimeInterface::RFC3339);
+        return $data->format($context['datetime_format'] ?? DateTimeInterface::RFC3339);
     }
 
     public function supportsNormalization(
