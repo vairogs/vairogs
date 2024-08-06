@@ -23,17 +23,20 @@
         "vairogs/doctrine-tools": "self.version",
         "vairogs/functions": "self.version",
         "vairogs/mapper": "self.version",
-        "vairogs/settings": "self.version"
+        "vairogs/package": "self.version",
+        "vairogs/settings": "self.version",
+        "vairogs/audit": "self.version"
     },
     "require": {
         "php": ">=8.3",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-random": "*",
-        "api-platform/core": ">=3.2",
+        "api-platform/core": ">=3.3",
         "composer-runtime-api": "^2",
         "doctrine/collections": "*",
         "doctrine/dbal": "*",
+        "doctrine/doctrine-bundle": "*",
         "doctrine/orm": "*",
         "doctrine/persistence": "*",
         "symfony/config": "*",

@@ -20,10 +20,14 @@
     "require": {
         "php": ">=8.3",
         "doctrine/dbal": "*",
+        "doctrine/migrations": "*",
         "doctrine/orm": "*",
         "symfony/config": "*",
+        "symfony/console": "*",
         "symfony/dependency-injection": "*",
         "symfony/doctrine-bridge": "*",
+        "symfony/event-dispatcher": "*",
+        "symfony/finder": "*",
         "symfony/serializer": "*",
         "symfony/uid": "*",
         "vairogs/bundle": "*"
