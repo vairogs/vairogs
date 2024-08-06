@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\DoctrineTools\ORM\Query\AST;
+namespace Vairogs\Component\DoctrineTools\Doctrine\ORM\Query\AST;
 
 use Doctrine\ORM\Query\AST\Functions\FunctionNode;
 use Doctrine\ORM\Query\Parser;
@@ -8,12 +8,13 @@ use Doctrine\ORM\Query\QueryException;
 use Doctrine\ORM\Query\SqlWalker;
 use Doctrine\ORM\Query\TokenType;
 
+use function count;
+use function vsprintf;
+
 abstract class BaseFunction extends FunctionNode
 {
     protected string $functionPrototype;
-
     protected array $nodesMapping = [];
-
     protected array $nodes = [];
 
     /**
@@ -61,11 +62,9 @@ abstract class BaseFunction extends FunctionNode
     protected function feedParserWithNodes(
         Parser $parser,
     ): void {
-        $nodesMappingCount = count($this->nodesMapping);
-        $lastNode = $nodesMappingCount - 1;
-        for ($i = 0; $i < $nodesMappingCount; $i++) {
+        for ($i = 0, $count = count($this->nodesMapping); $i < $count; $i++) {
             $this->nodes[$i] = $parser->{$this->nodesMapping[$i]}();
-            if ($i < $lastNode) {
+            if ($i < $count - 1) {
                 $parser->match(TokenType::T_COMMA);
             }
         }

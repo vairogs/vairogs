@@ -1,10 +1,15 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\DoctrineTools\ORM\Query\AST;
+namespace Vairogs\Component\DoctrineTools\Doctrine\ORM\Query\AST\String;
 
 use Doctrine\ORM\Query\Parser;
 use Doctrine\ORM\Query\SqlWalker;
 use Doctrine\ORM\Query\TokenType;
+use Vairogs\Component\DoctrineTools\Doctrine\ORM\Query\AST\BaseFunction;
+
+use function array_pop;
+use function count;
+use function vsprintf;
 
 class RegexpReplace extends BaseFunction
 {

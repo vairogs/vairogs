@@ -1,6 +1,8 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\DoctrineTools\ORM\Query\AST;
+namespace Vairogs\Component\DoctrineTools\Doctrine\ORM\Query\AST\Datetime;
+
+use Vairogs\Component\DoctrineTools\Doctrine\ORM\Query\AST\BaseFunction;
 
 class ToChar extends BaseFunction
 {
