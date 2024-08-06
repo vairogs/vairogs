@@ -24,10 +24,6 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/cache.git"
     },
     {
-        "path": "src/Vairogs/Package",
-        "repo": "https://GH_TOKEN@github.com/vairogs/package.git"
-    },
-    {
         "path": "src/Vairogs/Component/Audit",
         "repo": "https://GH_TOKEN@github.com/vairogs/audit.git"
     }
