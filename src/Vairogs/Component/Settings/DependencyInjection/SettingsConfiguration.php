@@ -4,26 +4,24 @@ namespace Vairogs\Component\Settings\DependencyInjection;
 
 use InvalidArgumentException;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
-use Symfony\Component\DependencyInjection\ContainerBuilder;
-use Symfony\Component\DependencyInjection\Loader\Configurator\ContainerConfigurator;
-use Vairogs\Bundle\DependencyInjection\Dependency;
+use Vairogs\Bundle\DependencyInjection\AbstractDependencyConfiguration;
 use Vairogs\Bundle\VairogsBundle;
 use Vairogs\Component\Settings\Constants\Enum\Storage;
 
 use function class_exists;
-use function dirname;
 use function sprintf;
 
-final readonly class SettingsConfiguration implements Dependency
+final class SettingsConfiguration extends AbstractDependencyConfiguration
 {
     public function addSection(
         ArrayNodeDefinition $rootNode,
         callable $enableIfStandalone,
+        string $component,
     ): void {
         $rootNode
             ->children()
-                ->arrayNode(Dependency::COMPONENT_SETTINGS)
-                    ->{$enableIfStandalone(sprintf('%s/%s', VairogsBundle::VAIROGS, Dependency::COMPONENT_SETTINGS), self::class)}()
+                ->arrayNode($component)
+                    ->{$enableIfStandalone(sprintf('%s/%s', VairogsBundle::VAIROGS, $component), self::class)}()
                     ->children()
                         ->enumNode('storage')->values(Storage::getCases())->defaultValue(Storage::FILE->value)->end()
                         ->arrayNode(Storage::FILE->value)
@@ -31,7 +29,7 @@ final readonly class SettingsConfiguration implements Dependency
                             ->children()
                                 ->enumNode('type')->values(['json', 'php', ])->defaultValue('json')->end()
                                 ->scalarNode('directory')->defaultValue(sprintf('%%kernel.project_dir%%/var/%s/', VairogsBundle::VAIROGS))->end()
-                                ->scalarNode('filename')->defaultValue(Dependency::COMPONENT_SETTINGS)->end()
+                                ->scalarNode('filename')->defaultValue($component)->end()
                             ->end()
                         ->end()
                         ->arrayNode(Storage::ORM->value)
@@ -48,11 +46,11 @@ final readonly class SettingsConfiguration implements Dependency
             ->end()
             ->validate()
                 ->ifTrue(fn (array $v) => true)
-                ->then(static function (array $v) {
+                ->then(static function (array $v) use ($component) {
                     foreach (Storage::cases() as $case) {
-                        $v[Dependency::COMPONENT_SETTINGS][$case->value][VairogsBundle::ENABLED] =
-                            $v[Dependency::COMPONENT_SETTINGS][VairogsBundle::ENABLED]
-                            && Storage::from($v[Dependency::COMPONENT_SETTINGS]['storage']) === $case;
+                        $v[$component][$case->value]['enabled'] =
+                            $v[$component]['enabled']
+                            && Storage::from($v[$component]['storage']) === $case;
                     }
 
                     return $v;
@@ -60,27 +58,21 @@ final readonly class SettingsConfiguration implements Dependency
             ->end()
             ->validate()
                 ->ifTrue(
-                    static fn (array $v) => $v[Dependency::COMPONENT_SETTINGS][VairogsBundle::ENABLED]
-                    && $v[Dependency::COMPONENT_SETTINGS][Storage::ORM->value][VairogsBundle::ENABLED]
+                    static fn (array $v) => $v[$component]['enabled']
+                    && $v[$component][Storage::ORM->value]['enabled']
                     && (
-                        null === $v[Dependency::COMPONENT_SETTINGS][Storage::ORM->value]['entity_class']
-                        || !class_exists($v[Dependency::COMPONENT_SETTINGS][Storage::ORM->value]['entity_class'])
+                        null === $v[$component][Storage::ORM->value]['entity_class']
+                        || !class_exists($v[$component][Storage::ORM->value]['entity_class'])
                     ),
                 )
-                ->then(static function (array $v): void {
-                    throw new InvalidArgumentException(sprintf('Class "%s" configured in %s.%s.orm.entity_class does not exist', $v[Dependency::COMPONENT_SETTINGS][Storage::ORM->value]['entity_class'], VairogsBundle::VAIROGS, Dependency::COMPONENT_SETTINGS));
+                ->then(static function (array $v) use ($component): void {
+                    throw new InvalidArgumentException(sprintf('Class "%s" configured in %s.%s.orm.entity_class does not exist', $v[$component][Storage::ORM->value]['entity_class'], VairogsBundle::VAIROGS, $component));
                 })
             ->end();
     }
 
-    public function registerConfiguration(
-        ContainerConfigurator $container,
-        ContainerBuilder $builder,
-    ): void {
-        if (!VairogsBundle::enabled($builder, Dependency::COMPONENT_SETTINGS)) {
-            return;
-        }
-
-        $container->import(dirname(__DIR__) . '/Resources/config/services.php');
+    public function usesDoctrine(): bool
+    {
+        return true;
     }
 }
