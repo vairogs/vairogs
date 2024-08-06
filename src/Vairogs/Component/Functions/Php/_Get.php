@@ -19,7 +19,7 @@ trait _Get
         string $property,
         bool $throwOnUnInitialized = false,
         mixed ...$arguments,
-    ) {
+    ): mixed {
         try {
             $reflectionProperty = (new ReflectionProperty(class: $object, property: $property));
         } catch (ReflectionException) {

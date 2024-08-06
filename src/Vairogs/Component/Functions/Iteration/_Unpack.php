@@ -20,6 +20,7 @@ trait _Unpack
                 }
                 $temp = &$temp[$segment];
             }
+
             $temp = $value;
         }
 

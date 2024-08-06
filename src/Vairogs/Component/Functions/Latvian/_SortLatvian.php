@@ -2,7 +2,6 @@
 
 namespace Vairogs\Component\Functions\Latvian;
 
-use function call_user_func;
 use function usort;
 
 trait _SortLatvian
@@ -16,6 +15,6 @@ trait _SortLatvian
             use _Compare;
         }, 'compare'];
 
-        return usort(array: $names, callback: fn ($a, $b) => call_user_func($callback, $a, $b, $field));
+        return usort(array: $names, callback: static fn ($a, $b) => $callback($a, $b, $field));
     }
 }

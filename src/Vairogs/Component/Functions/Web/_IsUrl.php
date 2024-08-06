@@ -12,7 +12,6 @@ trait _IsUrl
     public function isUrl(
         string $url,
     ): bool {
-        /* @noinspection BypassedUrlValidationInspection */
         return false !== filter_var(value: filter_var(value: $url, filter: FILTER_SANITIZE_URL), filter: FILTER_VALIDATE_URL);
     }
 }

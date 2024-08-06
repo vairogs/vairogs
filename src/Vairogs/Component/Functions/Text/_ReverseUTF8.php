@@ -12,7 +12,6 @@ trait _ReverseUTF8
 {
     public function reverseUTF8(string $text): string
     {
-        /* @noinspection PhpRedundantOptionalArgumentInspection */
         return implode(separator: '', array: array_reverse(array: mb_str_split(string: $text, encoding: Text::UTF8)));
     }
 }

@@ -13,12 +13,10 @@ trait _AddElementIfNotExists
     ): void {
         $array ??= [];
 
-        if (null !== $key) {
-            if (!isset($array[$key])) {
-                $array[$key] = $element;
+        if ((null !== $key) && !isset($array[$key])) {
+            $array[$key] = $element;
 
-                return;
-            }
+            return;
         }
 
         if (!in_array(needle: $element, haystack: $array, strict: true)) {

@@ -2,6 +2,7 @@
 
 namespace Vairogs\Component\Functions\Iteration;
 
+use function array_is_list;
 use function is_array;
 
 trait _IsAssociative

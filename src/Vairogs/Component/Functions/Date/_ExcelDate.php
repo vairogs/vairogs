@@ -15,7 +15,6 @@ trait _ExcelDate
         $base = 25569;
 
         if ($timestamp >= $base) {
-            /** @noinspection SummerTimeUnsafeTimeManipulationInspection */
             $unix = ($timestamp - $base) * 86400;
             $date = gmdate(format: $format, timestamp: $unix);
 

@@ -23,6 +23,6 @@ trait _DistanceInKm
 
         $calculateDistance = 2 * asin(num: sqrt(num: sin(num: $distanceLat / 2) * sin(num: $distanceLat / 2) + cos(num: deg2rad(num: $latitude1)) * cos(num: deg2rad(num: $latitude2)) * sin(num: $distanceLon / 2) * sin(num: $distanceLon / 2)));
 
-        return (float) ($earthRadius * $calculateDistance);
+        return $earthRadius * $calculateDistance;
     }
 }

@@ -20,6 +20,7 @@ final class Iteration
     use Iteration\_MakeMultiDimensional;
     use Iteration\_MakeOneDimension;
     use Iteration\_Pick;
+    use Iteration\_RecursiveKSort;
     use Iteration\_RemoveFromArray;
     use Iteration\_Unique;
     use Iteration\_UniqueMap;

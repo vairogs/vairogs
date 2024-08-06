@@ -13,13 +13,6 @@ trait _MakeMultiDimensional
             return $array;
         }
 
-        $result = [];
-
-        /* @noinspection MissUsingForeachInspection */
-        foreach ($array as $item) {
-            $result[][] = $item;
-        }
-
-        return $result;
+        return array_map(callback: static fn ($item) => [$item], array: array_values(array: $array));
     }
 }

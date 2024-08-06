@@ -53,7 +53,6 @@ final class Web
     public const string HTTP_X_REAL_IP = 'HTTP_X_REAL_IP';
     public const string REMOTE_ADDR = 'REMOTE_ADDR';
 
-    /** @noinspection HttpUrlsUsage */
     public const string SCHEMA_HTTP = 'http://';
     public const string SCHEMA_HTTPS = 'https://';
 

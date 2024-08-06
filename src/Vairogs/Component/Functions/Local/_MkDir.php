@@ -10,7 +10,6 @@ use function sprintf;
 
 trait _MkDir
 {
-    /** @noinspection MkdirRaceConditionInspection */
     public function mkdir(
         string $dir,
     ): bool {
