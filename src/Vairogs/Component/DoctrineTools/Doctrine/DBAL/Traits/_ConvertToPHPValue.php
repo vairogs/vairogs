@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\DoctrineTools\DBAL\Traits;
+namespace Vairogs\Component\DoctrineTools\Doctrine\DBAL\Traits;
 
 use DateTime;
 use DateTimeImmutable;
@@ -20,19 +20,20 @@ trait _ConvertToPHPValue
         AbstractPlatform $platform,
         DateTimeInterface $object,
         string $function,
+        string $prefix = '',
     ): DateTime|DateTimeImmutable|null {
         if (null === $value || $value instanceof DateTimeImmutable) {
             return $value;
         }
 
         $dateTime = $object::createFromFormat(
-            format: $platform->getDateTimeFormatString(),
+            format: $prefix . $platform->getDateTimeFormatString(),
             datetime: $value,
             timezone: UTCDateTimeImmutable::getUTCTimeZone(),
         ) ?: $function(datetime: $value, timezone: UTCDateTimeImmutable::getUTCTimeZone());
 
         if (false === $dateTime) {
-            throw InvalidFormat::new(value: $value, toType: $object::class, expectedFormat: $platform->getDateTimeFormatString());
+            throw InvalidFormat::new(value: $value, toType: $object::class, expectedFormat: $prefix . $platform->getDateTimeFormatString());
         }
 
         return $dateTime;

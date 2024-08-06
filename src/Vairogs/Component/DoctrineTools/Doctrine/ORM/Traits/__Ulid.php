@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\DoctrineTools\ORM\Traits;
+namespace Vairogs\Component\DoctrineTools\Doctrine\ORM\Traits;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\IdGenerator\UlidGenerator;

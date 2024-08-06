@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\DoctrineTools\DBAL\Traits;
+namespace Vairogs\Component\DoctrineTools\Doctrine\DBAL\Traits;
 
 use DateTimeInterface;
 use Doctrine\DBAL\Platforms\AbstractPlatform;

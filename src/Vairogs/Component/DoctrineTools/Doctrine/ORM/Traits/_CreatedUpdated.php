@@ -1,6 +1,6 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\DoctrineTools\ORM\Traits;
+namespace Vairogs\Component\DoctrineTools\Doctrine\ORM\Traits;
 
 use DateTimeImmutable;
 use Doctrine\DBAL\Types\Types;
@@ -8,6 +8,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Exception;
 use Vairogs\Component\DoctrineTools\UTCDateTimeImmutable;
 
+#[ORM\HasLifecycleCallbacks]
 trait _CreatedUpdated
 {
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, options: ['default' => 'CURRENT_TIMESTAMP'])]
@@ -21,6 +22,9 @@ trait _CreatedUpdated
         return $this->updatedAt;
     }
 
+    /**
+     * @throws Exception
+     */
     public function setUpdatedAt(
         ?DateTimeImmutable $updatedAt,
     ): static {
@@ -50,6 +54,9 @@ trait _CreatedUpdated
         return $this->createdAt;
     }
 
+    /**
+     * @throws Exception
+     */
     public function setCreatedAt(
         ?DateTimeImmutable $createdAt,
     ): static {
@@ -58,6 +65,9 @@ trait _CreatedUpdated
         return $this;
     }
 
+    /**
+     * @throws Exception
+     */
     protected function modifyTimezone(
         ?DateTimeImmutable $dateTimeImmutable,
     ): ?DateTimeImmutable {

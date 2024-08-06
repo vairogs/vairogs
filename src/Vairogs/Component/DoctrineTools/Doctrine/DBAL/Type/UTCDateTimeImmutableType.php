@@ -1,11 +1,12 @@
 <?php declare(strict_types = 1);
 
-namespace Vairogs\Component\DoctrineTools\DBAL;
+namespace Vairogs\Component\DoctrineTools\Doctrine\DBAL\Type;
 
 use DateTimeImmutable;
 use Doctrine\DBAL\Platforms\AbstractPlatform;
 use Doctrine\DBAL\Types\ConversionException;
 use Doctrine\DBAL\Types\DateTimeImmutableType;
+use Vairogs\Component\DoctrineTools\Doctrine\DBAL\Traits;
 use Vairogs\Component\DoctrineTools\UTCDateTimeImmutable;
 
 class UTCDateTimeImmutableType extends DateTimeImmutableType
