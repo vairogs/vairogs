@@ -10,7 +10,7 @@ trait _Schema
     public function schema(
         Request $request,
     ): string {
-        return (new class() {
+        return (new class {
             use _IsHttps;
         })->isHttps(request: $request) ? Web::SCHEMA_HTTPS : Web::SCHEMA_HTTP;
     }

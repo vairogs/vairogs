@@ -12,7 +12,7 @@ trait _Usort
         string $order,
     ): Closure {
         return static function (array|object $first, array|object $second) use ($parameter, $order): int {
-            $anon = new class() {
+            $anon = new class {
                 use Php\_Parameter;
             };
             if (($firstSort = $anon->parameter(variable: $first, key: $parameter)) === ($secondSort = $anon->parameter(variable: $second, key: $parameter))) {

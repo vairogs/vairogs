@@ -8,7 +8,7 @@ trait _LeastCommonMultiple
         int $first,
         int $second,
     ): int {
-        return (int) ($first * $second / (new class() {
+        return (int) ($first * $second / (new class {
             use _GreatestCommonDiviser;
         })->greatestCommonDivisor(first: $first, second: $second));
     }

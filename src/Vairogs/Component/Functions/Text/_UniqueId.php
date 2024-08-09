@@ -15,7 +15,7 @@ trait _UniqueId
         try {
             return substr(string: bin2hex(string: random_bytes(length: $length)), offset: 0, length: $length);
         } catch (Throwable) {
-            return (new class() {
+            return (new class {
                 use _RandomString;
             })->randomString(length: $length);
         }

@@ -10,7 +10,7 @@ trait _Call
     {
         array_unshift($arguments, $value);
 
-        return (new class() {
+        return (new class {
             use _ReturnFunction;
         })->returnFunction($function, ...$arguments);
     }

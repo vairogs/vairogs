@@ -13,7 +13,7 @@ trait _RandomString
 {
     public function randomString(int $length = 32, string $chars = Text::BASIC): string
     {
-        return substr(string: (new class() {
+        return substr(string: (new class {
             use _Shuffle;
         })->shuffle(string: str_repeat(string: $chars, times: (int) ceil(num: (int) (strlen(string: $chars) / $length)))), offset: 0, length: $length);
     }

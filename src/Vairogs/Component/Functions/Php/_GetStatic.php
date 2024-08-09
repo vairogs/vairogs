@@ -20,7 +20,7 @@ trait _GetStatic
     ): mixed {
         try {
             if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
-                return (new class() {
+                return (new class {
                     use _Return;
                 })->return(static fn () => $object::${$property}, $object, ...$arguments);
             }

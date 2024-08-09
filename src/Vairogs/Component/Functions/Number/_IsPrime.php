@@ -10,14 +10,14 @@ trait _IsPrime
         int $number,
         bool $override = false,
     ): bool {
-        $function = (new FunctionHandler(function: 'isPrimal', instance: new class() {
+        $function = (new FunctionHandler(function: 'isPrimal', instance: new class {
             use _IsPrimal;
         }));
-        $below = (new FunctionHandler(function: 'isPrimeBelow1000', instance: new class() {
+        $below = (new FunctionHandler(function: 'isPrimeBelow1000', instance: new class {
             use _IsPrimeBelow1000;
         }))->next(handler: $function);
 
-        return (bool) (new FunctionHandler(function: 'isPrimeGmp', instance: new class() {
+        return (bool) (new FunctionHandler(function: 'isPrimeGmp', instance: new class {
             use _IsPrimeGmp;
         }))->next(handler: $below)->handle($number, $override);
     }

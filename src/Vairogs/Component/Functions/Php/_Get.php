@@ -35,14 +35,14 @@ trait _Get
         }
 
         try {
-            return (new class() {
+            return (new class {
                 use _GetNonStatic;
             })->getNonStatic($object, $property, ...$arguments);
         } catch (Exception) {
             // exception === unable to get object property
         }
 
-        return (new class() {
+        return (new class {
             use _GetStatic;
         })->getStatic($object, $property, ...$arguments);
     }

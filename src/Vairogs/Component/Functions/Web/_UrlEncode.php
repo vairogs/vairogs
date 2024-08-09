@@ -17,7 +17,7 @@ trait _UrlEncode
 
         if ('' !== $query) {
             /** @var string $query */
-            $query = '?' . http_build_query(data: (new class() {
+            $query = '?' . http_build_query(data: (new class {
                 use _BuildHttpQueryString;
             })->arrayFromQueryString(query: $query));
         }

@@ -7,7 +7,7 @@ trait _MakeMultiDimensional
     public function makeMultiDimensional(
         array $array,
     ): array {
-        if ((new class() {
+        if ((new class {
             use _IsMultiDimentional;
         })->isMultiDimensional(keys: $array)) {
             return $array;

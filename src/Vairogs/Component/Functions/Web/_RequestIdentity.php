@@ -20,12 +20,12 @@ trait _RequestIdentity
     ): array {
         $additionalData = [
             'actualIp' => file_get_contents(filename: $ipUrl),
-            'uuid' => $request->server->get(key: 'REQUEST_TIME', default: '') . (new class() {
+            'uuid' => $request->server->get(key: 'REQUEST_TIME', default: '') . (new class {
                 use Text\_UniqueId;
             })->uniqueId(),
         ];
 
-        return array_merge((new class() {
+        return array_merge((new class {
             use _BuildArrayFromObject;
         })->buildArrayFromObject(object: $request), $additionalData);
     }

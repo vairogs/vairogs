@@ -13,7 +13,7 @@ trait _BubbleSort
         for ($foo = 0; $foo < $count; $foo++) {
             for ($bar = 0; $bar < $count - 1; $bar++) {
                 if ($bar < $count && $array[$bar] > $array[$bar + 1]) {
-                    (new class() {
+                    (new class {
                         use _SwapArray;
                     })->swapArray(array: $array, foo: $bar, bar: $bar + 1);
                 }

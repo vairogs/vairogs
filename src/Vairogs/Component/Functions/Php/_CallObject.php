@@ -10,7 +10,7 @@ trait _CallObject
     {
         array_unshift($arguments, $value);
 
-        return (new class() {
+        return (new class {
             use _ReturnObject;
         })->returnObject($object, $function, ...$arguments);
     }

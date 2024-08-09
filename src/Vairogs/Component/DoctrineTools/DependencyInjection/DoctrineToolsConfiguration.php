@@ -52,7 +52,7 @@ final class DoctrineToolsConfiguration extends AbstractDependencyConfiguration
 
             $types = ['string', 'datetime', 'numeric'];
 
-            $snake = (new class() {
+            $snake = (new class {
                 use _SnakeCaseFromCamelCase;
             });
 

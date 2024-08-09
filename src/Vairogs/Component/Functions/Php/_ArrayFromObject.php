@@ -11,7 +11,7 @@ trait _ArrayFromObject
         $input = [];
 
         foreach ((new ReflectionObject(object: $object))->getProperties() as $reflectionProperty) {
-            $input[$name = $reflectionProperty->getName()] = (new class() {
+            $input[$name = $reflectionProperty->getName()] = (new class {
                 use _Get;
             })->get(object: $object, property: $name);
         }

@@ -19,8 +19,10 @@ trait _Uuid
 
     public function setUuid(
         ?Uid\Uuid $uuid,
-    ): void {
+    ): static {
         $this->uuid = $uuid;
+
+        return $this;
     }
 
     #[ORM\PrePersist]

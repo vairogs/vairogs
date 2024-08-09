@@ -20,10 +20,10 @@ trait _FilteredMethods
         $filtered = [];
 
         foreach ($methods as $method) {
-            if (null === $filterClass || (new class() {
+            if (null === $filterClass || (new class {
                 use _AttributeExists;
             })->attributeExists(reflectionMethod: $method, filterClass: $filterClass)) {
-                $filtered[(new class() {
+                $filtered[(new class {
                     use Text\_SnakeCaseFromCamelCase;
                 })->snakeCaseFromCamelCase(string: $name = $method->getName())] = $this->definition(class: $class, name: $name, isStatic: $method->isStatic());
             }

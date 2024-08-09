@@ -12,7 +12,7 @@ trait _Parameter
             return $variable[$key];
         }
 
-        return (new class() {
+        return (new class {
             use _Get;
         })->get(object: $variable, property: $key);
     }

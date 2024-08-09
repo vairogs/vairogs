@@ -11,10 +11,10 @@ trait _Shuffle
 {
     public function shuffle(string $string): string
     {
-        if ((new class() {
+        if ((new class {
             use Local\_IsInstalled;
         })->isInstalled(packages: ['random'])) {
-            return (new class() {
+            return (new class {
                 use Php\_Randomizer;
             })->randomizer()->shuffleBytes(bytes: $string);
         }

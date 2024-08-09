@@ -16,7 +16,7 @@ trait _Unique
             return array_unique(array: $input);
         }
 
-        if ((new class() {
+        if ((new class {
             use _IsMultiDimentional;
         })->isMultiDimensional(keys: $input)) {
             return $input;

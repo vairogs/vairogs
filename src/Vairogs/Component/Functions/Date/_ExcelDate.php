@@ -18,7 +18,7 @@ trait _ExcelDate
             $unix = ($timestamp - $base) * 86400;
             $date = gmdate(format: $format, timestamp: $unix);
 
-            if ((new class() {
+            if ((new class {
                 use _ValidateDateBasic;
             })->validateDateBasic(date: $date, format: $format)) {
                 return $date;

@@ -9,7 +9,7 @@ trait _Void
         object $clone,
         mixed ...$arguments,
     ): void {
-        (new class() {
+        (new class {
             use _Bind;
         })->bind(function: $function, clone: $clone)(...$arguments);
     }

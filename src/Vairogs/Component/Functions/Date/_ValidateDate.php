@@ -12,7 +12,7 @@ trait _ValidateDate
     public function validateDate(
         string $date,
     ): bool {
-        $date = (new class() {
+        $date = (new class {
             use Text\_KeepNumeric;
         })->keepNumeric(text: $date);
         $day = (int) substr(string: $date, offset: 0, length: 2);

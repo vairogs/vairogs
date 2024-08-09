@@ -7,7 +7,7 @@ trait _ValidatePersonCodeNew
     public function validatePersonCodeNew(
         string $personCode,
     ): bool {
-        $personCode = (new class() {
+        $personCode = (new class {
             use _CleanPersonCode;
         })->cleanPersonCode(personCode: $personCode);
 

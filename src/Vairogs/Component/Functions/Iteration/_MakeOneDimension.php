@@ -22,7 +22,7 @@ trait _MakeOneDimension
             foreach ($array as $key => $value) {
                 $key = ltrim(string: $base . '.' . $key, characters: '.');
 
-                if ((new class() {
+                if ((new class {
                     use _IsAssociative;
                 })->isAssociative(array: $value, allowList: $allowList)) {
                     $result = $this->makeOneDimension(array: $value, base: $key, separator: $separator, onlyLast: $onlyLast, depth: $depth + 1, maxDepth: $maxDepth, result: $result, allowList: $allowList);

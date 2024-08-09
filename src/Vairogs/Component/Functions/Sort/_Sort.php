@@ -23,13 +23,13 @@ trait _Sort
         }
 
         $data = (array) $data;
-        if (!(new class() {
+        if (!(new class {
             use _IsSortable;
         })->isSortable(item: current(array: $data), field: $parameter)) {
             throw new InvalidArgumentException(message: "Sorting parameter doesn't exist in sortable variable");
         }
 
-        usort(array: $data, callback: (new class() {
+        usort(array: $data, callback: (new class {
             use _Usort;
         })->usort(parameter: $parameter, order: $order));
 

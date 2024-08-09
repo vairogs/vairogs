@@ -18,7 +18,7 @@ trait _RemoteIp
             $headers = [Web::HTTP_CLIENT_IP, Web::HTTP_X_REAL_IP, Web::HTTP_X_FORWARDED_FOR, Web::REMOTE_ADDR, ];
         }
 
-        return (string) (new class() {
+        return (string) (new class {
             use Iteration\_FirstMatchAsString;
         })->firstMatchAsString(keys: $headers, haystack: $request->server->all());
     }

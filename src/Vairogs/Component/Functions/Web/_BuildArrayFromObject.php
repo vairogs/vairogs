@@ -14,7 +14,7 @@ trait _BuildArrayFromObject
     public function buildArrayFromObject(
         object $object,
     ): array {
-        parse_str(string: (new class() {
+        parse_str(string: (new class {
             use _BuildHttpQueryString;
         })->buildHttpQueryString(object: $object), result: $result);
 

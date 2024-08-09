@@ -12,7 +12,7 @@ trait _CIDRRange
         string $cidr,
         bool $int = true,
     ): array {
-        if (!(new class() {
+        if (!(new class {
             use _IsCIDR;
         })->isCIDR(cidr: $cidr)) {
             return ['0', '0'];

@@ -18,7 +18,7 @@ trait _BuildHttpQueryArray
     ): array {
         $result = [];
 
-        foreach ((new class() {
+        foreach ((new class {
             use Php\_Array;
         })->array(input: $input) as $key => $value) {
             $newKey = match ($parent) {
@@ -26,7 +26,7 @@ trait _BuildHttpQueryArray
                 default => sprintf('%s[%s]', $parent, $key),
             };
 
-            $result = (new class() {
+            $result = (new class {
                 use _Result;
             })->result(result: $result, key: $newKey, value: $value);
         }

@@ -9,7 +9,7 @@ trait _VoidObject
         string $function,
         mixed ...$arguments,
     ): void {
-        (new class() {
+        (new class {
             use _Void;
         })->void(fn () => $object->{$function}(...$arguments), $object, ...$arguments);
     }

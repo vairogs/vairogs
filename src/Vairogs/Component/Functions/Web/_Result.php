@@ -20,7 +20,7 @@ trait _Result
         mixed $value,
     ): array {
         if (!$value instanceof CURLFile && (is_array(value: $value) || is_object(value: $value))) {
-            return array_merge($result, (new class() {
+            return array_merge($result, (new class {
                 use _BuildHttpQueryArray;
             })->buildHttpQueryArray(input: $value, parent: $key));
         }

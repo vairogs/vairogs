@@ -11,7 +11,7 @@ trait _SortLatvian
         string|int $field,
         ?array $callback = null,
     ): bool {
-        $callback ??= [new class() {
+        $callback ??= [new class {
             use _Compare;
         }, 'compare'];
 

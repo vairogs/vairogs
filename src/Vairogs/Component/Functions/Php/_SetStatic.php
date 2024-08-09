@@ -20,7 +20,7 @@ trait _SetStatic
     ): object {
         try {
             if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
-                (new class() {
+                (new class {
                     use _Void;
                 })->void(function: static function () use ($object, $property, $value): void {
                     $object::${$property} = $value;

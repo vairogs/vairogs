@@ -15,7 +15,7 @@ trait _SnakeCaseFromSentence
         $string = preg_replace(pattern: [
             '#([A-Z\d]+)([A-Z][a-z])#',
             '#([a-z\d])([A-Z])#',
-        ], replacement: '\1_\2', subject: $skipCamel ? $string : (new class() {
+        ], replacement: '\1_\2', subject: $skipCamel ? $string : (new class {
             use _CamelCase;
         })->camelCase(string: $string));
 

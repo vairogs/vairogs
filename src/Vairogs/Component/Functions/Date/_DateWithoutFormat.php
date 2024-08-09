@@ -15,7 +15,7 @@ trait _DateWithoutFormat
         string $date,
         array $guesses = [],
     ): DateTimeInterface|string {
-        $formats = array_merge((new class() {
+        $formats = array_merge((new class {
             use Php\_ClassConstantsValues;
         })->classConstantsValues(class: DateTimeImmutable::class), Date::EXTRA_FORMATS, $guesses);
 

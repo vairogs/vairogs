@@ -26,14 +26,14 @@ trait _Set
         }
 
         try {
-            return (new class() {
+            return (new class {
                 use _SetNonStatic;
             })->setNonStatic(object: $object, property: $property, value: $value);
         } catch (Exception) {
             // exception === unable to get object property
         }
 
-        return (new class() {
+        return (new class {
             use _SetStatic;
         })->setStatic(object: $object, property: $property, value: $value);
     }

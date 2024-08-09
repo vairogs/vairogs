@@ -5,6 +5,7 @@ namespace Vairogs\Component\Functions\Latvian;
 use InvalidArgumentException;
 use Vairogs\Component\Functions\Text;
 
+use function sprintf;
 use function str_replace;
 use function strlen;
 
@@ -13,7 +14,7 @@ trait _CleanPersonCode
     public function cleanPersonCode(
         string $personCode,
     ): string {
-        $personCode = (new class() {
+        $personCode = (new class {
             use Text\_KeepNumeric;
         })->keepNumeric(text: $personCode);
         $personCode = str_replace(search: '-', replace: '', subject: $personCode);

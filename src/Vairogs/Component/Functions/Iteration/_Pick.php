@@ -12,10 +12,10 @@ trait _Pick
     public function pick(
         array $array,
     ): int|string|array {
-        if ((new class() {
+        if ((new class {
             use Local\_IsInstalled;
         })->isInstalled(packages: ['random'])) {
-            return (new class() {
+            return (new class {
                 use Php\_Randomizer;
             })->randomizer()->pickArrayKeys(array: $array, num: 1)[0];
         }

@@ -9,7 +9,7 @@ trait _ReturnObject
         string $function,
         mixed ...$arguments,
     ): mixed {
-        return (new class() {
+        return (new class {
             use _Return;
         })->return(fn () => $object->{$function}(...$arguments), $object, ...$arguments);
     }

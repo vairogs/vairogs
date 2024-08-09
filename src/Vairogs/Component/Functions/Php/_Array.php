@@ -9,7 +9,7 @@ trait _Array
     public function array(array|object $input): array
     {
         if (is_object(value: $input)) {
-            return (new class() {
+            return (new class {
                 use _ArrayFromObject;
             })->arrayFromObject(object: $input);
         }

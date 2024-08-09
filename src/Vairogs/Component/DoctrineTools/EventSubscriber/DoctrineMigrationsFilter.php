@@ -22,7 +22,7 @@ class DoctrineMigrationsFilter implements EventSubscriberInterface
             return true;
         }
 
-        if (!(new class() {
+        if (!(new class {
             use _Exists;
         })->exists(TableMetadataStorageConfiguration::class)) {
             return true;

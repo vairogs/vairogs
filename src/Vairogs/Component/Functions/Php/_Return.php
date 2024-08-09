@@ -9,7 +9,7 @@ trait _Return
         object $clone,
         mixed ...$arguments,
     ): mixed {
-        return (new class() {
+        return (new class {
             use _Bind;
         })->bind(function: $function, clone: $clone)(...$arguments);
     }

@@ -16,9 +16,9 @@ trait _RequestMethods
      */
     public function requestMethods(): array
     {
-        return (new class() {
+        return (new class {
             use Iteration\_ArrayValuesFiltered;
-        })->arrayValuesFiltered(input: (new class() {
+        })->arrayValuesFiltered(input: (new class {
             use Php\_ClassConstants;
         })->classConstants(class: Request::class), with: 'METHOD_');
     }

@@ -17,10 +17,10 @@ trait _ArrayValuesFiltered
         bool $start = true,
     ): array {
         return match ($start) {
-            true => array_values(array: (new class() {
+            true => array_values(array: (new class {
                 use _FilterKeyStartsWith;
             })->filterKeyStartsWith(input: $input, startsWith: $with)),
-            false => array_values(array: (new class() {
+            false => array_values(array: (new class {
                 use _FilterKeyEndsWith;
             })->filterKeyEndsWith(input: $input, endsWith: $with)),
         };

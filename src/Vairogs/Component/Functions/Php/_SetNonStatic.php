@@ -26,7 +26,7 @@ trait _SetNonStatic
             throw new InvalidArgumentException(message: sprintf('Property "%s" is static', $property));
         }
 
-        (new class() {
+        (new class {
             use _Void;
         })->void(function: function () use ($object, $property, $value): void {
             $object->{$property} = $value;

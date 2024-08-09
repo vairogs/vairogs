@@ -26,7 +26,7 @@ trait _GetNonStatic
             throw new InvalidArgumentException(message: sprintf('Property "%s" is static', $property));
         }
 
-        return (new class() {
+        return (new class {
             use _Return;
         })->return(fn () => $object->{$property}, $object, ...$arguments);
     }
