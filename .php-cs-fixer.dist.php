@@ -4,6 +4,15 @@ use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 
+$fileHeaderComment = <<<'EOF'
+This file is part of the Vairogs package.
+
+(c) Dāvis Zālītis (k0d3r1s) <davis@vairogs.com>
+
+For the full copyright and license information, please view the LICENSE
+file that was distributed with this source code.
+EOF;
+
 $finder = Finder::create()
     ->in(dirs: [getcwd(), ])
     ->exclude(dirs: ['vendor', 'var', '.github', ]);
@@ -32,6 +41,7 @@ return (new Config())
         'explicit_indirect_variable' => true,
         'fopen_flags' => ['b_mode' => true, ],
         'global_namespace_import' => ['import_constants' => null, 'import_functions' => true, 'import_classes' => true, ],
+        'header_comment' => ['header' => $fileHeaderComment],
         'increment_style' => ['style' => 'post', ],
         'linebreak_after_opening_tag' => false,
         'magic_constant_casing' => true,
@@ -49,7 +59,6 @@ return (new Config())
         'no_unset_on_property' => true,
         'no_useless_else' => true,
         'no_useless_sprintf' => true,
-//        'nullable_type_declaration_for_default_null_value' => true,
         'ordered_class_elements' => ['sort_algorithm' => 'none', ],
         'ordered_imports' => ['sort_algorithm' => 'alpha', 'imports_order' => ['class', 'function', 'const', ], ],
         'protected_to_private' => false,
