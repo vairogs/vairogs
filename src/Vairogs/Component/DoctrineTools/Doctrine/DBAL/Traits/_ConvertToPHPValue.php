@@ -35,11 +35,13 @@ trait _ConvertToPHPValue
             return $value;
         }
 
+        $tz = UTCDateTimeImmutable::getUTCTimeZone();
+
         $dateTime = $object::createFromFormat(
             format: $prefix . $platform->getDateTimeFormatString(),
             datetime: $value,
-            timezone: UTCDateTimeImmutable::getUTCTimeZone(),
-        ) ?: $function(datetime: $value, timezone: UTCDateTimeImmutable::getUTCTimeZone());
+            timezone: $tz,
+        ) ?: $function(datetime: $value, timezone: $tz);
 
         if (false === $dateTime) {
             throw InvalidFormat::new(value: $value, toType: $object::class, expectedFormat: $prefix . $platform->getDateTimeFormatString());

@@ -20,6 +20,7 @@ class UTCDateTimeImmutable extends DateTimeImmutable
 {
     public const string UTC = 'UTC';
     public const string FORMAT = 'Y-m-d H:i:s.u';
+    public static ?DateTimeZone $timezone = null;
 
     /**
      * @throws Exception
@@ -27,12 +28,14 @@ class UTCDateTimeImmutable extends DateTimeImmutable
     public function __construct(
         string $datetime = 'now',
     ) {
-        parent::__construct(datetime: $datetime, timezone: self::getUTCTimeZone());
+        self::$timezone = self::getUTCTimeZone();
+
+        parent::__construct(datetime: $datetime, timezone: self::$timezone);
     }
 
     public static function getUTCTimeZone(): DateTimeZone
     {
-        return new DateTimeZone(timezone: self::UTC);
+        return self::$timezone ?? new DateTimeZone(timezone: self::UTC);
     }
 
     /**
