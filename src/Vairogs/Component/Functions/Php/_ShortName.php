@@ -16,8 +16,9 @@ use ReflectionClass;
 
 trait _ShortName
 {
-    public function shortName(string $class): string
-    {
+    public function shortName(
+        string $class,
+    ): string {
         try {
             return (new ReflectionClass(objectOrClass: $class))->getShortName();
         } catch (Exception) {

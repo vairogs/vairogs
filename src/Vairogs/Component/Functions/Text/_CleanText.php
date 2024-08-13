@@ -19,8 +19,9 @@ use function strip_tags;
 
 trait _CleanText
 {
-    public function cleanText(string $text): string
-    {
+    public function cleanText(
+        string $text,
+    ): string {
         return (new class {
             use _HtmlEntityDecode;
         })->htmlEntityDecode(text: (new class {

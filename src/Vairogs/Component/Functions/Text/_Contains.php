@@ -15,8 +15,10 @@ use function strpbrk;
 
 trait _Contains
 {
-    public function contains(string $haystack, string $needle): bool
-    {
+    public function contains(
+        string $haystack,
+        string $needle,
+    ): bool {
         return false !== strpbrk(string: $haystack, characters: $needle);
     }
 }

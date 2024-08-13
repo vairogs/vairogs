@@ -17,8 +17,9 @@ use function strtolower;
 
 trait _Boolval
 {
-    public function boolval(mixed $value): bool
-    {
+    public function boolval(
+        mixed $value,
+    ): bool {
         if (is_bool(value: $value)) {
             return $value;
         }
@@ -26,8 +27,8 @@ trait _Boolval
         $value = strtolower(string: (string) $value);
 
         return match ($value) {
-            'y' => true,
-            'n' => false,
+            'y', '1', 'true' => true,
+            'n', '0', 'false' => false,
             default => filter_var(value: $value, filter: FILTER_VALIDATE_BOOL),
         };
     }

@@ -11,14 +11,19 @@
 
 namespace Vairogs\Component\Functions\Php;
 
-use ReflectionMethod;
+use function in_array;
+use function is_bool;
+use function strtolower;
 
-trait _AttributeExists
+trait _IsBool
 {
-    public function attributeExists(
-        ReflectionMethod $reflectionMethod,
-        string $filterClass,
+    public function isBool(
+        mixed $value,
     ): bool {
-        return [] !== $reflectionMethod->getAttributes(name: $filterClass);
+        if (is_bool(value: $value)) {
+            return true;
+        }
+
+        return in_array(strtolower(string: (string) $value), ['y', 'true', 'n', 'false'], true);
     }
 }

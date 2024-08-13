@@ -15,8 +15,9 @@ use function preg_replace;
 
 trait _StripSpace
 {
-    public function stripSpace(string $text): string
-    {
+    public function stripSpace(
+        string $text,
+    ): string {
         return (string) preg_replace(pattern: '#\s+#', replacement: '', subject: $text);
     }
 }

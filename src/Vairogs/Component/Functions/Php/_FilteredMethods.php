@@ -18,8 +18,10 @@ use Vairogs\Component\Functions\Text;
 
 trait _FilteredMethods
 {
-    public function filteredMethods(string $class, ?string $filterClass = null): array
-    {
+    public function filteredMethods(
+        string $class,
+        ?string $filterClass = null,
+    ): array {
         try {
             $methods = (new ReflectionClass(objectOrClass: $class))->getMethods(filter: ReflectionMethod::IS_PUBLIC);
         } catch (Exception) {
@@ -41,8 +43,11 @@ trait _FilteredMethods
         return $filtered;
     }
 
-    public function definition(string $class, string $name, bool $isStatic = false): array
-    {
+    public function definition(
+        string $class,
+        string $name,
+        bool $isStatic = false,
+    ): array {
         if ($isStatic) {
             return [$class, $name, ];
         }

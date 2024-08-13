@@ -16,8 +16,10 @@ use function mb_substr;
 
 trait _LastPart
 {
-    public function lastPart(string $text, string $delimiter): string
-    {
+    public function lastPart(
+        string $text,
+        string $delimiter,
+    ): string {
         return false === ($idx = mb_strrpos(haystack: $text, needle: $delimiter)) ? $text : mb_substr(string: $text, start: $idx + 1);
     }
 }

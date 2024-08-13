@@ -16,8 +16,9 @@ use function preg_replace;
 
 trait _HtmlEntityDecode
 {
-    public function htmlEntityDecode(string $text): string
-    {
+    public function htmlEntityDecode(
+        string $text,
+    ): string {
         return preg_replace(pattern: '#\R+#', replacement: '', subject: html_entity_decode(string: $text));
     }
 }

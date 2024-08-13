@@ -18,8 +18,9 @@ use function str_shuffle;
 
 trait _Shuffle
 {
-    public function shuffle(string $string): string
-    {
+    public function shuffle(
+        string $string,
+    ): string {
         if ((new class {
             use Local\_IsInstalled;
         })->isInstalled(packages: ['random'])) {

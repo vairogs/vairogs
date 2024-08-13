@@ -15,8 +15,9 @@ use function preg_replace;
 
 trait _OneSpace
 {
-    public function oneSpace(string $text): string
-    {
+    public function oneSpace(
+        string $text,
+    ): string {
         return (string) preg_replace(pattern: '#\s+#S', replacement: ' ', subject: $text);
     }
 }

@@ -15,8 +15,9 @@ use function preg_replace;
 
 trait _KeepNumeric
 {
-    public function keepNumeric(string $text): string
-    {
+    public function keepNumeric(
+        string $text,
+    ): string {
         return (string) preg_replace(pattern: '#\D#', replacement: '', subject: $text);
     }
 }

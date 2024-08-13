@@ -15,8 +15,9 @@ use ReflectionObject;
 
 trait _ArrayFromObject
 {
-    public function arrayFromObject(object $object): array
-    {
+    public function arrayFromObject(
+        object $object,
+    ): array {
         $input = [];
 
         foreach ((new ReflectionObject(object: $object))->getProperties() as $reflectionProperty) {

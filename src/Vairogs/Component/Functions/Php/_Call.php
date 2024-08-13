@@ -15,8 +15,11 @@ use function array_unshift;
 
 trait _Call
 {
-    public function call(mixed $value, string $function, ...$arguments): mixed
-    {
+    public function call(
+        mixed $value,
+        string $function,
+        ...$arguments,
+    ): mixed {
         array_unshift($arguments, $value);
 
         return (new class {

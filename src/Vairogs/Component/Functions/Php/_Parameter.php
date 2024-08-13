@@ -15,8 +15,10 @@ use function is_array;
 
 trait _Parameter
 {
-    public function parameter(array|object $variable, mixed $key): mixed
-    {
+    public function parameter(
+        array|object $variable,
+        mixed $key,
+    ): mixed {
         if (is_array(value: $variable)) {
             return $variable[$key];
         }

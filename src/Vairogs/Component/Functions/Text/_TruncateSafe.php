@@ -16,8 +16,11 @@ use function mb_substr;
 
 trait _TruncateSafe
 {
-    public function truncateSafe(string $text, int $length, string $append = '...'): string
-    {
+    public function truncateSafe(
+        string $text,
+        int $length,
+        string $append = '...',
+    ): string {
         $result = mb_substr(string: $text, start: 0, length: $length);
         $lastSpace = mb_strrpos(haystack: $result, needle: ' ');
 

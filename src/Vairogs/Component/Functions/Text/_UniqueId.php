@@ -19,8 +19,9 @@ use function substr;
 
 trait _UniqueId
 {
-    public function uniqueId(int $length = 32): string
-    {
+    public function uniqueId(
+        int $length = 32,
+    ): string {
         try {
             return substr(string: bin2hex(string: random_bytes(length: $length)), offset: 0, length: $length);
         } catch (Throwable) {

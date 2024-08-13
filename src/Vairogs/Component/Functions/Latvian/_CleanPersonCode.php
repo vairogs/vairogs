@@ -26,7 +26,7 @@ trait _CleanPersonCode
         $personCode = (new class {
             use Text\_KeepNumeric;
         })->keepNumeric(text: $personCode);
-        $personCode = str_replace(search: '-', replace: '', subject: $personCode);
+        $personCode = (string) str_replace(search: '-', replace: '', subject: $personCode);
 
         if (11 !== strlen(string: $personCode)) {
             throw new InvalidArgumentException(message: sprintf('Invalid person code: "%s"', $personCode));

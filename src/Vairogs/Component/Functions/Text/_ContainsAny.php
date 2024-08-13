@@ -15,8 +15,10 @@ use function str_contains;
 
 trait _ContainsAny
 {
-    public function containsAny(string $haystack, array $needles = []): bool
-    {
+    public function containsAny(
+        string $haystack,
+        array $needles = [],
+    ): bool {
         foreach ($needles as $needle) {
             if (str_contains(haystack: $haystack, needle: (string) $needle)) {
                 return true;

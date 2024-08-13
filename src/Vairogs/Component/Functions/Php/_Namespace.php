@@ -16,8 +16,9 @@ use ReflectionClass;
 
 trait _Namespace
 {
-    public function namespace(string $class): string
-    {
+    public function namespace(
+        string $class,
+    ): string {
         try {
             return (new ReflectionClass(objectOrClass: $class))->getNamespaceName();
         } catch (Exception) {

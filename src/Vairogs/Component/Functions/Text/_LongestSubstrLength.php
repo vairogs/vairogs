@@ -16,8 +16,9 @@ use function strlen;
 
 trait _LongestSubstrLength
 {
-    public function longestSubstrLength(string $string): int
-    {
+    public function longestSubstrLength(
+        string $string,
+    ): int {
         $result = $start = 0;
         $chars = [];
 

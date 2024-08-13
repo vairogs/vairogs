@@ -19,8 +19,10 @@ use function substr;
 
 trait _Sha
 {
-    public function sha(string $text, int $bits = 256): string
-    {
+    public function sha(
+        string $text,
+        int $bits = 256,
+    ): string {
         $hash = substr(string: hash(algo: 'sha' . $bits, data: $text, binary: true), offset: 0, length: (int) round(num: $bits / 16));
 
         return strtr(rtrim(string: base64_encode(string: $hash), characters: '='), from: '+/', to: '-_');

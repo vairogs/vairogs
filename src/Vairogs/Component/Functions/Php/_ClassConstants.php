@@ -24,8 +24,9 @@ trait _ClassConstants
      * @throws InvalidArgumentException
      * @throws RuntimeException
      */
-    public function classConstants(string $class): array
-    {
+    public function classConstants(
+        string $class,
+    ): array {
         try {
             return (new ReflectionClass(objectOrClass: $class))->getConstants(filter: ReflectionClassConstant::IS_PUBLIC);
         } catch (Exception $e) {
