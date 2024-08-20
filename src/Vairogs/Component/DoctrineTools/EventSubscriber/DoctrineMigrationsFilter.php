@@ -25,8 +25,9 @@ class DoctrineMigrationsFilter implements EventSubscriberInterface
 {
     private bool $enabled = true;
 
-    public function __invoke(AbstractAsset|string $asset): bool
-    {
+    public function __invoke(
+        AbstractAsset|string $asset,
+    ): bool {
         if (!$this->enabled) {
             return true;
         }
@@ -44,8 +45,9 @@ class DoctrineMigrationsFilter implements EventSubscriberInterface
         return $asset !== (new TableMetadataStorageConfiguration())->getTableName();
     }
 
-    public function onConsoleCommand(ConsoleCommandEvent $event): void
-    {
+    public function onConsoleCommand(
+        ConsoleCommandEvent $event,
+    ): void {
         $command = $event->getCommand();
         if (null === $command) {
             return;

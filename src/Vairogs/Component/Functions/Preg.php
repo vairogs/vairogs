@@ -9,15 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Handler;
+namespace Vairogs\Component\Functions;
 
-interface Handler
+final class Preg
 {
-    public function handle(
-        ...$arguments,
-    ): mixed;
-
-    public function next(
-        self $handler,
-    ): self;
+    use Preg\_AddUtf8Modifier;
+    use Preg\_Match;
+    use Preg\_MatchAll;
+    use Preg\_NewPregException;
+    use Preg\_RemoveUtf8Modifier;
+    use Preg\_Replace;
+    use Preg\_ReplaceCallback;
+    use Preg\_Split;
 }

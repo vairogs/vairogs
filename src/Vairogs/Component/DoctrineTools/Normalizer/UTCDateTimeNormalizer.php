@@ -33,13 +33,12 @@ class UTCDateTimeNormalizer implements NormalizerInterface, DenormalizerInterfac
         return new UTCDateTimeImmutable($data);
     }
 
-    public function supportsDenormalization(
-        mixed $data,
-        string $type,
-        ?string $format = null,
-        array $context = [],
-    ): bool {
-        return UTCDateTimeImmutable::class === $type;
+    public function getSupportedTypes(
+        ?string $format,
+    ): array {
+        return [
+            UTCDateTimeImmutable::class => true,
+        ];
     }
 
     public function normalize(
@@ -50,19 +49,20 @@ class UTCDateTimeNormalizer implements NormalizerInterface, DenormalizerInterfac
         return $data->format($context['datetime_format'] ?? DateTimeInterface::RFC3339);
     }
 
+    public function supportsDenormalization(
+        mixed $data,
+        string $type,
+        ?string $format = null,
+        array $context = [],
+    ): bool {
+        return UTCDateTimeImmutable::class === $type;
+    }
+
     public function supportsNormalization(
         mixed $data,
         ?string $format = null,
         array $context = [],
     ): bool {
         return $data instanceof UTCDateTimeImmutable;
-    }
-
-    public function getSupportedTypes(
-        ?string $format,
-    ): array {
-        return [
-            UTCDateTimeImmutable::class => true,
-        ];
     }
 }

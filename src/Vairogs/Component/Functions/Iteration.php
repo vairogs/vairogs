@@ -16,6 +16,7 @@ final class Iteration
     use Iteration\_AddElementIfNotExists;
     use Iteration\_ArrayFlipRecursive;
     use Iteration\_ArrayIntersectKeyRecursive;
+    use Iteration\_ArrayToString;
     use Iteration\_ArrayValuesFiltered;
     use Iteration\_FilterKeyEndsWith;
     use Iteration\_FilterKeyStartsWith;

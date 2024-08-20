@@ -41,29 +41,8 @@ final class Web
     use Web\_ValidateEmail;
     use Web\_ValidateIPAddress;
 
-    public const string HTML = 'text/html';
-    public const string JSON = 'application/json';
-    public const string JSONLD = 'application/ld+json';
-    public const string JSON_PATCH = 'application/merge-patch+json';
-    public const string XLSX = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
-    public const string XML = 'application/xml';
-    public const string X_WWW_FORM_URLENCODED = 'application/x-www-form-urlencoded';
-
     public const int HTTP = 80;
     public const int HTTPS = 443;
-
-    public const string HEADER_HTTPS = 'HTTPS';
-    public const string HEADER_PORT = 'SERVER_PORT';
-    public const string HEADER_PROTO = 'HTTP_X_FORWARDED_PROTO';
-    public const string HEADER_SSL = 'HTTP_X_FORWARDED_SSL';
-    public const string HTTP_CF_CONNECTING_IP = 'HTTP_CF_CONNECTING_IP';
-    public const string HTTP_CLIENT_IP = 'HTTP_CLIENT_IP';
-    public const string HTTP_X_FORWARDED_FOR = 'HTTP_X_FORWARDED_FOR';
-    public const string HTTP_X_REAL_IP = 'HTTP_X_REAL_IP';
-    public const string REMOTE_ADDR = 'REMOTE_ADDR';
-
-    public const string SCHEMA_HTTP = 'http://';
-    public const string SCHEMA_HTTPS = 'https://';
 
     public const int HTTP_BANDWIDTH_LIMIT_EXCEEDED = 509;
     public const int HTTP_BLOCKED_BY_WINDOWS_PARENTAL_CONTROLS = 450;
@@ -84,4 +63,25 @@ final class Web
     public const int HTTP_THIS_IS_FINE = 218;
     public const int HTTP_TOKEN_REQUIRED = 499;
     public const int HTTP_TRANSFORMATION_APPLIED = 214;
+
+    public const string HTML = 'text/html';
+    public const string JSON = 'application/json';
+    public const string JSONLD = 'application/ld+json';
+    public const string JSON_PATCH = 'application/merge-patch+json';
+    public const string XLSX = 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet';
+    public const string XML = 'application/xml';
+    public const string X_WWW_FORM_URLENCODED = 'application/x-www-form-urlencoded';
+
+    public const string HEADER_HTTPS = 'HTTPS';
+    public const string HEADER_PORT = 'SERVER_PORT';
+    public const string HEADER_PROTO = 'HTTP_X_FORWARDED_PROTO';
+    public const string HEADER_SSL = 'HTTP_X_FORWARDED_SSL';
+    public const string HTTP_CF_CONNECTING_IP = 'HTTP_CF_CONNECTING_IP';
+    public const string HTTP_CLIENT_IP = 'HTTP_CLIENT_IP';
+    public const string HTTP_X_FORWARDED_FOR = 'HTTP_X_FORWARDED_FOR';
+    public const string HTTP_X_REAL_IP = 'HTTP_X_REAL_IP';
+    public const string REMOTE_ADDR = 'REMOTE_ADDR';
+
+    public const string SCHEMA_HTTP = 'http://';
+    public const string SCHEMA_HTTPS = 'https://';
 }

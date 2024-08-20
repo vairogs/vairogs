@@ -17,13 +17,12 @@ use Symfony\Component\Finder\Finder;
 use Vairogs\Bundle\DependencyInjection\AbstractDependencyConfiguration;
 use Vairogs\Bundle\VairogsBundle;
 use Vairogs\Component\DoctrineTools\Doctrine\DBAL;
+use Vairogs\Component\Functions\Preg\_Match;
 use Vairogs\Component\Functions\Text\_SnakeCaseFromCamelCase;
 
 use function array_keys;
 use function class_exists;
-use function dirname;
 use function file_get_contents;
-use function preg_match;
 use function strtoupper;
 use function ucfirst;
 
@@ -38,7 +37,7 @@ final class DoctrineToolsConfiguration extends AbstractDependencyConfiguration
             if ($builder->hasExtension('doctrine_migrations')) {
                 $container->extension('doctrine_migrations', [
                     'migrations_paths' => [
-                        'Vairogs\\Component\\DoctrineTools\\Migrations' => dirname(__DIR__) . '/Resources/migrations',
+                        'Vairogs\\Component\\DoctrineTools\\Migrations' => __DIR__ . '/../Resources/migrations',
                     ],
                 ]);
             }
@@ -66,17 +65,20 @@ final class DoctrineToolsConfiguration extends AbstractDependencyConfiguration
             });
 
             $functions = [];
+            $match = new class {
+                use _Match;
+            };
 
             foreach ($types as $type) {
                 $finder = new Finder();
-                $finder->files()->in(dirname(__DIR__) . '/Doctrine/ORM/Query/AST/' . ucfirst($type))->name('*.php');
+                $finder->files()->in(__DIR__ . '/../Doctrine/ORM/Query/AST/' . ucfirst($type))->name('*.php');
                 $functions[$type] = [];
 
                 foreach ($finder as $file) {
                     $fileContents = file_get_contents($file->getRealPath());
 
-                    if (preg_match('/namespace\s+(.+?);/', $fileContents, $namespaceMatches)
-                        && preg_match('/class\s+(\w+)/', $fileContents, $classMatches)) {
+                    if ($match::match('/namespace\s+(.+?);/', $fileContents, $namespaceMatches)
+                        && $match::match('/class\s+(\w+)/', $fileContents, $classMatches)) {
                         $className = $classMatches[1];
                         $fullClassName = $namespaceMatches[1] . '\\' . $className;
 

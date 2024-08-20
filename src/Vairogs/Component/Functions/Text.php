@@ -21,6 +21,7 @@ final class Text
     use Text\_CountryName;
     use Text\_CyrillicToLatin;
     use Text\_HtmlEntityDecode;
+    use Text\_IsHex;
     use Text\_KeepNumeric;
     use Text\_LastPart;
     use Text\_LatinToCyrillic;
@@ -34,11 +35,13 @@ final class Text
     use Text\_ReverseUTF8;
     use Text\_Sanitize;
     use Text\_SanitizeFloat;
+    use Text\_ScalarToString;
     use Text\_Sha;
     use Text\_Shuffle;
     use Text\_SnakeCaseFromCamelCase;
     use Text\_SnakeCaseFromSentence;
     use Text\_StripSpace;
+    use Text\_ToString;
     use Text\_TruncateSafe;
     use Text\_UniqueId;
 

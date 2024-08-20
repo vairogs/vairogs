@@ -23,12 +23,16 @@ final class Date
     use Date\_ValidateDate;
     use Date\_ValidateDateBasic;
 
-    public const string FORMAT = 'd-m-Y H:i:s';
-    public const string FORMAT_TS = 'D M d Y H:i:s T';
-
     public const array EXTRA_FORMATS = [
         self::FORMAT,
         self::FORMAT_TS,
+    ];
+
+    public const array TIME = [
+        'hour' => self::HOUR,
+        'minute' => self::MIN,
+        'second' => self::SEC,
+        'micro' => self::MS,
     ];
 
     public const int JAN = 31;
@@ -50,10 +54,6 @@ final class Date
     public const int MS = 1;
     public const int SEC = 1000 * self::MS;
 
-    public const array TIME = [
-        'hour' => self::HOUR,
-        'minute' => self::MIN,
-        'second' => self::SEC,
-        'micro' => self::MS,
-    ];
+    public const string FORMAT = 'd-m-Y H:i:s';
+    public const string FORMAT_TS = 'D M d Y H:i:s T';
 }

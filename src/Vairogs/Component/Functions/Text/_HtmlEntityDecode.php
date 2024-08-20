@@ -11,14 +11,17 @@
 
 namespace Vairogs\Component\Functions\Text;
 
+use Vairogs\Component\Functions\Preg\_Replace;
+
 use function html_entity_decode;
-use function preg_replace;
 
 trait _HtmlEntityDecode
 {
     public function htmlEntityDecode(
         string $text,
     ): string {
-        return preg_replace(pattern: '#\R+#', replacement: '', subject: html_entity_decode(string: $text));
+        return (new class {
+            use _Replace;
+        })::replace(pattern: '#\R+#', replacement: '', subject: html_entity_decode(string: $text));
     }
 }

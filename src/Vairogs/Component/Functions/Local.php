@@ -15,6 +15,7 @@ final class Local
 {
     use Local\_Exists;
     use Local\_FileExistsCwd;
+    use Local\_GetClassFromFile;
     use Local\_GetEnv;
     use Local\_HumanFIleSize;
     use Local\_IsInstalled;

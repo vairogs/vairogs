@@ -23,8 +23,19 @@ use function vsprintf;
 abstract class BaseFunction extends FunctionNode
 {
     protected string $functionPrototype;
-    protected array $nodesMapping = [];
     protected array $nodes = [];
+    protected array $nodesMapping = [];
+
+    public function getSql(
+        SqlWalker $sqlWalker,
+    ): string {
+        $dispatched = [];
+        foreach ($this->nodes as $node) {
+            $dispatched[] = null === $node ? 'null' : $node->dispatch($sqlWalker);
+        }
+
+        return vsprintf($this->functionPrototype, $dispatched);
+    }
 
     /**
      * @throws QueryException
@@ -40,24 +51,7 @@ abstract class BaseFunction extends FunctionNode
         $parser->match(TokenType::T_CLOSE_PARENTHESIS);
     }
 
-    public function getSql(
-        SqlWalker $sqlWalker,
-    ): string {
-        $dispatched = [];
-        foreach ($this->nodes as $node) {
-            $dispatched[] = null === $node ? 'null' : $node->dispatch($sqlWalker);
-        }
-
-        return vsprintf($this->functionPrototype, $dispatched);
-    }
-
     abstract protected function customFunction(): void;
-
-    protected function setFunctionPrototype(
-        string $functionPrototype,
-    ): void {
-        $this->functionPrototype = $functionPrototype;
-    }
 
     protected function addNodeMapping(
         string $parserMethod,
@@ -77,5 +71,11 @@ abstract class BaseFunction extends FunctionNode
                 $parser->match(TokenType::T_COMMA);
             }
         }
+    }
+
+    protected function setFunctionPrototype(
+        string $functionPrototype,
+    ): void {
+        $this->functionPrototype = $functionPrototype;
     }
 }

@@ -18,6 +18,18 @@ use Vairogs\Component\Functions\Text;
 
 trait _FilteredMethods
 {
+    public function definition(
+        string $class,
+        string $name,
+        bool $isStatic = false,
+    ): array {
+        if ($isStatic) {
+            return [$class, $name, ];
+        }
+
+        return [new $class(), $name, ];
+    }
+
     public function filteredMethods(
         string $class,
         ?string $filterClass = null,
@@ -41,17 +53,5 @@ trait _FilteredMethods
         }
 
         return $filtered;
-    }
-
-    public function definition(
-        string $class,
-        string $name,
-        bool $isStatic = false,
-    ): array {
-        if ($isStatic) {
-            return [$class, $name, ];
-        }
-
-        return [new $class(), $name, ];
     }
 }

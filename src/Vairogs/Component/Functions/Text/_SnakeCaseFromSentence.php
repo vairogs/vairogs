@@ -11,8 +11,9 @@
 
 namespace Vairogs\Component\Functions\Text;
 
+use Vairogs\Component\Functions\Preg\_Replace;
+
 use function mb_strtolower;
-use function preg_replace;
 use function str_replace;
 
 trait _SnakeCaseFromSentence
@@ -21,7 +22,9 @@ trait _SnakeCaseFromSentence
         string $string,
         bool $skipCamel = false,
     ): string {
-        $string = preg_replace(pattern: [
+        $string = (new class {
+            use _Replace;
+        })::replace(pattern: [
             '#([A-Z\d]+)([A-Z][a-z])#',
             '#([a-z\d])([A-Z])#',
         ], replacement: '\1_\2', subject: $skipCamel ? $string : (new class {

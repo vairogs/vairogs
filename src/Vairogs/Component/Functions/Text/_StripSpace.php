@@ -11,13 +11,15 @@
 
 namespace Vairogs\Component\Functions\Text;
 
-use function preg_replace;
+use Vairogs\Component\Functions\Preg\_Replace;
 
 trait _StripSpace
 {
     public function stripSpace(
         string $text,
     ): string {
-        return (string) preg_replace(pattern: '#\s+#', replacement: '', subject: $text);
+        return (new class {
+            use _Replace;
+        })::replace(pattern: '#\s+#', replacement: '', subject: $text);
     }
 }

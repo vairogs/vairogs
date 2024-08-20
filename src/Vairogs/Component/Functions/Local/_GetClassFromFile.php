@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Mapper\Traits;
+namespace Vairogs\Component\Functions\Local;
 
 use PhpToken;
 

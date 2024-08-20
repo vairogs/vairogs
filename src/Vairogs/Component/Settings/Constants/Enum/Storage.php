@@ -16,8 +16,8 @@ use Vairogs\Component\Functions\Iteration\_Cases;
 enum Storage: string
 {
     use _Cases;
+    case FILE = 'file';
+    case MEMORY = 'memory';
 
     case ORM = 'orm';
-    case MEMORY = 'memory';
-    case FILE = 'file';
 }

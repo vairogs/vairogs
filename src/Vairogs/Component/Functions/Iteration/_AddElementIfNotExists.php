@@ -11,6 +11,7 @@
 
 namespace Vairogs\Component\Functions\Iteration;
 
+use function array_key_exists;
 use function in_array;
 
 trait _AddElementIfNotExists
@@ -22,7 +23,7 @@ trait _AddElementIfNotExists
     ): void {
         $array ??= [];
 
-        if ((null !== $key) && !isset($array[$key])) {
+        if ((null !== $key) && !array_key_exists($key, $array)) {
             $array[$key] = $element;
 
             return;

@@ -11,6 +11,7 @@
 
 namespace Vairogs\Component\Functions\Iteration;
 
+use function array_key_exists;
 use function explode;
 
 trait _Unpack
@@ -24,7 +25,7 @@ trait _Unpack
             $path = explode(separator: '.', string: $key);
             $temp = &$multiDimension;
             foreach ($path as $segment) {
-                if (!isset($temp[$segment])) {
+                if (!array_key_exists($segment, $temp)) {
                     $temp[$segment] = [];
                 }
                 $temp = &$temp[$segment];

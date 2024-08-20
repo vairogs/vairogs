@@ -17,6 +17,7 @@ final class Sort
     use Sort\_IsSortable;
     use Sort\_MergeSort;
     use Sort\_Sort;
+    use Sort\_StableSort;
     use Sort\_Swap;
     use Sort\_SwapArray;
     use Sort\_Usort;

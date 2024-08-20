@@ -11,6 +11,7 @@
 
 namespace Vairogs\Component\Functions\Text;
 
+use function array_key_exists;
 use function max;
 use function strlen;
 
@@ -23,7 +24,7 @@ trait _LongestSubstrLength
         $chars = [];
 
         for ($i = 0, $len = strlen(string: $string); $i < $len; $i++) {
-            if (isset($chars[$string[$i]])) {
+            if (array_key_exists($string[$i], $chars)) {
                 $start = max($start, $chars[$string[$i]] + 1);
             }
 

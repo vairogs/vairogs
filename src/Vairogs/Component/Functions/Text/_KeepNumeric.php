@@ -11,13 +11,15 @@
 
 namespace Vairogs\Component\Functions\Text;
 
-use function preg_replace;
+use Vairogs\Component\Functions\Preg\_Replace;
 
 trait _KeepNumeric
 {
     public function keepNumeric(
         string $text,
     ): string {
-        return (string) preg_replace(pattern: '#\D#', replacement: '', subject: $text);
+        return (new class {
+            use _Replace;
+        })::replace(pattern: '#\D#', replacement: '', subject: $text);
     }
 }

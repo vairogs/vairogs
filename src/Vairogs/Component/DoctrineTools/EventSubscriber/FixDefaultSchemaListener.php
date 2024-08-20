@@ -23,8 +23,9 @@ class FixDefaultSchemaListener
     /**
      * @throws Exception
      */
-    public function postGenerateSchema(GenerateSchemaEventArgs $args): void
-    {
+    public function postGenerateSchema(
+        GenerateSchemaEventArgs $args,
+    ): void {
         $schemaManager = $args->getEntityManager()
             ->getConnection()
             ->createSchemaManager();

@@ -11,8 +11,9 @@
 
 namespace Vairogs\Component\Functions\Text;
 
+use Vairogs\Component\Functions\Preg\_Replace;
+
 use function mb_strtolower;
-use function preg_replace;
 
 trait _SnakeCaseFromCamelCase
 {
@@ -20,6 +21,8 @@ trait _SnakeCaseFromCamelCase
         string $string,
         string $separator = '_',
     ): string {
-        return mb_strtolower(string: (string) preg_replace(pattern: '#(?!^)[[:upper:]]+#', replacement: $separator . '$0', subject: $string));
+        return mb_strtolower(string: (new class {
+            use _Replace;
+        })::replace(pattern: '#(?!^)[[:upper:]]+#', replacement: $separator . '$0', subject: $string));
     }
 }

@@ -13,13 +13,15 @@ namespace Vairogs\Component\Functions\Text;
 
 use Vairogs\Component\Functions\Preg\_Replace;
 
-trait _OneSpace
+use function var_export;
+
+trait _ScalarToString
 {
-    public function oneSpace(
-        string $text,
+    public static function scalarToString(
+        mixed $value,
     ): string {
         return (new class {
             use _Replace;
-        })::replace(pattern: '#\s+#S', replacement: ' ', subject: $text);
+        })::replace('/\bNULL\b/', 'null', var_export($value, true));
     }
 }

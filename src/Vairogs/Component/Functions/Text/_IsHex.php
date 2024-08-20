@@ -11,15 +11,15 @@
 
 namespace Vairogs\Component\Functions\Text;
 
-use Vairogs\Component\Functions\Preg\_Replace;
+use Vairogs\Component\Functions\Preg\_Match;
 
-trait _OneSpace
+trait _IsHex
 {
-    public function oneSpace(
-        string $text,
-    ): string {
+    public function isHex(
+        string $string,
+    ): bool {
         return (new class {
-            use _Replace;
-        })::replace(pattern: '#\s+#S', replacement: ' ', subject: $text);
+            use _Match;
+        })::match('/^(?:0x)?[0-9a-f]*$/', $string);
     }
 }

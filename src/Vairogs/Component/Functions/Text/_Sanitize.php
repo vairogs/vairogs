@@ -11,7 +11,8 @@
 
 namespace Vairogs\Component\Functions\Text;
 
-use function preg_replace;
+use Vairogs\Component\Functions\Preg\_Replace;
+
 use function str_replace;
 
 trait _Sanitize
@@ -19,6 +20,8 @@ trait _Sanitize
     public function sanitize(
         string $text,
     ): string {
-        return str_replace(search: ["'", '"'], replace: ['&#39;', '&#34;'], subject: (string) preg_replace(pattern: '/\x00|<[^>]*>?/', replacement: '', subject: $text));
+        return str_replace(search: ["'", '"'], replace: ['&#39;', '&#34;'], subject: (new class {
+            use _Replace;
+        })::replace(pattern: '/\x00|<[^>]*>?/', replacement: '', subject: $text));
     }
 }

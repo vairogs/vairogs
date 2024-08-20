@@ -26,19 +26,19 @@ trait _Uuid
         return $this->uuid;
     }
 
-    public function setUuid(
-        ?Uid\Uuid $uuid,
-    ): static {
-        $this->uuid = $uuid;
-
-        return $this;
-    }
-
     #[ORM\PrePersist]
     public function prePersist(): void
     {
         if (null === $this->uuid) {
             $this->uuid = Uid\Uuid::v4();
         }
+    }
+
+    public function setUuid(
+        ?Uid\Uuid $uuid,
+    ): static {
+        $this->uuid = $uuid;
+
+        return $this;
     }
 }

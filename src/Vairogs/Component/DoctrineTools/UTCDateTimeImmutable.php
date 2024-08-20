@@ -33,20 +33,6 @@ class UTCDateTimeImmutable extends DateTimeImmutable
         parent::__construct(datetime: $datetime, timezone: self::$timezone);
     }
 
-    public static function getUTCTimeZone(): DateTimeZone
-    {
-        return self::$timezone ?? new DateTimeZone(timezone: self::UTC);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public static function createFromInterface(
-        DateTimeInterface $object,
-    ): static {
-        return new static(datetime: $object->setTimezone(timezone: self::getUTCTimeZone())->format(format: self::FORMAT));
-    }
-
     /**
      * @throws Exception
      */
@@ -62,5 +48,19 @@ class UTCDateTimeImmutable extends DateTimeImmutable
         }
 
         return false;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public static function createFromInterface(
+        DateTimeInterface $object,
+    ): static {
+        return new static(datetime: $object->setTimezone(timezone: self::getUTCTimeZone())->format(format: self::FORMAT));
+    }
+
+    public static function getUTCTimeZone(): DateTimeZone
+    {
+        return self::$timezone ?? new DateTimeZone(timezone: self::UTC);
     }
 }

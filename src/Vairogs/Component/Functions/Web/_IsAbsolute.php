@@ -11,13 +11,15 @@
 
 namespace Vairogs\Component\Functions\Web;
 
-use function preg_match;
+use Vairogs\Component\Functions\Preg\_Match;
 
 trait _IsAbsolute
 {
     public function isAbsolute(
         string $path,
     ): bool {
-        return str_starts_with(haystack: $path, needle: '//') || preg_match(pattern: '#^[a-z-]{3,}://#i', subject: $path);
+        return str_starts_with(haystack: $path, needle: '//') || (new class {
+            use _Match;
+        })::match(pattern: '#^[a-z-]{3,}://#i', subject: $path);
     }
 }

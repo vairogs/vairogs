@@ -26,9 +26,25 @@ trait _CreatedUpdated
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, options: ['default' => 'CURRENT_TIMESTAMP'])]
     protected ?DateTimeImmutable $updatedAt = null;
 
+    public function getCreatedAt(): ?DateTimeImmutable
+    {
+        return $this->createdAt;
+    }
+
     public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updatedAt;
+    }
+
+    /**
+     * @throws Exception
+     */
+    public function setCreatedAt(
+        ?DateTimeImmutable $createdAt,
+    ): static {
+        $this->createdAt = $this->modifyTimezone(dateTimeImmutable: $createdAt);
+
+        return $this;
     }
 
     /**
@@ -54,22 +70,6 @@ trait _CreatedUpdated
         if (null === $this->createdAt) {
             $this->setCreatedAt(createdAt: new UTCDateTimeImmutable());
         }
-
-        return $this;
-    }
-
-    public function getCreatedAt(): ?DateTimeImmutable
-    {
-        return $this->createdAt;
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function setCreatedAt(
-        ?DateTimeImmutable $createdAt,
-    ): static {
-        $this->createdAt = $this->modifyTimezone(dateTimeImmutable: $createdAt);
 
         return $this;
     }

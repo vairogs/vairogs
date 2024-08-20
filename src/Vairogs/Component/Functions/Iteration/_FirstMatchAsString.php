@@ -11,6 +11,8 @@
 
 namespace Vairogs\Component\Functions\Iteration;
 
+use function array_key_exists;
+
 trait _FirstMatchAsString
 {
     public function firstMatchAsString(
@@ -18,7 +20,7 @@ trait _FirstMatchAsString
         array $haystack,
     ): ?string {
         foreach ($keys as $key) {
-            if (isset($haystack[$key])) {
+            if (array_key_exists($key, $haystack)) {
                 return (string) $haystack[$key];
             }
         }
