@@ -26,5 +26,9 @@
     {
         "path": "src/Vairogs/Component/Audit",
         "repo": "https://GH_TOKEN@github.com/vairogs/audit.git"
+    },
+    {
+        "path": "src/Vairogs/PhpCsFixerCustomFixers",
+        "repo": "https://GH_TOKEN@github.com/vairogs/php-cs-fixer-custom-fixers.git"
     }
 ]

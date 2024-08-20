@@ -1,0 +1,32 @@
+{
+    "name": "vairogs/php-cs-fixer-custom-fixers",
+    "type": "library",
+    "license": "BSD-3-Clause",
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\PhpCsFixerCustomFixers\\": ""
+        }
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false,
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    },
+    "require": {
+        "php": ">=8.3",
+        "friendsofphp/php-cs-fixer": "*",
+        "symfony/finder": "*",
+        "vairogs/functions": "*"
+    },
+    "suggest": {
+        "doctrine/migrations": "*"
+    },
+    "conflict": {
+        "friendsofphp/php-cs-fixer": "<3.57.0"
+    }
+}

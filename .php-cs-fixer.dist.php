@@ -5,21 +5,25 @@ use PhpCsFixer\Finder;
 use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
 
 $fileHeaderComment = <<<'EOF'
-This file is part of the Vairogs package.
+    This file is part of the Vairogs package.
 
-(c) Dāvis Zālītis (k0d3r1s) <davis@vairogs.com>
+    (c) Dāvis Zālītis (k0d3r1s) <davis@vairogs.com>
 
-For the full copyright and license information, please view the LICENSE
-file that was distributed with this source code.
-EOF;
+    For the full copyright and license information, please view the LICENSE
+    file that was distributed with this source code.
+    EOF;
 
 $finder = Finder::create()
     ->in(dirs: [getcwd(), ])
     ->exclude(dirs: ['vendor', 'var', '.github', ]);
 
+$fixers = new Vairogs\PhpCsFixerCustomFixers\Fixers();
+
 return (new Config())
     ->setParallelConfig(ParallelConfigFactory::detect())
+    ->registerCustomFixers($fixers)
     ->setRules(rules: [
+        ...$fixers::getFixers(),
         '@PER-CS2.0' => true,
         '@PER-CS2.0:risky' => true,
         '@PHP80Migration:risky' => true,
@@ -45,6 +49,7 @@ return (new Config())
         'increment_style' => ['style' => 'post', ],
         'linebreak_after_opening_tag' => false,
         'magic_constant_casing' => true,
+        'method_argument_space' => ['on_multiline' => 'ensure_fully_multiline', 'keep_multiple_spaces_after_comma' => false, ],
         'method_chaining_indentation' => false,
         'multiline_whitespace_before_semicolons' => ['strategy' => 'no_multi_line', ],
         'native_constant_invocation' => false,
@@ -59,7 +64,7 @@ return (new Config())
         'no_unset_on_property' => true,
         'no_useless_else' => true,
         'no_useless_sprintf' => true,
-        'ordered_class_elements' => ['sort_algorithm' => 'none', ],
+        'ordered_class_elements' => ['sort_algorithm' => 'alpha', 'case_sensitive' => true, 'order' => ['use_trait', 'public', 'protected', 'private', 'case', 'constant', 'constant_public', 'constant_protected', 'constant_private', 'property', 'property_static', 'property_public', 'property_public_readonly', 'property_public_static', 'property_protected', 'property_protected_readonly', 'property_protected_static', 'property_private', 'property_private_readonly', 'property_private_static', 'construct', 'destruct', 'magic', 'method', 'method_abstract', 'method_static', 'method_public_abstract', 'method_public_abstract_static', 'method_public', 'method_public_static', 'method_protected_abstract', 'method_protected_abstract_static', 'method_protected', 'method_protected_static', 'method_private_abstract', 'method_private_abstract_static', 'method_private', 'method_private_static'], ],
         'ordered_imports' => ['sort_algorithm' => 'alpha', 'imports_order' => ['class', 'function', 'const', ], ],
         'protected_to_private' => false,
         'return_assignment' => true,
