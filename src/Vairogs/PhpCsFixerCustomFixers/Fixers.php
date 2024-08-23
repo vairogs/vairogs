@@ -57,6 +57,7 @@ final class Fixers implements IteratorAggregate
         $match = new class {
             use _Match;
         };
+        $classMatches = $namespaceMatches = ['', ''];
         foreach ($finder as $file) {
             $fileContents = file_get_contents($file->getRealPath());
 

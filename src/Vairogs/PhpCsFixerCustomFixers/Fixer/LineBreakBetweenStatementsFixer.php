@@ -149,15 +149,11 @@ final class LineBreakBetweenStatementsFixer extends AbstractFixer
                 '{',
             ], $index);
 
-            if (empty($curlyBracket)) {
+            if (null === $curlyBracket) {
                 continue;
             }
 
             $openCurlyBracket = array_key_first($curlyBracket);
-
-            if (false === $openCurlyBracket) {
-                continue;
-            }
 
             $closeCurlyBracket = $this->analyze($tokens)->getClosingCurlyBracket($openCurlyBracket);
 

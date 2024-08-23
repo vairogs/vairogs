@@ -128,7 +128,7 @@ final class LineBreakBetweenMethodArgumentsFixer extends AbstractFixer
      */
     private function mergeArgs(
         Tokens $tokens,
-        $index,
+        int $index,
     ): void {
         $openBraceIndex = $tokens->getNextTokenOfKind($index, ['(']);
         $closeBraceIndex = $this->analyze($tokens)->getClosingParenthesis($openBraceIndex);
@@ -153,7 +153,7 @@ final class LineBreakBetweenMethodArgumentsFixer extends AbstractFixer
      */
     private function splitArgs(
         Tokens $tokens,
-        $index,
+        int $index,
     ): void {
         $this->mergeArgs($tokens, $index);
 

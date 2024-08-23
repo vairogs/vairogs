@@ -12,7 +12,6 @@
 namespace Vairogs\PhpCsFixerCustomFixers\PhpCsFixer;
 
 use InvalidArgumentException;
-use LogicException;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
@@ -77,7 +76,7 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
         return new FixerDefinition(
             $this->getDocumentation(),
             array_map(
-                static fn (?array $configutation = null) => new CodeSample($this->getSampleCode(), $configutation),
+                fn (?array $configutation = null) => new CodeSample($this->getSampleCode(), $configutation),
                 [[]],
             ),
         );
@@ -107,10 +106,6 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
     public function setWhitespacesConfig(
         WhitespacesFixerConfig $config,
     ): void {
-        if (!$this instanceof WhitespacesAwareFixerInterface) {
-            throw new LogicException('Cannot run method for class not implementing "PhpCsFixer\Fixer\WhitespacesAwareFixerInterface".');
-        }
-
         $this->whitespacesConfig = $config;
     }
 
@@ -217,7 +212,7 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
 
     protected function hasUseStatements(
         Tokens $tokens,
-        $fqcn,
+        array|string $fqcn,
     ): bool {
         return null !== $this->getUseStatements($tokens, $fqcn);
     }

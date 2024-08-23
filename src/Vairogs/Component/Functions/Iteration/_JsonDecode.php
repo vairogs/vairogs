@@ -34,7 +34,7 @@ trait _JsonDecode
         int $depth = 512,
     ): mixed {
         $flags |= JSON_BIGINT_AS_STRING;
-        if (function_exists(function: 'json_validate') && !json_validate(json: $json, depth: $depth, flags: $flags | JSON_THROW_ON_ERROR)) {
+        if (function_exists(function: 'json_validate') && !json_validate(json: $json, depth: $depth)) {
             throw new JsonException(message: json_last_error_msg(), code: json_last_error());
         }
 

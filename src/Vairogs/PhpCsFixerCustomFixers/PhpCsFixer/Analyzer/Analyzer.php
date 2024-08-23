@@ -76,7 +76,7 @@ final class Analyzer
     public function __call(
         string $name,
         array $arguments,
-    ) {
+    ): mixed {
         return call_user_func_array([$this->analyzer, $name], $arguments);
     }
 
@@ -97,7 +97,7 @@ final class Analyzer
         $sequences = [];
 
         foreach ($seqs as $seq) {
-            $index = $start ?: 0;
+            $index = $start ?? 0;
 
             do {
                 $extract = $this->tokens->findSequence($seq, (int) $index, $end);
@@ -216,7 +216,6 @@ final class Analyzer
         ?int $startIndex = null,
     ): array {
         if (null === $startIndex) {
-            $index = $startIndex;
             foreach ($this->tokens as $index => $token) {
                 if (!$token->isClassy()) {
                     continue;
@@ -226,7 +225,7 @@ final class Analyzer
 
                 break;
             }
-            $startIndex = $index;
+            $startIndex = $index ?? $startIndex;
         }
 
         $startIndex++;
