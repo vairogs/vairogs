@@ -9,10 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Mapper\Constants\Enum;
+namespace Vairogs\Component\Functions;
 
-enum MappingType
+final readonly class Vairogs
 {
-    case ENTITY;
-    case RESOURCE;
+    public const string VAIROGS = 'vairogs';
 }

@@ -9,15 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Settings\Constants\Enum;
+namespace Vairogs\Component\Mapper\Constants;
 
-use Vairogs\Component\Functions\Iteration\_Cases;
-
-enum Storage: string
+enum MappingType
 {
-    use _Cases;
-    case FILE = 'file';
-    case MEMORY = 'memory';
-
-    case ORM = 'orm';
+    case ENTITY;
+    case RESOURCE;
 }

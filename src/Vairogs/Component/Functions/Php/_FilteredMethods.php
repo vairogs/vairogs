@@ -48,7 +48,9 @@ trait _FilteredMethods
             })->attributeExists(reflectionMethod: $method, filterClass: $filterClass)) {
                 $filtered[(new class {
                     use Text\_SnakeCaseFromCamelCase;
-                })->snakeCaseFromCamelCase(string: $name = $method->getName())] = $this->definition(class: $class, name: $name, isStatic: $method->isStatic());
+                })->snakeCaseFromCamelCase(string: $name = $method->getName())] = (new class {
+                    use _FilteredMethods;
+                })->definition(class: $class, name: $name, isStatic: $method->isStatic());
             }
         }
 

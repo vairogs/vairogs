@@ -13,13 +13,18 @@ namespace Vairogs\Component\Functions\Local;
 
 use function class_exists;
 use function interface_exists;
+use function is_object;
 use function trait_exists;
 
 trait _Exists
 {
     public function exists(
-        string $class,
+        string|object $class,
     ): bool {
+        if (is_object($class)) {
+            $class = $class::class;
+        }
+
         return class_exists(class: $class) || interface_exists(interface: $class) || trait_exists(trait: $class);
     }
 }
