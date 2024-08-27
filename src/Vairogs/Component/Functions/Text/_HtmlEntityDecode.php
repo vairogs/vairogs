@@ -20,8 +20,14 @@ trait _HtmlEntityDecode
     public function htmlEntityDecode(
         string $text,
     ): string {
-        return (new class {
-            use _Replace;
-        })::replace(pattern: '#\R+#', replacement: '', subject: html_entity_decode(string: $text));
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Replace;
+            };
+        }
+
+        return $_helper->replace(pattern: '#\R+#', replacement: '', subject: html_entity_decode(string: $text));
     }
 }

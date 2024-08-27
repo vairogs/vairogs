@@ -42,15 +42,19 @@ trait _FilteredMethods
 
         $filtered = [];
 
-        foreach ($methods as $method) {
-            if (null === $filterClass || (new class {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
                 use _AttributeExists;
-            })->attributeExists(reflectionMethod: $method, filterClass: $filterClass)) {
-                $filtered[(new class {
-                    use Text\_SnakeCaseFromCamelCase;
-                })->snakeCaseFromCamelCase(string: $name = $method->getName())] = (new class {
-                    use _FilteredMethods;
-                })->definition(class: $class, name: $name, isStatic: $method->isStatic());
+                use _FilteredMethods;
+                use Text\_SnakeCaseFromCamelCase;
+            };
+        }
+
+        foreach ($methods as $method) {
+            if (null === $filterClass || $_helper->attributeExists(reflectionMethod: $method, filterClass: $filterClass)) {
+                $filtered[$_helper->snakeCaseFromCamelCase(string: $name = $method->getName())] = $_helper->definition(class: $class, name: $name, isStatic: $method->isStatic());
             }
         }
 

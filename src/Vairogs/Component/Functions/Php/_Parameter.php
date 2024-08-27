@@ -23,8 +23,14 @@ trait _Parameter
             return $variable[$key];
         }
 
-        return (new class {
-            use _Get;
-        })->get(object: $variable, property: $key);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Get;
+            };
+        }
+
+        return $_helper->get(object: $variable, property: $key);
     }
 }

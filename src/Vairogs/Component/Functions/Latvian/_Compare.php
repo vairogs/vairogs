@@ -21,12 +21,15 @@ trait _Compare
         array|object $second,
         string|int $field,
     ): int {
-        $value = new class {
-            use Iteration\_Value;
-        };
+        static $_helper = null;
 
-        return (new class {
-            use Text\_Compare;
-        })->compare(first: $value->value(objectOrArray: $first, field: $field), second: $value->value(objectOrArray: $second, field: $field), haystack: Text::LV_LOWERCASE);
+        if (null === $_helper) {
+            $_helper = new class {
+                use Iteration\_Value;
+                use Text\_Compare;
+            };
+        }
+
+        return $_helper->compare(first: $_helper->value(objectOrArray: $first, field: $field), second: $_helper->value(objectOrArray: $second, field: $field), haystack: Text::LV_LOWERCASE);
     }
 }

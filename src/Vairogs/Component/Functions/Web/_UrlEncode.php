@@ -25,10 +25,16 @@ trait _UrlEncode
         $query = $urlParsed['query'] ?? '';
 
         if ('' !== $query) {
+            static $_helper = null;
+
+            if (null === $_helper) {
+                $_helper = new class {
+                    use _ArrayFromQueryString;
+                };
+            }
+
             /** @var string $query */
-            $query = '?' . http_build_query(data: (new class {
-                use _BuildHttpQueryString;
-            })->arrayFromQueryString(query: $query));
+            $query = '?' . http_build_query(data: $_helper->arrayFromQueryString(query: $query));
         }
 
         if ($port && ':' !== $port[0]) {

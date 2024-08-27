@@ -22,14 +22,19 @@ trait _SnakeCaseFromSentence
         string $string,
         bool $skipCamel = false,
     ): string {
-        $string = (new class {
-            use _Replace;
-        })::replace(pattern: [
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _CamelCase;
+                use _Replace;
+            };
+        }
+
+        $string = $_helper->replace(pattern: [
             '#([A-Z\d]+)([A-Z][a-z])#',
             '#([a-z\d])([A-Z])#',
-        ], replacement: '\1_\2', subject: $skipCamel ? $string : (new class {
-            use _CamelCase;
-        })->camelCase(string: $string));
+        ], replacement: '\1_\2', subject: $skipCamel ? $string : $_helper->camelCase(string: $string));
 
         return mb_strtolower(string: str_replace(search: '-', replace: '_', subject: (string) $string));
     }

@@ -24,8 +24,14 @@ trait _RandomString
         int $length = 32,
         string $chars = Text::BASIC,
     ): string {
-        return substr(string: (new class {
-            use _Shuffle;
-        })->shuffle(string: str_repeat(string: $chars, times: (int) ceil(num: (int) (strlen(string: $chars) / $length)))), offset: 0, length: $length);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Shuffle;
+            };
+        }
+
+        return substr(string: $_helper->shuffle(string: str_repeat(string: $chars, times: (int) ceil(num: (int) (strlen(string: $chars) / $length)))), offset: 0, length: $length);
     }
 }

@@ -18,8 +18,14 @@ trait _Return
         object $clone,
         mixed ...$arguments,
     ): mixed {
-        return (new class {
-            use _Bind;
-        })->bind(function: $function, clone: $clone)(...$arguments);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Bind;
+            };
+        }
+
+        return $_helper->bind(function: $function, clone: $clone)(...$arguments);
     }
 }

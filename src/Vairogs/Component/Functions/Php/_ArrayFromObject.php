@@ -20,10 +20,16 @@ trait _ArrayFromObject
     ): array {
         $input = [];
 
-        foreach ((new ReflectionObject(object: $object))->getProperties() as $reflectionProperty) {
-            $input[$name = $reflectionProperty->getName()] = (new class {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
                 use _Get;
-            })->get(object: $object, property: $name);
+            };
+        }
+
+        foreach ((new ReflectionObject(object: $object))->getProperties() as $reflectionProperty) {
+            $input[$name = $reflectionProperty->getName()] = $_helper->get(object: $object, property: $name);
         }
 
         return $input;

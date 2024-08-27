@@ -21,12 +21,17 @@ trait _Shuffle
     public function shuffle(
         string $string,
     ): string {
-        if ((new class {
-            use Local\_IsInstalled;
-        })->isInstalled(packages: ['random'])) {
-            return (new class {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use Local\_IsInstalled;
                 use Php\_Randomizer;
-            })->randomizer()->shuffleBytes(bytes: $string);
+            };
+        }
+
+        if ($_helper->isInstalled(packages: ['random'])) {
+            return $_helper->randomizer()->shuffleBytes(bytes: $string);
         }
 
         return str_shuffle(string: $string);

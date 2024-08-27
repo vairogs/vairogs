@@ -27,11 +27,17 @@ trait _GetStatic
         string $property,
         mixed ...$arguments,
     ): mixed {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Return;
+            };
+        }
+
         try {
             if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
-                return (new class {
-                    use _Return;
-                })->return(static fn () => $object::${$property}, $object, ...$arguments);
+                return $_helper->return(static fn () => $object::${$property}, $object, ...$arguments);
             }
         } catch (Exception) {
             // exception === unable to get object property

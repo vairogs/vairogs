@@ -19,15 +19,19 @@ trait _IsPrime
         int $number,
         bool $override = false,
     ): bool {
-        $function = (new FunctionHandler(function: 'isPrimal', instance: new class {
-            use _IsPrimal;
-        }));
-        $below = (new FunctionHandler(function: 'isPrimeBelow1000', instance: new class {
-            use _IsPrimeBelow1000;
-        }))->next(handler: $function);
+        static $_helper = null;
 
-        return (bool) (new FunctionHandler(function: 'isPrimeGmp', instance: new class {
-            use _IsPrimeGmp;
-        }))->next(handler: $below)->handle($number, $override);
+        if (null === $_helper) {
+            $_helper = new class {
+                use _IsPrimal;
+                use _IsPrimeBelow1000;
+                use _IsPrimeGmp;
+            };
+        }
+
+        $function = (new FunctionHandler(function: 'isPrimal', instance: $_helper));
+        $below = (new FunctionHandler(function: 'isPrimeBelow1000', instance: $_helper))->next(handler: $function);
+
+        return (bool) (new FunctionHandler(function: 'isPrimeGmp', instance: $_helper))->next(handler: $below)->handle($number, $override);
     }
 }

@@ -19,29 +19,35 @@ use const PREG_NO_ERROR;
 
 trait _Match
 {
-    public static function match(
+    public function match(
         string $pattern,
         string $subject,
         ?array &$matches = null,
         int $flags = 0,
         int $offset = 0,
     ): bool {
-        $result = @preg_match((new class {
-            use _AddUtf8Modifier;
-        })::addUtf8Modifier($pattern), $subject, $matches, $flags, $offset);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _AddUtf8Modifier;
+                use _NewPregException;
+                use _RemoveUtf8Modifier;
+            };
+        }
+
+        $result = @preg_match($_helper->addUtf8Modifier($pattern), $subject, $matches, $flags, $offset);
+
         if (false !== $result && PREG_NO_ERROR === preg_last_error()) {
             return 1 === $result;
         }
 
-        $result = @preg_match((new class {
-            use _RemoveUtf8Modifier;
-        })::removeUtf8Modifier($pattern), $subject, $matches, $flags, $offset);
+        $result = @preg_match($_helper->removeUtf8Modifier($pattern), $subject, $matches, $flags, $offset);
+
         if (false !== $result && PREG_NO_ERROR === preg_last_error()) {
             return 1 === $result;
         }
 
-        throw (new class {
-            use _NewPregException;
-        })::newPregException(preg_last_error(), preg_last_error_msg(), __METHOD__, $pattern);
+        throw $_helper->newPregException(preg_last_error(), preg_last_error_msg(), __METHOD__, $pattern);
     }
 }

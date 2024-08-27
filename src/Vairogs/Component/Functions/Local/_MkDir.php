@@ -24,6 +24,7 @@ trait _MkDir
     ): bool {
         if (!is_dir(filename: $dir)) {
             @mkdir(directory: $dir, recursive: true);
+
             if (!is_dir(filename: $dir)) {
                 throw new UnexpectedValueException(message: sprintf('Directory "%s" was not created', $dir));
             }

@@ -18,8 +18,14 @@ trait _IsAbsolute
     public function isAbsolute(
         string $path,
     ): bool {
-        return str_starts_with(haystack: $path, needle: '//') || (new class {
-            use _Match;
-        })::match(pattern: '#^[a-z-]{3,}://#i', subject: $path);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Match;
+            };
+        }
+
+        return str_starts_with(haystack: $path, needle: '//') || $_helper->match(pattern: '#^[a-z-]{3,}://#i', subject: $path);
     }
 }

@@ -27,11 +27,17 @@ trait _SetStatic
         string $property,
         mixed $value,
     ): object {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Void;
+            };
+        }
+
         try {
             if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
-                (new class {
-                    use _Void;
-                })->void(function: static function () use ($object, $property, $value): void {
+                $_helper->void(function: static function () use ($object, $property, $value): void {
                     $object::${$property} = $value;
                 }, clone: $object);
 

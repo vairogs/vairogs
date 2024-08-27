@@ -65,6 +65,7 @@ final class DeclareAfterOpeningTagFixer extends AbstractFixer
         assert(is_int($semicolonIndex));
 
         $tokensToInsert = [];
+
         for ($index = $declareIndex; $index <= $semicolonIndex; $index++) {
             $tokensToInsert[] = $tokens[$index];
         }
@@ -75,10 +76,16 @@ final class DeclareAfterOpeningTagFixer extends AbstractFixer
             $tokensToInsert[] = new Token([T_WHITESPACE, substr($openingTagTokenContent, 5)]);
         }
 
-        if ($tokens[$semicolonIndex + 1]->isGivenKind(T_WHITESPACE)) {
-            $content = (new class {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
                 use _Replace;
-            })::replace('/^(\\R?)(?=\\R)/', '', $tokens[$semicolonIndex + 1]->getContent());
+            };
+        }
+
+        if ($tokens[$semicolonIndex + 1]->isGivenKind(T_WHITESPACE)) {
+            $content = $_helper->replace('/^(\\R?)(?=\\R)/', '', $tokens[$semicolonIndex + 1]->getContent());
 
             $tokens->ensureWhitespaceAtIndex($semicolonIndex + 1, 0, $content);
         }

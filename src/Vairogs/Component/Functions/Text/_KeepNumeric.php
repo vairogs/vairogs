@@ -18,8 +18,14 @@ trait _KeepNumeric
     public function keepNumeric(
         string $text,
     ): string {
-        return (new class {
-            use _Replace;
-        })::replace(pattern: '#\D#', replacement: '', subject: $text);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Replace;
+            };
+        }
+
+        return $_helper->replace(pattern: '#\D#', replacement: '', subject: $text);
     }
 }

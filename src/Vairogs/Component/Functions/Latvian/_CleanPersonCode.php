@@ -23,9 +23,14 @@ trait _CleanPersonCode
     public function cleanPersonCode(
         string $personCode,
     ): string {
-        $personCode = (new class {
-            use Text\_KeepNumeric;
-        })->keepNumeric(text: $personCode);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use Text\_KeepNumeric;
+            };
+        }
+        $personCode = $_helper->keepNumeric(text: $personCode);
         $personCode = (string) str_replace(search: '-', replace: '', subject: $personCode);
 
         if (11 !== strlen(string: $personCode)) {

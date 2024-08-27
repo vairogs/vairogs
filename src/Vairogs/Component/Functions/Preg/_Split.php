@@ -19,28 +19,34 @@ use const PREG_NO_ERROR;
 
 trait _Split
 {
-    public static function split(
+    public function split(
         string $pattern,
         string $subject,
         int $limit = -1,
         int $flags = 0,
     ): array {
-        $result = @preg_split((new class {
-            use _AddUtf8Modifier;
-        })::addUtf8Modifier($pattern), $subject, $limit, $flags);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _AddUtf8Modifier;
+                use _NewPregException;
+                use _RemoveUtf8Modifier;
+            };
+        }
+
+        $result = @preg_split($_helper->addUtf8Modifier($pattern), $subject, $limit, $flags);
+
         if (false !== $result && PREG_NO_ERROR === preg_last_error()) {
             return $result;
         }
 
-        $result = @preg_split((new class {
-            use _RemoveUtf8Modifier;
-        })::removeUtf8Modifier($pattern), $subject, $limit, $flags);
+        $result = @preg_split($_helper->removeUtf8Modifier($pattern), $subject, $limit, $flags);
+
         if (false !== $result && PREG_NO_ERROR === preg_last_error()) {
             return $result;
         }
 
-        throw (new class {
-            use _NewPregException;
-        })::newPregException(preg_last_error(), preg_last_error_msg(), __METHOD__, $pattern);
+        throw $_helper->newPregException(preg_last_error(), preg_last_error_msg(), __METHOD__, $pattern);
     }
 }

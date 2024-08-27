@@ -18,8 +18,14 @@ trait _VoidObject
         string $function,
         mixed ...$arguments,
     ): void {
-        (new class {
-            use _Void;
-        })->void(fn () => $object->{$function}(...$arguments), $object, ...$arguments);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Void;
+            };
+        }
+
+        $_helper->void(fn () => $object->{$function}(...$arguments), $object, ...$arguments);
     }
 }

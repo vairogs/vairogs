@@ -23,9 +23,15 @@ trait _IsCIDR
         $parts = explode(separator: '/', string: $cidr);
 
         if (2 === count(value: $parts) && is_numeric(value: $parts[1]) && 32 >= (int) $parts[1]) {
-            return (new class {
-                use _ValidateIPAddress;
-            })->validateIPAddress(ipAddress: $parts[0], deny: false);
+            static $_helper = null;
+
+            if (null === $_helper) {
+                $_helper = new class {
+                    use _ValidateIPAddress;
+                };
+            }
+
+            return $_helper->validateIPAddress(ipAddress: $parts[0], deny: false);
         }
 
         return false;

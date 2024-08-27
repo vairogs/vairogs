@@ -23,8 +23,14 @@ trait _CallObject
     ): mixed {
         array_unshift($arguments, $value);
 
-        return (new class {
-            use _ReturnObject;
-        })->returnObject($object, $function, ...$arguments);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _ReturnObject;
+            };
+        }
+
+        return $_helper->returnObject($object, $function, ...$arguments);
     }
 }

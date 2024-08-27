@@ -38,6 +38,7 @@ trait _GetClassFromFile
                 foreach (array_slice(array: $tokens, offset: $i + 1) as $subToken) {
                     if (T_NAME_QUALIFIED === $subToken->id) {
                         $namespace = $subToken->text;
+
                         break;
                     }
                 }
@@ -52,6 +53,7 @@ trait _GetClassFromFile
                     if (T_STRING === $subToken->id) {
                         return $namespace . '\\' . $subToken->text;
                     }
+
                     break;
                 }
             }

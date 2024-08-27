@@ -18,8 +18,14 @@ trait _ReturnObject
         string $function,
         mixed ...$arguments,
     ): mixed {
-        return (new class {
-            use _Return;
-        })->return(fn () => $object->{$function}(...$arguments), $object, ...$arguments);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Return;
+            };
+        }
+
+        return $_helper->return(fn () => $object->{$function}(...$arguments), $object, ...$arguments);
     }
 }

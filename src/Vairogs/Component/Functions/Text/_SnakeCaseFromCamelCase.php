@@ -21,8 +21,14 @@ trait _SnakeCaseFromCamelCase
         string $string,
         string $separator = '_',
     ): string {
-        return mb_strtolower(string: (new class {
-            use _Replace;
-        })::replace(pattern: '#(?!^)[[:upper:]]+#', replacement: $separator . '$0', subject: $string));
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Replace;
+            };
+        }
+
+        return mb_strtolower(string: $_helper->replace(pattern: '#(?!^)[[:upper:]]+#', replacement: $separator . '$0', subject: $string));
     }
 }

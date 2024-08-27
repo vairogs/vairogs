@@ -30,8 +30,10 @@ final class Fixers implements IteratorAggregate
     public function getIterator(): Generator
     {
         $classNames = [];
+
         foreach (new DirectoryIterator(__DIR__ . '/Fixer') as $fileInfo) {
             $fileName = $fileInfo->getBasename('.php');
+
             if (in_array($fileName, ['.', '..', ], true)) {
                 continue;
             }
@@ -54,15 +56,21 @@ final class Fixers implements IteratorAggregate
         $finder->files()->in(__DIR__ . '/Fixer/')->name('*.php');
         $files = [];
 
-        $match = new class {
-            use _Match;
-        };
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Match;
+            };
+        }
+
         $classMatches = $namespaceMatches = ['', ''];
+
         foreach ($finder as $file) {
             $fileContents = file_get_contents($file->getRealPath());
 
-            if ($match::match('/namespace\s+(.+?);/', $fileContents, $namespaceMatches)
-                && $match::match('/class\s+(\w+)/', $fileContents, $classMatches)) {
+            if ($_helper->match('/namespace\s+(.+?);/', $fileContents, $namespaceMatches)
+                && $_helper->match('/class\s+(\w+)/', $fileContents, $classMatches)) {
                 $className = $classMatches[1];
                 $fullClassName = $namespaceMatches[1] . '\\' . $className;
 
@@ -73,6 +81,7 @@ final class Fixers implements IteratorAggregate
         }
 
         $fixers = [];
+
         foreach ($files as $fixer) {
             $fixers[AbstractFixer::getNameForClass($fixer)] = true;
         }

@@ -25,8 +25,14 @@ trait _ClassConstantsValues
     public function classConstantsValues(
         string $class,
     ): array {
-        return array_values(array: (new class {
-            use _ClassConstants;
-        })->classConstants(class: $class));
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _ClassConstants;
+            };
+        }
+
+        return array_values(array: $_helper->classConstants(class: $class));
     }
 }

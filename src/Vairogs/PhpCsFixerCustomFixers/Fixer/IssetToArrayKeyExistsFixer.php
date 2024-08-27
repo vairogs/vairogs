@@ -50,6 +50,7 @@ final class IssetToArrayKeyExistsFixer extends AbstractFixer
 
             $closeBrackets = $tokens->getPrevMeaningfulToken($closeParenthesis);
             assert(is_int($closeBrackets));
+
             if (!$tokens[$closeBrackets]->equals(']')) {
                 continue;
             }
@@ -61,6 +62,7 @@ final class IssetToArrayKeyExistsFixer extends AbstractFixer
             $keyEndIndex = $tokens->getPrevMeaningfulToken($closeBrackets);
 
             $keyTokens = [];
+
             for ($i = $keyStartIndex; $i <= $keyEndIndex; $i++) {
                 if ($tokens[$i]->equals('')) {
                     continue;

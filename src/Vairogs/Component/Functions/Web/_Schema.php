@@ -19,8 +19,14 @@ trait _Schema
     public function schema(
         Request $request,
     ): string {
-        return (new class {
-            use _IsHttps;
-        })->isHttps(request: $request) ? Web::SCHEMA_HTTPS : Web::SCHEMA_HTTP;
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _IsHttps;
+            };
+        }
+
+        return $_helper->isHttps(request: $request) ? Web::SCHEMA_HTTPS : Web::SCHEMA_HTTP;
     }
 }

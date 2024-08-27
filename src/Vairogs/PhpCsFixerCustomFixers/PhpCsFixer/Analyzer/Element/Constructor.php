@@ -47,6 +47,7 @@ final readonly class Constructor
         $closeParenthesis = $this->tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openParenthesis);
 
         $constructorParameterNames = [];
+
         for ($index = $openParenthesis + 1; $index < $closeParenthesis; $index++) {
             if (!$this->tokens[$index]->isGivenKind(T_VARIABLE)) {
                 continue;
@@ -79,11 +80,13 @@ final readonly class Constructor
 
             $semicolonIndex = $this->tokens->getNextMeaningfulToken($index);
             assert(is_int($semicolonIndex));
+
             if (!$this->tokens[$semicolonIndex]->equals(';')) {
                 continue;
             }
 
             $propertyIndex = $this->getPropertyIndex($index, $openBrace);
+
             if (null === $propertyIndex) {
                 continue;
             }
@@ -111,6 +114,7 @@ final readonly class Constructor
         $closeParenthesis = $this->tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openParenthesis);
 
         $constructorPromotableParameters = [];
+
         for ($index = $openParenthesis + 1; $index < $closeParenthesis; $index++) {
             if (!$this->tokens[$index]->isGivenKind(T_VARIABLE)) {
                 continue;
@@ -118,6 +122,7 @@ final readonly class Constructor
 
             $typeIndex = $this->tokens->getPrevMeaningfulToken($index);
             assert(is_int($typeIndex));
+
             if ($this->tokens[$typeIndex]->equalsAny(['(', ',', [T_CALLABLE], [T_ELLIPSIS]])) {
                 continue;
             }
@@ -133,6 +138,7 @@ final readonly class Constructor
                 ],
             );
             assert(is_int($visibilityIndex));
+
             if (!$this->tokens[$visibilityIndex]->equalsAny(['(', ','])) {
                 continue;
             }
@@ -148,6 +154,7 @@ final readonly class Constructor
     ): array {
         $duplicates = [];
         $values = [];
+
         foreach ($array as $key => $value) {
             if (array_key_exists($value, $values)) {
                 $duplicates[$values[$value]] = $values[$value];
@@ -165,11 +172,13 @@ final readonly class Constructor
     ): ?int {
         $assignmentIndex = $this->tokens->getPrevMeaningfulToken($index);
         assert(is_int($assignmentIndex));
+
         if (!$this->tokens[$assignmentIndex]->equals('=')) {
             return null;
         }
 
         $propertyIndex = $this->tokens->getPrevMeaningfulToken($assignmentIndex);
+
         if (!$this->tokens[$propertyIndex]->isGivenKind(T_STRING)) {
             return null;
         }
@@ -180,12 +189,14 @@ final readonly class Constructor
 
         $thisIndex = $this->tokens->getPrevMeaningfulToken($objectOperatorIndex);
         assert(is_int($thisIndex));
+
         if (!$this->tokens[$thisIndex]->equals([T_VARIABLE, '$this'])) {
             return null;
         }
 
         $prevThisIndex = $this->tokens->getPrevMeaningfulToken($thisIndex);
         assert(is_int($prevThisIndex));
+
         if ($prevThisIndex > $openBrace && !$this->tokens[$prevThisIndex]->equalsAny(['}', ';'])) {
             return null;
         }

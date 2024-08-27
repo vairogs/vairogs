@@ -19,14 +19,19 @@ trait _ValidateCIDR
     public function validateCIDR(
         string $cidr,
     ): bool {
-        if (!(new class {
-            use _IsCIDR;
-        })->isCIDR(cidr: $cidr)) {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _CIDRRange;
+                use _IsCIDR;
+            };
+        }
+
+        if (!$_helper->isCIDR(cidr: $cidr)) {
             return false;
         }
 
-        return (int) (new class {
-            use _CIDRRange;
-        })->CIDRRange(cidr: $cidr)[0] === ip2long(ip: explode(separator: '/', string: $cidr, limit: 2)[0]);
+        return (int) $_helper->CIDRRange(cidr: $cidr)[0] === ip2long(ip: explode(separator: '/', string: $cidr, limit: 2)[0]);
     }
 }

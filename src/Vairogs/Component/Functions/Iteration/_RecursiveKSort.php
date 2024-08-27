@@ -22,9 +22,17 @@ trait _RecursiveKSort
         array &$array,
         int $flags = SORT_REGULAR,
     ): true {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _RecursiveKSort;
+            };
+        }
+
         foreach ($array as &$v) {
             if (is_array($v)) {
-                $this->recursiveKSort($v, $flags);
+                $_helper->recursiveKSort($v, $flags);
             }
         }
         unset($v);

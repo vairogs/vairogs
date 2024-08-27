@@ -15,7 +15,7 @@ use function is_array;
 
 trait _AddUtf8Modifier
 {
-    public static function addUtf8Modifier(
+    public function addUtf8Modifier(
         array|string $pattern,
     ): array|string {
         $processPattern = static fn (string $pattern): string => $pattern . 'u';

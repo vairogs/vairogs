@@ -19,12 +19,18 @@ trait _BubbleSort
         array &$array,
     ): void {
         $count = count(value: $array);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _SwapArray;
+            };
+        }
+
         for ($foo = 0; $foo < $count; $foo++) {
             for ($bar = 0; $bar < $count - 1; $bar++) {
                 if ($bar < $count && $array[$bar] > $array[$bar + 1]) {
-                    (new class {
-                        use _SwapArray;
-                    })->swapArray(array: $array, foo: $bar, bar: $bar + 1);
+                    $_helper->swapArray(array: $array, foo: $bar, bar: $bar + 1);
                 }
             }
         }

@@ -30,9 +30,15 @@ trait _WillBeAvailable
             throw new LogicException(message: sprintf('Calling "%s" when dependencies have been installed with Composer 1 is not supported. Consider upgrading to Composer 2.', __METHOD__));
         }
 
-        if (!(new class {
-            use _Exists;
-        })->exists(class: $class)) {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Exists;
+            };
+        }
+
+        if (!$_helper->exists(class: $class)) {
             return false;
         }
 

@@ -43,11 +43,13 @@ final class NoUselessDirnameCallFixer extends AbstractFixer
             }
 
             $prevInserts = $this->getPrevTokensUpdates($tokens, $index);
+
             if (null === $prevInserts) {
                 continue;
             }
 
             $nextInserts = $this->getNextTokensUpdates($tokens, $index);
+
             if (null === $nextInserts) {
                 continue;
             }
@@ -89,10 +91,12 @@ final class NoUselessDirnameCallFixer extends AbstractFixer
 
         $commaOrClosingParenthesisIndex = $tokens->getNextMeaningfulToken($index);
         assert(is_int($commaOrClosingParenthesisIndex));
+
         if ($tokens[$commaOrClosingParenthesisIndex]->equals(',')) {
             $updates[$commaOrClosingParenthesisIndex] = '';
             $afterCommaIndex = $tokens->getNextMeaningfulToken($commaOrClosingParenthesisIndex);
             assert(is_int($afterCommaIndex));
+
             if ($tokens[$afterCommaIndex]->isGivenKind(T_LNUMBER)) {
                 $depthLevel = (int) $tokens[$afterCommaIndex]->getContent();
                 $updates[$afterCommaIndex] = '';
@@ -115,12 +119,14 @@ final class NoUselessDirnameCallFixer extends AbstractFixer
 
         $concatenationIndex = $tokens->getNextMeaningfulToken($closingParenthesisIndex);
         assert(is_int($concatenationIndex));
+
         if (!$tokens[$concatenationIndex]->equals('.')) {
             return null;
         }
 
         $stringIndex = $tokens->getNextMeaningfulToken($concatenationIndex);
         assert(is_int($stringIndex));
+
         if (!$tokens[$stringIndex]->isGivenKind(T_CONSTANT_ENCAPSED_STRING)) {
             return null;
         }
@@ -139,6 +145,7 @@ final class NoUselessDirnameCallFixer extends AbstractFixer
 
         $openParenthesisIndex = $tokens->getPrevMeaningfulToken($index);
         assert(is_int($openParenthesisIndex));
+
         if (!$tokens[$openParenthesisIndex]->equals('(')) {
             return null;
         }
@@ -146,6 +153,7 @@ final class NoUselessDirnameCallFixer extends AbstractFixer
 
         $dirnameCallIndex = $tokens->getPrevMeaningfulToken($openParenthesisIndex);
         assert(is_int($dirnameCallIndex));
+
         if (!$tokens[$dirnameCallIndex]->equals([T_STRING, 'dirname'], false)) {
             return null;
         }
@@ -157,6 +165,7 @@ final class NoUselessDirnameCallFixer extends AbstractFixer
 
         $namespaceSeparatorIndex = $tokens->getPrevMeaningfulToken($dirnameCallIndex);
         assert(is_int($namespaceSeparatorIndex));
+
         if ($tokens[$namespaceSeparatorIndex]->isGivenKind(T_NS_SEPARATOR)) {
             $updates[$namespaceSeparatorIndex] = '';
         }

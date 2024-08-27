@@ -32,9 +32,15 @@ class DoctrineMigrationsFilter implements EventSubscriberInterface
             return true;
         }
 
-        if (!(new class {
-            use _Exists;
-        })->exists(TableMetadataStorageConfiguration::class)) {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Exists;
+            };
+        }
+
+        if (!$_helper->exists(TableMetadataStorageConfiguration::class)) {
             return true;
         }
 
@@ -49,6 +55,7 @@ class DoctrineMigrationsFilter implements EventSubscriberInterface
         ConsoleCommandEvent $event,
     ): void {
         $command = $event->getCommand();
+
         if (null === $command) {
             return;
         }

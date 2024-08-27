@@ -31,16 +31,22 @@ trait _Sort
             return $data;
         }
 
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _IsSortable;
+                use _Usort;
+            };
+        }
+
         $data = (array) $data;
-        if (!(new class {
-            use _IsSortable;
-        })->isSortable(item: current(array: $data), field: $parameter)) {
+
+        if (!$_helper->isSortable(item: current(array: $data), field: $parameter)) {
             throw new InvalidArgumentException(message: "Sorting parameter doesn't exist in sortable variable");
         }
 
-        usort(array: $data, callback: (new class {
-            use _Usort;
-        })->usort(parameter: $parameter, order: $order));
+        usort(array: $data, callback: $_helper->usort(parameter: $parameter, order: $order));
 
         return $data;
     }

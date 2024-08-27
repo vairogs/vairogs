@@ -23,8 +23,14 @@ trait _CamelCase
     public function camelCase(
         string $string,
     ): string {
-        return (new class {
-            use _Replace;
-        })::replace(pattern: '#\s+#', replacement: '', subject: lcfirst(string: ucwords(string: mb_strtolower(string: str_replace(search: '_', replace: ' ', subject: $string)))));
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Replace;
+            };
+        }
+
+        return $_helper->replace(pattern: '#\s+#', replacement: '', subject: lcfirst(string: ucwords(string: mb_strtolower(string: str_replace(search: '_', replace: ' ', subject: $string)))));
     }
 }

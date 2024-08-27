@@ -21,6 +21,14 @@ trait _GreatestCommonDiviser
             return $first;
         }
 
-        return $this->greatestCommonDivisor(first: $second, second: $first % $second);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _GreatestCommonDiviser;
+            };
+        }
+
+        return $_helper->greatestCommonDivisor(first: $second, second: $first % $second);
     }
 }

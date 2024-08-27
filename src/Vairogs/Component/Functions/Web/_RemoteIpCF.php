@@ -24,8 +24,14 @@ trait _RemoteIpCF
             return $request->server->get(key: Web::HTTP_CF_CONNECTING_IP);
         }
 
-        return (new class {
-            use _RemoteIp;
-        })->remoteIp(request: $request, trust: $trust);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _RemoteIp;
+            };
+        }
+
+        return $_helper->remoteIp(request: $request, trust: $trust);
     }
 }

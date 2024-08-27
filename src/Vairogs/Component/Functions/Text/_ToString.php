@@ -17,13 +17,18 @@ use function is_array;
 
 trait _ToString
 {
-    public static function toString(
+    public function toString(
         mixed $value,
     ): string {
-        return is_array($value) ? (new class {
-            use _ArrayToString;
-        })::arrayToString($value) : (new class {
-            use _ScalarToString;
-        })::scalarToString($value);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _ArrayToString;
+                use _ScalarToString;
+            };
+        }
+
+        return is_array($value) ? $_helper->arrayToString($value) : $_helper->scalarToString($value);
     }
 }

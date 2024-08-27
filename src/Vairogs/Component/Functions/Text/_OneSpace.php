@@ -18,8 +18,14 @@ trait _OneSpace
     public function oneSpace(
         string $text,
     ): string {
-        return (new class {
-            use _Replace;
-        })::replace(pattern: '#\s+#S', replacement: ' ', subject: $text);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Replace;
+            };
+        }
+
+        return $_helper->replace(pattern: '#\s+#S', replacement: ' ', subject: $text);
     }
 }

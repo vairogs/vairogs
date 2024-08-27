@@ -21,6 +21,7 @@ trait _ClassMethods
         ?string $parent = null,
     ): array {
         $methods = get_class_methods(object_or_class: $class);
+
         if (null !== $parent) {
             return array_diff($methods, get_class_methods(object_or_class: $parent));
         }

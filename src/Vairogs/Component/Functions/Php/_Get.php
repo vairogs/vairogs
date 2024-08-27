@@ -43,16 +43,21 @@ trait _Get
             return null;
         }
 
-        try {
-            return (new class {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
                 use _GetNonStatic;
-            })->getNonStatic($object, $property, ...$arguments);
+                use _GetStatic;
+            };
+        }
+
+        try {
+            return $_helper->getNonStatic($object, $property, ...$arguments);
         } catch (Exception) {
             // exception === unable to get object property
         }
 
-        return (new class {
-            use _GetStatic;
-        })->getStatic($object, $property, ...$arguments);
+        return $_helper->getStatic($object, $property, ...$arguments);
     }
 }

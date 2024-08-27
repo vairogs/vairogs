@@ -22,21 +22,25 @@ use const PCRE_VERSION;
 
 trait _NewPregException
 {
-    public static function newPregException(
+    public function newPregException(
         int $error,
         string $errorMsg,
         string $method,
         array|string $pattern,
     ): RuntimeException {
-        $match = new class {
-            use _Match;
-            use _Replace;
-        };
-        $processPattern = static function (string $pattern) use ($error, $errorMsg, $method, $match): RuntimeException {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Match;
+                use _Replace;
+            };
+        }
+        $processPattern = static function (string $pattern) use ($error, $errorMsg, $method, $_helper): RuntimeException {
             $errorMessage = null;
 
             try {
-                $result = SkipErrorHandler::execute(static fn () => $match::match($pattern, ''));
+                $result = SkipErrorHandler::execute(static fn () => $_helper->match($pattern, ''));
             } catch (RuntimeException $e) {
                 $result = false;
                 $errorMessage = $e->getMessage();
@@ -51,7 +55,7 @@ trait _NewPregException
             $message = sprintf(
                 '(code: %d) %s',
                 $code,
-                $match::replace('~preg_[a-z_]+[()]{2}: ~', '', $errorMessage),
+                $_helper->replace('~preg_[a-z_]+[()]{2}: ~', '', $errorMessage),
             );
 
             return new RuntimeException(

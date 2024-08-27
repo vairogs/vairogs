@@ -133,9 +133,15 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
         $parts = explode('\\', $class);
         $name = substr($parts[count($parts) - 1], 0, -strlen('Fixer'));
 
-        return sprintf('%s/%s', self::PREFIX, (new class {
-            use _SnakeCaseFromCamelCase;
-        })->snakeCaseFromCamelCase($name));
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _SnakeCaseFromCamelCase;
+            };
+        }
+
+        return sprintf('%s/%s', self::PREFIX, $_helper->snakeCaseFromCamelCase($name));
     }
 
     public static function removeWithLinesIfPossible(
@@ -148,6 +154,7 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
             $wasNewlineRemoved = self::handleWhitespaceBefore($tokens, $prev);
 
             $next = $tokens->getNonEmptySibling($index, 1);
+
             if (null !== $next) {
                 self::handleWhitespaceAfter($tokens, $next, $wasNewlineRemoved);
             }
@@ -186,6 +193,7 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
         Tokens $tokens,
     ): array {
         $comments = [];
+
         foreach ($tokens as $index => $token) {
             if ($token->isComment()) {
                 $comments[$index] = $token;
@@ -201,6 +209,7 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
     ): ?array {
         $fqcnArray = is_array($fqcn) ? $fqcn : explode('\\', $fqcn);
         $sequence = [[T_USE]];
+
         foreach ($fqcnArray as $component) {
             $sequence[] = [T_STRING, $component];
             $sequence[] = [T_NS_SEPARATOR];
@@ -238,9 +247,16 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
         bool $wasNewlineRemoved,
     ): void {
         $pattern = $wasNewlineRemoved ? '/^\\h+/' : '/^\\h*\\R/';
-        $newContent = (new class {
-            use _Replace;
-        })::replace($pattern, '', $tokens[$index]->getContent());
+
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Replace;
+            };
+        }
+
+        $newContent = $_helper->replace($pattern, '', $tokens[$index]->getContent());
         $tokens->ensureWhitespaceAtIndex($index, 0, $newContent);
     }
 
@@ -252,12 +268,16 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
             return false;
         }
 
-        $replace = new class {
-            use _Replace;
-        };
+        static $_helper = null;
 
-        $withoutTrailingSpaces = $replace::replace('/\\h+$/', '', $tokens[$index]->getContent());
-        $withoutNewline = $replace::replace('/\\R$/', '', $withoutTrailingSpaces, 1);
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Replace;
+            };
+        }
+
+        $withoutTrailingSpaces = $_helper->replace('/\\h+$/', '', $tokens[$index]->getContent());
+        $withoutNewline = $_helper->replace('/\\R$/', '', $withoutTrailingSpaces, 1);
         $tokens->ensureWhitespaceAtIndex($index, 0, $withoutNewline);
 
         return $withoutTrailingSpaces !== $withoutNewline;
@@ -269,11 +289,15 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
     ): bool {
         $next = $tokens->getNonEmptySibling($index, 1);
 
-        return null !== $next
-            && (!$tokens[$next]->isGivenKind(T_WHITESPACE)
-                || !(new class {
-                    use _Match;
-                })::match('/\\R/', $tokens[$next]->getContent()));
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Match;
+            };
+        }
+
+        return null !== $next && (!$tokens[$next]->isGivenKind(T_WHITESPACE) || !$_helper->match('/\\R/', $tokens[$next]->getContent()));
     }
 
     protected static function hasMeaningTokenInLineBefore(
@@ -287,19 +311,23 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
             return true;
         }
 
-        $match = new class {
-            use _Match;
-        };
+        static $_helper = null;
 
-        if ($tokens[$prev]->isGivenKind(T_OPEN_TAG) && !$match::match('/\\R$/', $tokens[$prev]->getContent())) {
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Match;
+            };
+        }
+
+        if ($tokens[$prev]->isGivenKind(T_OPEN_TAG) && !$_helper->match('/\\R$/', $tokens[$prev]->getContent())) {
             return true;
         }
 
-        if (!$match::match('/\\R/', $tokens[$prev]->getContent())) {
+        if (!$_helper->match('/\\R/', $tokens[$prev]->getContent())) {
             $prevPrev = $tokens->getNonEmptySibling($prev, -1);
             assert(is_int($prevPrev));
 
-            if (!$tokens[$prevPrev]->isGivenKind(T_OPEN_TAG) || !$match::match('/\\R$/', $tokens[$prevPrev]->getContent())) {
+            if (!$tokens[$prevPrev]->isGivenKind(T_OPEN_TAG) || !$_helper->match('/\\R$/', $tokens[$prevPrev]->getContent())) {
                 return true;
             }
         }

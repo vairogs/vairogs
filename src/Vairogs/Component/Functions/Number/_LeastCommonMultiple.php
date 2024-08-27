@@ -17,8 +17,14 @@ trait _LeastCommonMultiple
         int $first,
         int $second,
     ): int {
-        return (int) ($first * $second / (new class {
-            use _GreatestCommonDiviser;
-        })->greatestCommonDivisor(first: $first, second: $second));
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _GreatestCommonDiviser;
+            };
+        }
+
+        return (int) ($first * $second / $_helper->greatestCommonDivisor(first: $first, second: $second));
     }
 }

@@ -18,7 +18,7 @@ use function substr;
 
 trait _RemoveUtf8Modifier
 {
-    public static function removeUtf8Modifier(
+    public function removeUtf8Modifier(
         array|string $pattern,
     ): array|string {
         if ('' === $pattern || [] === $pattern) {

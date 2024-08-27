@@ -22,8 +22,14 @@ trait _Call
     ): mixed {
         array_unshift($arguments, $value);
 
-        return (new class {
-            use _ReturnFunction;
-        })->returnFunction($function, ...$arguments);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _ReturnFunction;
+            };
+        }
+
+        return $_helper->returnFunction($function, ...$arguments);
     }
 }

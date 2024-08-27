@@ -27,14 +27,21 @@ trait _MakeOneDimension
         array $result = [],
         bool $allowList = false,
     ): array {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _IsAssociative;
+                use _MakeOneDimension;
+            };
+        }
+
         if ($depth <= $maxDepth) {
             foreach ($array as $key => $value) {
                 $key = ltrim(string: $base . '.' . $key, characters: '.');
 
-                if ((new class {
-                    use _IsAssociative;
-                })->isAssociative(array: $value, allowList: $allowList)) {
-                    $result = $this->makeOneDimension(array: $value, base: $key, separator: $separator, onlyLast: $onlyLast, depth: $depth + 1, maxDepth: $maxDepth, result: $result, allowList: $allowList);
+                if ($_helper->isAssociative(array: $value, allowList: $allowList)) {
+                    $result = $_helper->makeOneDimension(array: $value, base: $key, separator: $separator, onlyLast: $onlyLast, depth: $depth + 1, maxDepth: $maxDepth, result: $result, allowList: $allowList);
 
                     if ($onlyLast) {
                         continue;

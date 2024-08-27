@@ -23,8 +23,14 @@ trait _BuildHttpQueryString
     public function buildHttpQueryString(
         object $object,
     ): string {
-        return http_build_query(data: (new class {
-            use _BuildHttpQueryArray;
-        })->buildHttpQueryArray(input: $object));
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _BuildHttpQueryString;
+            };
+        }
+
+        return http_build_query(data: $_helper->buildHttpQueryArray(input: $object));
     }
 }

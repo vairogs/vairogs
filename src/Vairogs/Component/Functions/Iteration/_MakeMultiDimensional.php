@@ -16,9 +16,15 @@ trait _MakeMultiDimensional
     public function makeMultiDimensional(
         array $array,
     ): array {
-        if ((new class {
-            use _IsMultiDimentional;
-        })->isMultiDimensional(keys: $array)) {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _IsMultiDimentional;
+            };
+        }
+
+        if ($_helper->isMultiDimensional(keys: $array)) {
             return $array;
         }
 

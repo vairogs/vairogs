@@ -19,9 +19,15 @@ trait _ValidatePersonCodeOld
     public function validatePersonCodeOld(
         string $personCode,
     ): bool {
-        $personCode = (new class {
-            use _CleanPersonCode;
-        })->cleanPersonCode(personCode: $personCode);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _CleanPersonCode;
+            };
+        }
+
+        $personCode = $_helper->cleanPersonCode(personCode: $personCode);
 
         $check = '01060307091005080402';
         $checksum = 1;

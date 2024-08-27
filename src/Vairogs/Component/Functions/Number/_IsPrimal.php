@@ -22,9 +22,15 @@ trait _IsPrimal
     public function isPrimal(
         int $number,
     ): bool {
-        (new class {
-            use _Match;
-        })::match(pattern: '#^1?$|^(11+?)\1+$#', subject: implode(separator: '1', array: array_fill(start_index: 0, count: $number, value: null)), matches: $matches);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Match;
+            };
+        }
+
+        $_helper->match(pattern: '#^1?$|^(11+?)\1+$#', subject: implode(separator: '1', array: array_fill(start_index: 0, count: $number, value: null)), matches: $matches);
 
         return array_key_exists(1, $matches);
     }

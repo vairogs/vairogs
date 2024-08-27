@@ -24,9 +24,15 @@ trait _DateWithoutFormat
         string $date,
         array $guesses = [],
     ): DateTimeInterface|string {
-        $formats = array_merge((new class {
-            use Php\_ClassConstantsValues;
-        })->classConstantsValues(class: DateTimeImmutable::class), Date::EXTRA_FORMATS, $guesses);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use Php\_ClassConstantsValues;
+            };
+        }
+
+        $formats = array_merge($_helper->classConstantsValues(class: DateTimeImmutable::class), Date::EXTRA_FORMATS, $guesses);
 
         foreach ($formats as $format) {
             $datetime = DateTimeImmutable::createFromFormat(format: '!' . $format, datetime: $date);

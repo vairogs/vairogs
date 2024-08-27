@@ -132,6 +132,7 @@ final class Analyzer
             }
 
             $constructorAttributes = $this->analyzer->getMethodAttributes($index);
+
             if ($constructorAttributes['abstract']) {
                 return null;
             }
@@ -301,6 +302,7 @@ final class Analyzer
         ?int $index,
     ): array {
         $argumentsRange = $this->getArgumentsRange($index);
+
         if (null === $argumentsRange) {
             return [];
         }
@@ -309,10 +311,13 @@ final class Analyzer
 
         $arguments = [];
         $index = $currentArgumentStart = $argumentStartIndex;
+
         while ($index < $argumentsEndIndex) {
             $blockType = Tokens::detectBlockType($this->tokens[$index]);
+
             if (null !== $blockType && $blockType['isStart']) {
                 $index = $this->tokens->findBlockEnd($blockType['type'], $index);
+
                 continue;
             }
 
@@ -358,9 +363,14 @@ final class Analyzer
         $closeParenthesis = $this->getClosingParenthesis($openParenthesis);
 
         $arguments = [];
-        $match = new class {
-            use _Match;
-        };
+
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Match;
+            };
+        }
 
         for ($position = $openParenthesis + 1; $position < $closeParenthesis; $position++) {
             $token = $this->tokens[$position];
@@ -374,14 +384,14 @@ final class Analyzer
             $argumentAsDefault = false;
             $argumentNullable = false;
 
-            if (!$match::match('/^\$.+/', $this->tokens[$argumentName]->getContent())) {
+            if (!$_helper->match('/^\$.+/', $this->tokens[$argumentName]->getContent())) {
                 do {
                     if (!$this->tokens[$argumentName]->isWhitespace()) {
                         $argumentType .= $this->tokens[$argumentName]->getContent();
                     }
 
                     $argumentName++;
-                } while (!$match::match('/^\$.+/', $this->tokens[$argumentName]->getContent()));
+                } while (!$_helper->match('/^\$.+/', $this->tokens[$argumentName]->getContent()));
             }
 
             $next = $this->tokens->getNextMeaningfulToken($argumentName);
@@ -520,6 +530,7 @@ final class Analyzer
 
         $cases = [];
         $index = $casesStartIndex;
+
         while ($index < $casesEndIndex) {
             $index = $this->getNextSameLevelToken($index);
 
@@ -589,6 +600,7 @@ final class Analyzer
         int $endIndex,
     ): ArrayElement {
         $index = $startIndex;
+
         while ($endIndex > $index = $this->nextCandidateIndex($index)) {
             if (!$this->tokens[$index]->isGivenKind(T_DOUBLE_ARROW)) {
                 continue;
@@ -670,6 +682,7 @@ final class Analyzer
                 foreach ($openingToken as $opening) {
                     if ($opening === $this->tokens[$index]->getContent()) {
                         $index = $this->getClosingMatchingToken($index, $opening);
+
                         break;
                     }
                 }
@@ -691,6 +704,7 @@ final class Analyzer
         }
 
         $index++;
+
         while ($index < count($this->tokens) && ($this->tokens[$index]->isWhitespace(" \t") || $this->tokens[$index]->isComment())) {
             $index++;
         }
@@ -707,6 +721,7 @@ final class Analyzer
 
         $openParenthesis = $this->tokens->getNextMeaningfulToken($index);
         assert(is_int($openParenthesis));
+
         if (!$this->tokens[$openParenthesis]->equals('(')) {
             throw new InvalidArgumentException(sprintf('Index %d is not a function.', $index));
         }
@@ -753,6 +768,7 @@ final class Analyzer
         }
 
         $index = $casesStartIndex;
+
         while ($index < $this->tokens->count()) {
             $index = $this->getNextSameLevelToken($index);
 
@@ -802,6 +818,7 @@ final class Analyzer
         $elements = [];
 
         $index = $startIndex;
+
         while ($endIndex >= $index = $this->nextCandidateIndex($index)) {
             if (!$this->tokens[$index]->equals(',')) {
                 continue;
@@ -834,6 +851,7 @@ final class Analyzer
         }
 
         $blockType = Tokens::detectBlockType($this->tokens[$index]);
+
         if (null !== $blockType && $blockType['isStart']) {
             return $this->tokens->findBlockEnd($blockType['type'], $index) + 1;
         }

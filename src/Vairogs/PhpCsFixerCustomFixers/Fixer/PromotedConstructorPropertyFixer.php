@@ -59,6 +59,7 @@ final class PromotedConstructorPropertyFixer extends AbstractFixer
             }
 
             $constructorAnalysis = $constructorAnalyzer->findNonAbstractConstructor($index);
+
             if (null === $constructorAnalysis) {
                 continue;
             }
@@ -101,6 +102,7 @@ final class PromotedConstructorPropertyFixer extends AbstractFixer
         int $classIndex,
     ): array {
         $properties = [];
+
         foreach ((new TokensAnalyzer($tokens))->getClassyElements() as $index => $element) {
             if ($element['classIndex'] !== $classIndex) {
                 continue;
@@ -177,6 +179,7 @@ final class PromotedConstructorPropertyFixer extends AbstractFixer
         assert(is_int($index));
 
         $type = '';
+
         while ($index < $variableIndex) {
             $type .= $tokens[$index]->getContent();
 
@@ -198,10 +201,16 @@ final class PromotedConstructorPropertyFixer extends AbstractFixer
             return false;
         }
 
-        foreach ((new DocBlock($tokens[$phpDocIndex]->getContent()))->getAnnotations() as $annotation) {
-            if ((new class {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
                 use _Match;
-            })::match('/\\*\\h+(@Document|@Entity|@Mapping\\\\Entity|@ODM\\\\Document|@ORM\\\\Entity|@ORM\\\\Mapping\\\\Entity)/', $annotation->getContent())) {
+            };
+        }
+
+        foreach ((new DocBlock($tokens[$phpDocIndex]->getContent()))->getAnnotations() as $annotation) {
+            if ($_helper->match('/\\*\\h+(@Document|@Entity|@Mapping\\\\Entity|@ODM\\\\Document|@ORM\\\\Entity|@ORM\\\\Mapping\\\\Entity)/', $annotation->getContent())) {
                 return true;
             }
         }
@@ -269,6 +278,7 @@ final class PromotedConstructorPropertyFixer extends AbstractFixer
             $assignedPropertyIndex = $tokens->getPrevTokenOfKind($constructorPromotableAssignments[$constructorParameterName], [[T_STRING]]);
             $oldParameterName = $tokens[$constructorParameterIndex]->getContent();
             $newParameterName = '$' . $tokens[$assignedPropertyIndex]->getContent();
+
             if ($oldParameterName !== $newParameterName && in_array($newParameterName, $constructorParameterNames, true)) {
                 continue;
             }
@@ -318,6 +328,7 @@ final class PromotedConstructorPropertyFixer extends AbstractFixer
         $removeFrom = $tokens->getTokenNotOfKindSibling($prevPropertyIndex, 1, [[T_WHITESPACE], [T_COMMENT]]);
         assert(is_int($removeFrom));
         $removeTo = $nextPropertyIndex;
+
         if ($tokens[$prevPropertyIndex]->equals(',')) {
             $removeFrom = $prevPropertyIndex;
             $removeTo = $propertyIndex;
@@ -328,11 +339,13 @@ final class PromotedConstructorPropertyFixer extends AbstractFixer
         }
 
         $tokensToInsert = [];
+
         for ($index = $removeFrom; $index <= $visibilityIndex - 1; $index++) {
             $tokensToInsert[] = $tokens[$index];
         }
 
         $visibilityToken = $tokens[$visibilityIndex];
+
         if ($tokens[$visibilityIndex]->isGivenKind(T_VAR)) {
             $visibilityToken = new Token([T_PUBLIC, 'public']);
         }

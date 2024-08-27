@@ -27,15 +27,20 @@ trait _RequestIdentity
         Request $request,
         string $ipUrl = 'https://api.ipify.org/',
     ): array {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _BuildArrayFromObject;
+                use Text\_UniqueId;
+            };
+        }
+
         $additionalData = [
             'actualIp' => file_get_contents(filename: $ipUrl),
-            'uuid' => $request->server->get(key: 'REQUEST_TIME', default: '') . (new class {
-                use Text\_UniqueId;
-            })->uniqueId(),
+            'uuid' => $request->server->get(key: 'REQUEST_TIME', default: '') . $_helper->uniqueId(),
         ];
 
-        return array_merge((new class {
-            use _BuildArrayFromObject;
-        })->buildArrayFromObject(object: $request), $additionalData);
+        return array_merge($_helper->buildArrayFromObject(object: $request), $additionalData);
     }
 }

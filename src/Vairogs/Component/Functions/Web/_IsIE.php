@@ -19,8 +19,14 @@ trait _IsIE
     public function isIE(
         Request $request,
     ): bool {
-        return (new class {
-            use Text\_ContainsAny;
-        })->containsAny(haystack: $request->server->get(key: 'HTTP_USER_AGENT'), needles: ['MSIE', 'Edge', 'Trident/7']);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use Text\_ContainsAny;
+            };
+        }
+
+        return $_helper->containsAny(haystack: $request->server->get(key: 'HTTP_USER_AGENT'), needles: ['MSIE', 'Edge', 'Trident/7']);
     }
 }

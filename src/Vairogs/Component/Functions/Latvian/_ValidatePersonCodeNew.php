@@ -16,9 +16,15 @@ trait _ValidatePersonCodeNew
     public function validatePersonCodeNew(
         string $personCode,
     ): bool {
-        $personCode = (new class {
-            use _CleanPersonCode;
-        })->cleanPersonCode(personCode: $personCode);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _CleanPersonCode;
+            };
+        }
+
+        $personCode = $_helper->cleanPersonCode(personCode: $personCode);
 
         $calculations = [1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
         $sum = 0;

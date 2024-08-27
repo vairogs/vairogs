@@ -34,16 +34,21 @@ trait _Set
             throw new InvalidArgumentException(message: sprintf('Unable to set property "%s" of object %s', $property, $object::class));
         }
 
-        try {
-            return (new class {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
                 use _SetNonStatic;
-            })->setNonStatic(object: $object, property: $property, value: $value);
+                use _SetStatic;
+            };
+        }
+
+        try {
+            return $_helper->setNonStatic(object: $object, property: $property, value: $value);
         } catch (Exception) {
             // exception === unable to get object property
         }
 
-        return (new class {
-            use _SetStatic;
-        })->setStatic(object: $object, property: $property, value: $value);
+        return $_helper->setStatic(object: $object, property: $property, value: $value);
     }
 }

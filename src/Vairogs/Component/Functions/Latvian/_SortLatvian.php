@@ -20,9 +20,15 @@ trait _SortLatvian
         string|int $field,
         ?array $callback = null,
     ): bool {
-        $callback ??= [new class {
-            use _Compare;
-        }, 'compare'];
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Compare;
+            };
+        }
+
+        $callback ??= [$_helper, 'compare'];
 
         return usort(array: $names, callback: static fn ($a, $b) => $callback($a, $b, $field));
     }

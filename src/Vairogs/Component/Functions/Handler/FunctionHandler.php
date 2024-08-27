@@ -26,14 +26,19 @@ class FunctionHandler extends AbstractHandler
     public function handle(
         ...$arguments,
     ): mixed {
-        if (!is_object(value: $this->instance)) {
-            return (new class {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
                 use Php\_ReturnFunction;
-            })->returnFunction($this->function, ...$arguments) ?? parent::handle(...$arguments);
+                use Php\_ReturnObject;
+            };
         }
 
-        return (new class {
-            use Php\_ReturnObject;
-        })->returnObject($this->instance, $this->function, ...$arguments) ?? parent::handle(...$arguments);
+        if (!is_object(value: $this->instance)) {
+            return $_helper->returnFunction($this->function, ...$arguments) ?? parent::handle(...$arguments);
+        }
+
+        return $_helper->returnObject($this->instance, $this->function, ...$arguments) ?? parent::handle(...$arguments);
     }
 }

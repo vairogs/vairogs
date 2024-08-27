@@ -24,7 +24,15 @@ trait _RmDir
     public function rmdir(
         string $directory,
     ): bool {
-        array_map(callback: fn (string $file) => is_dir(filename: $file) ? $this->rmdir(directory: $file) : unlink(filename: $file), array: glob(pattern: $directory . '/*', flags: GLOB_NOSORT));
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _RmDir;
+            };
+        }
+
+        array_map(callback: static fn (string $file) => is_dir(filename: $file) ? $_helper->rmdir(directory: $file) : unlink(filename: $file), array: glob(pattern: $directory . '/*', flags: GLOB_NOSORT));
 
         return !is_dir(filename: $directory) || rmdir(directory: $directory);
     }

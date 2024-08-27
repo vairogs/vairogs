@@ -29,6 +29,7 @@ trait _TimeFormat
         foreach (Date::TIME as $unit => $value) {
             if ($timestamp >= $value) {
                 $time = (int) floor(num: $timestamp / $value);
+
                 if ($time > 0) {
                     match ($asArray) {
                         true => $result[$unit] = $time,

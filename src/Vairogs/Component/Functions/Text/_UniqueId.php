@@ -25,9 +25,15 @@ trait _UniqueId
         try {
             return substr(string: bin2hex(string: random_bytes(length: $length)), offset: 0, length: $length);
         } catch (Throwable) {
-            return (new class {
-                use _RandomString;
-            })->randomString(length: $length);
+            static $_helper = null;
+
+            if (null === $_helper) {
+                $_helper = new class {
+                    use _RandomString;
+                };
+            }
+
+            return $_helper->randomString(length: $length);
         }
     }
 }

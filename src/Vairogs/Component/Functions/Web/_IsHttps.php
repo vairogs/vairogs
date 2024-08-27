@@ -18,14 +18,17 @@ trait _IsHttps
     public function isHttps(
         Request $request,
     ): bool {
-        return (new class {
-            use _CheckHttps;
-        })->checkHttps(request: $request) || (new class {
-            use _CheckServerPort;
-        })->checkServerPort(request: $request) || (new class {
-            use _CheckHttpXForwardedSsl;
-        })->checkHttpXForwardedSsl(request: $request) || (new class {
-            use _CheckHttpXForwardedProto;
-        })->checkHttpXForwardedProto(request: $request);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _CheckHttps;
+                use _CheckHttpXForwardedProto;
+                use _CheckHttpXForwardedSsl;
+                use _CheckServerPort;
+            };
+        }
+
+        return $_helper->checkHttps(request: $request) || $_helper->checkServerPort(request: $request) || $_helper->checkHttpXForwardedSsl(request: $request) || $_helper->checkHttpXForwardedProto(request: $request);
     }
 }

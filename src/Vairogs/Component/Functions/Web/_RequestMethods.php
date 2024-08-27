@@ -25,10 +25,15 @@ trait _RequestMethods
      */
     public function requestMethods(): array
     {
-        return (new class {
-            use Iteration\_ArrayValuesFiltered;
-        })->arrayValuesFiltered(input: (new class {
-            use Php\_ClassConstants;
-        })->classConstants(class: Request::class), with: 'METHOD_');
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use Iteration\_ArrayValuesFiltered;
+                use Php\_ClassConstants;
+            };
+        }
+
+        return $_helper->arrayValuesFiltered(input: $_helper->classConstants(class: Request::class), with: 'METHOD_');
     }
 }

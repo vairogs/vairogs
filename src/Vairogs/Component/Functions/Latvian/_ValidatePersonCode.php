@@ -20,21 +20,24 @@ trait _ValidatePersonCode
     public function validatePersonCode(
         string $personCode,
     ): bool {
-        $personCode = (new class {
-            use _CleanPersonCode;
-        })->cleanPersonCode(personCode: $personCode);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _CleanPersonCode;
+                use _ValidatePersonCodeNew;
+                use _ValidatePersonCodeOld;
+                use Date\_ValidateDate;
+            };
+        }
+
+        $personCode = $_helper->cleanPersonCode(personCode: $personCode);
 
         if (32 === (int) substr(string: $personCode, offset: 0, length: 2)) {
-            if (!(new class {
-                use _ValidatePersonCodeNew;
-            })->validateNewPersonCode(personCode: $personCode)) {
+            if (!$_helper->validateNewPersonCode(personCode: $personCode)) {
                 return false;
             }
-        } elseif (!(new class {
-            use _ValidatePersonCodeOld;
-        })->validateOldPersonCode(personCode: $personCode) && !(new class {
-            use Date\_ValidateDate;
-        })->validateDate(date: $personCode)) {
+        } elseif (!$_helper->validateOldPersonCode(personCode: $personCode) && !$_helper->validateDate(date: $personCode)) {
             return false;
         }
 

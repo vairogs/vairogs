@@ -30,6 +30,7 @@ abstract class BaseFunction extends FunctionNode
         SqlWalker $sqlWalker,
     ): string {
         $dispatched = [];
+
         foreach ($this->nodes as $node) {
             $dispatched[] = null === $node ? 'null' : $node->dispatch($sqlWalker);
         }
@@ -67,6 +68,7 @@ abstract class BaseFunction extends FunctionNode
     ): void {
         for ($i = 0, $count = count($this->nodesMapping); $i < $count; $i++) {
             $this->nodes[$i] = $parser->{$this->nodesMapping[$i]}();
+
             if ($i < $count - 1) {
                 $parser->match(TokenType::T_COMMA);
             }

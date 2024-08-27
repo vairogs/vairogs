@@ -25,9 +25,15 @@ trait _Unique
             return array_unique(array: $input);
         }
 
-        if ((new class {
-            use _IsMultiDimentional;
-        })->isMultiDimensional(keys: $input)) {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _IsMultiDimentional;
+            };
+        }
+
+        if ($_helper->isMultiDimensional(keys: $input)) {
             return $input;
         }
 

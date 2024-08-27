@@ -26,6 +26,7 @@ class RegexpReplace extends BaseFunction
         SqlWalker $sqlWalker,
     ): string {
         $dispatched = [];
+
         foreach ($this->nodes as $node) {
             $dispatched[] = $node->dispatch($sqlWalker);
         }

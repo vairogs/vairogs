@@ -21,9 +21,15 @@ trait _ValidateDate
     public function validateDate(
         string $date,
     ): bool {
-        $date = (new class {
-            use Text\_KeepNumeric;
-        })->keepNumeric(text: $date);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use Text\_KeepNumeric;
+            };
+        }
+
+        $date = $_helper->keepNumeric(text: $date);
         $day = (int) substr(string: $date, offset: 0, length: 2);
         $month = (int) substr(string: $date, offset: 2, length: 2);
 

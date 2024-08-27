@@ -12,7 +12,7 @@
 namespace Vairogs\Component\Functions\Sort;
 
 use Closure;
-use Vairogs\Component\Functions\Php;
+use Vairogs\Component\Functions\Php\_Parameter;
 
 trait _Usort
 {
@@ -21,10 +21,15 @@ trait _Usort
         string $order,
     ): Closure {
         return static function (array|object $first, array|object $second) use ($parameter, $order): int {
-            $anon = new class {
-                use Php\_Parameter;
-            };
-            if (($firstSort = $anon->parameter(variable: $first, key: $parameter)) === ($secondSort = $anon->parameter(variable: $second, key: $parameter))) {
+            static $_helper = null;
+
+            if (null === $_helper) {
+                $_helper = new class {
+                    use _Parameter;
+                };
+            }
+
+            if (($firstSort = $_helper->parameter(variable: $first, key: $parameter)) === ($secondSort = $_helper->parameter(variable: $second, key: $parameter))) {
                 return 0;
             }
 

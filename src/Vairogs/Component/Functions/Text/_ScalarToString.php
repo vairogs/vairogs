@@ -17,11 +17,17 @@ use function var_export;
 
 trait _ScalarToString
 {
-    public static function scalarToString(
+    public function scalarToString(
         mixed $value,
     ): string {
-        return (new class {
-            use _Replace;
-        })::replace('/\bNULL\b/', 'null', var_export($value, true));
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Replace;
+            };
+        }
+
+        return $_helper->replace('/\bNULL\b/', 'null', var_export($value, true));
     }
 }

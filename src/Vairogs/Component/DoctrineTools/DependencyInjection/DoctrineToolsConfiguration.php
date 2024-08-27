@@ -54,20 +54,22 @@ final class DoctrineToolsConfiguration extends AbstractDependencyConfiguration
             ]);
 
             $managers = array_keys(VairogsBundle::getConfig('doctrine', $builder)['orm']['entity_managers'] ?? []);
+
             if ([] === $managers) {
                 $managers = ['default'];
             }
 
             $types = ['string', 'datetime', 'numeric'];
-
-            $snake = (new class {
-                use _SnakeCaseFromCamelCase;
-            });
-
             $functions = [];
-            $match = new class {
-                use _Match;
-            };
+
+            static $_helper = null;
+
+            if (null === $_helper) {
+                $_helper = new class {
+                    use _Match;
+                    use _SnakeCaseFromCamelCase;
+                };
+            }
 
             foreach ($types as $type) {
                 $finder = new Finder();
@@ -77,13 +79,13 @@ final class DoctrineToolsConfiguration extends AbstractDependencyConfiguration
                 foreach ($finder as $file) {
                     $fileContents = file_get_contents($file->getRealPath());
 
-                    if ($match::match('/namespace\s+(.+?);/', $fileContents, $namespaceMatches)
-                        && $match::match('/class\s+(\w+)/', $fileContents, $classMatches)) {
+                    if ($_helper->match('/namespace\s+(.+?);/', $fileContents, $namespaceMatches)
+                        && $_helper->match('/class\s+(\w+)/', $fileContents, $classMatches)) {
                         $className = $classMatches[1];
                         $fullClassName = $namespaceMatches[1] . '\\' . $className;
 
                         if (class_exists($fullClassName)) {
-                            $functions[$type][strtoupper($snake->snakeCaseFromCamelCase($className))] = $fullClassName;
+                            $functions[$type][strtoupper($_helper->snakeCaseFromCamelCase($className))] = $fullClassName;
                         }
                     }
                 }

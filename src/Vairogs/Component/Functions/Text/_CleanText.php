@@ -22,10 +22,15 @@ trait _CleanText
     public function cleanText(
         string $text,
     ): string {
-        return (new class {
-            use _HtmlEntityDecode;
-        })->htmlEntityDecode(text: (new class {
-            use _OneSpace;
-        })->oneSpace(text: str_replace(search: ' ?', replace: '', subject: mb_convert_encoding(string: strip_tags(string: $text), to_encoding: Text::UTF8, from_encoding: Text::UTF8))));
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _HtmlEntityDecode;
+                use _OneSpace;
+            };
+        }
+
+        return $_helper->htmlEntityDecode(text: $_helper->oneSpace(text: str_replace(search: ' ?', replace: '', subject: mb_convert_encoding(string: strip_tags(string: $text), to_encoding: Text::UTF8, from_encoding: Text::UTF8))));
     }
 }

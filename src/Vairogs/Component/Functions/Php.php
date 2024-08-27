@@ -15,7 +15,7 @@ final class Php
 {
     use Php\_Array;
     use Php\_ArrayFromObject;
-    use php\_AttributeExists;
+    use Php\_AttributeExists;
     use Php\_Bind;
     use Php\_Boolval;
     use Php\_Call;

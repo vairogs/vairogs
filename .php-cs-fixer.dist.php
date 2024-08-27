@@ -1,5 +1,14 @@
 <?php declare(strict_types = 1);
 
+/*
+ * This file is part of the Vairogs package.
+ *
+ * (c) Dāvis Zālītis (k0d3r1s) <davis@vairogs.com>
+ *
+ * For the full copyright and license information, please view the LICENSE
+ * file that was distributed with this source code.
+ */
+
 use PhpCsFixer\Config;
 use PhpCsFixer\Finder;
 use PhpCsFixer\Runner\Parallel\ParallelConfigFactory;
@@ -35,6 +44,7 @@ return (new Config())
         '@Symfony:risky' => true,
         'binary_operator_spaces' => true,
         'blank_line_after_opening_tag' => false,
+        'blank_line_before_statement' => ['statements' => ['break', 'case', 'continue', 'declare', 'default', 'do', 'exit', 'for', 'foreach', 'goto', 'if', 'include', 'include_once', 'phpdoc', 'require', 'require_once', 'return', 'switch', 'throw', 'try', 'while', 'yield', 'yield_from', ], ],
         'combine_consecutive_issets' => true,
         'combine_consecutive_unsets' => true,
         'comment_to_phpdoc' => true,

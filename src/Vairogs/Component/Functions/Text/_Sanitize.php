@@ -20,8 +20,14 @@ trait _Sanitize
     public function sanitize(
         string $text,
     ): string {
-        return str_replace(search: ["'", '"'], replace: ['&#39;', '&#34;'], subject: (new class {
-            use _Replace;
-        })::replace(pattern: '/\x00|<[^>]*>?/', replacement: '', subject: $text));
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Replace;
+            };
+        }
+
+        return str_replace(search: ["'", '"'], replace: ['&#39;', '&#34;'], subject: $_helper->replace(pattern: '/\x00|<[^>]*>?/', replacement: '', subject: $text));
     }
 }

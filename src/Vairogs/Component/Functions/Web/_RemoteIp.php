@@ -23,12 +23,18 @@ trait _RemoteIp
     ): string {
         $headers = [Web::REMOTE_ADDR, ];
 
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use Iteration\_FirstMatchAsString;
+            };
+        }
+
         if ($trust) {
             $headers = [Web::HTTP_CLIENT_IP, Web::HTTP_X_REAL_IP, Web::HTTP_X_FORWARDED_FOR, Web::REMOTE_ADDR, ];
         }
 
-        return (string) (new class {
-            use Iteration\_FirstMatchAsString;
-        })->firstMatchAsString(keys: $headers, haystack: $request->server->all());
+        return (string) $_helper->firstMatchAsString(keys: $headers, haystack: $request->server->all());
     }
 }

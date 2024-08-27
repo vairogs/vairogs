@@ -27,17 +27,22 @@ trait _BuildHttpQueryArray
     ): array {
         $result = [];
 
-        foreach ((new class {
-            use Php\_Array;
-        })->array(input: $input) as $key => $value) {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Result;
+                use Php\_Array;
+            };
+        }
+
+        foreach ($_helper->array(input: $input) as $key => $value) {
             $newKey = match ($parent) {
                 null => $key,
                 default => sprintf('%s[%s]', $parent, $key),
             };
 
-            $result = (new class {
-                use _Result;
-            })->result(result: $result, key: $newKey, value: $value);
+            $result = $_helper->result(result: $result, key: $newKey, value: $value);
         }
 
         return $result;

@@ -19,9 +19,15 @@ trait _Array
         array|object $input,
     ): array {
         if (is_object(value: $input)) {
-            return (new class {
-                use _ArrayFromObject;
-            })->arrayFromObject(object: $input);
+            static $_helper = null;
+
+            if (null === $_helper) {
+                $_helper = new class {
+                    use _ArrayFromObject;
+                };
+            }
+
+            return $_helper->arrayFromObject(object: $input);
         }
 
         return $input;

@@ -35,8 +35,14 @@ trait _GetNonStatic
             throw new InvalidArgumentException(message: sprintf('Property "%s" is static', $property));
         }
 
-        return (new class {
-            use _Return;
-        })->return(fn () => $object->{$property}, $object, ...$arguments);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Return;
+            };
+        }
+
+        return $_helper->return(fn () => $object->{$property}, $object, ...$arguments);
     }
 }

@@ -19,7 +19,7 @@ use function sqrt;
 
 trait _DistanceInKm
 {
-    public static function distanceInKm(
+    public function distanceInKm(
         float $latitude1,
         float $longitude1,
         float $latitude2,

@@ -25,9 +25,15 @@ trait _ArrayFromQueryString
     public function arrayFromQueryString(
         string $query,
     ): array {
-        parse_str(string: (new class {
-            use _ReplaceCallback;
-        })::replaceCallback(pattern: '#(?:^|(?<=&))[^=[]+#', callback: static fn ($match) => bin2hex(string: urldecode(string: $match[0])), subject: $query), result: $values);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _ReplaceCallback;
+            };
+        }
+
+        parse_str(string: $_helper->replaceCallback(pattern: '#(?:^|(?<=&))[^=[]+#', callback: static fn ($match) => bin2hex(string: urldecode(string: $match[0])), subject: $query), result: $values);
 
         return array_combine(keys: array_map(callback: 'hex2bin', array: array_keys(array: $values)), values: $values);
     }

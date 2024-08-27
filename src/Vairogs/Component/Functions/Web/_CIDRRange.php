@@ -21,9 +21,15 @@ trait _CIDRRange
         string $cidr,
         bool $int = true,
     ): array {
-        if (!(new class {
-            use _IsCIDR;
-        })->isCIDR(cidr: $cidr)) {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _IsCIDR;
+            };
+        }
+
+        if (!$_helper->isCIDR(cidr: $cidr)) {
             return ['0', '0'];
         }
 

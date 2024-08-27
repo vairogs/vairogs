@@ -20,8 +20,16 @@ trait _IsEmpty
         bool $result = true,
     ): bool {
         if (is_array(value: $variable) && [] !== $variable) {
+            static $_helper = null;
+
+            if (null === $_helper) {
+                $_helper = new class {
+                    use _IsEmpty;
+                };
+            }
+
             foreach ($variable as $item) {
-                $result = $this->isEmpty(variable: $item, result: $result);
+                $result = $_helper->isEmpty(variable: $item, result: $result);
             }
 
             return $result;

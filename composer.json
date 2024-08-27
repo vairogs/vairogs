@@ -25,7 +25,8 @@
         "vairogs/mapper": "self.version",
         "vairogs/package": "self.version",
         "vairogs/settings": "self.version",
-        "vairogs/audit": "self.version"
+        "vairogs/audit": "self.version",
+        "vairogs/php-cs-fixer-custom-fixers": "self.version"
     },
     "require": {
         "php": ">=8.3",

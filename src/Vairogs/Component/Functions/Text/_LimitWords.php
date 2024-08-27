@@ -24,9 +24,16 @@ trait _LimitWords
         int $limit = 100,
         string $append = '...',
     ): string {
-        (new class {
-            use _Match;
-        })::match(pattern: '/^\s*+(?:\S++\s*+){1,' . $limit . '}/u', subject: $text, matches: $matches);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Match;
+            };
+        }
+
+        $_helper->match(pattern: '/^\s*+(?:\S++\s*+){1,' . $limit . '}/u', subject: $text, matches: $matches);
+
         if (!array_key_exists(key: 0, array: $matches) || mb_strlen(string: $text) === mb_strlen(string: $matches[0])) {
             return $text;
         }

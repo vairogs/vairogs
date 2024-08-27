@@ -70,6 +70,7 @@ final class NoUselessStrlenFixer extends AbstractFixer
             assert(is_int($prevIndex));
 
             $startIndex = $index;
+
             if ($tokens[$prevIndex]->isGivenKind(T_NS_SEPARATOR)) {
                 $startIndex = $prevIndex;
                 $tokensToRemove[$prevIndex] = 1;
@@ -140,6 +141,7 @@ final class NoUselessStrlenFixer extends AbstractFixer
         assert(is_int($prevIndex));
 
         $changeCondition = false;
+
         if ($tokens[$prevIndex]->equals('<')) {
             $changeCondition = true;
         } elseif (!$tokens[$prevIndex]->isGivenKind([T_IS_IDENTICAL, T_IS_NOT_IDENTICAL, T_IS_EQUAL, T_IS_NOT_EQUAL])) {
@@ -170,6 +172,7 @@ final class NoUselessStrlenFixer extends AbstractFixer
         assert(is_int($nextIndex));
 
         $changeCondition = false;
+
         if ($tokens[$nextIndex]->equals('>')) {
             $changeCondition = true;
         } elseif (!$tokens[$nextIndex]->isGivenKind([T_IS_IDENTICAL, T_IS_NOT_IDENTICAL, T_IS_EQUAL, T_IS_NOT_EQUAL])) {

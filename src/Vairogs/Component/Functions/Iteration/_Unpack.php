@@ -24,6 +24,7 @@ trait _Unpack
         foreach ($oneDimension as $key => $value) {
             $path = explode(separator: '.', string: $key);
             $temp = &$multiDimension;
+
             foreach ($path as $segment) {
                 if (!array_key_exists($segment, $temp)) {
                     $temp[$segment] = [];

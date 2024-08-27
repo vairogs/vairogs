@@ -18,8 +18,14 @@ trait _Void
         object $clone,
         mixed ...$arguments,
     ): void {
-        (new class {
-            use _Bind;
-        })->bind(function: $function, clone: $clone)(...$arguments);
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _Bind;
+            };
+        }
+
+        $_helper->bind(function: $function, clone: $clone)(...$arguments);
     }
 }

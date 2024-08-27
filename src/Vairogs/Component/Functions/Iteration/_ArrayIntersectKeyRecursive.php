@@ -23,9 +23,17 @@ trait _ArrayIntersectKeyRecursive
     ): array {
         $result = array_intersect_key($first, $second);
 
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _ArrayIntersectKeyRecursive;
+            };
+        }
+
         foreach (array_keys(array: $result) as $key) {
             if (is_array(value: $first[$key]) && is_array(value: $second[$key])) {
-                $result[$key] = $this->arrayIntersectKeyRecursive(first: $first[$key], second: $second[$key]);
+                $result[$key] = $_helper->arrayIntersectKeyRecursive(first: $first[$key], second: $second[$key]);
             }
         }
 

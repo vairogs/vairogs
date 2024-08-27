@@ -17,7 +17,7 @@ use function usort;
 
 trait _StableSort
 {
-    public static function stableSort(
+    public function stableSort(
         array $elements,
         callable $getComparedValue,
         callable $compareValues,

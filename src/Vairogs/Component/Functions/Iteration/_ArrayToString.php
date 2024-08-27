@@ -19,7 +19,7 @@ use function substr;
 
 trait _ArrayToString
 {
-    public static function arrayToString(
+    public function arrayToString(
         array $value,
     ): string {
         if ([] === $value) {
@@ -29,16 +29,21 @@ trait _ArrayToString
         $isHash = !array_is_list($value);
         $str = '[';
 
-        $scalar = new class {
-            use _ScalarToString;
-        };
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _ArrayToString;
+                use _ScalarToString;
+            };
+        }
 
         foreach ($value as $k => $v) {
             if ($isHash) {
-                $str .= $scalar::scalarToString($k) . ' => ';
+                $str .= $_helper->scalarToString($k) . ' => ';
             }
 
-            $str .= is_array($v) ? self::arrayToString($v) . ', ' : $scalar::scalarToString($v) . ', ';
+            $str .= is_array($v) ? $_helper->arrayToString($v) . ', ' : $_helper->scalarToString($v) . ', ';
         }
 
         return substr($str, 0, -2) . ']';
