@@ -35,6 +35,7 @@ trait _RecursiveKSort
                 $_helper->recursiveKSort($v, $flags);
             }
         }
+
         unset($v);
 
         return ksort($array, $flags);

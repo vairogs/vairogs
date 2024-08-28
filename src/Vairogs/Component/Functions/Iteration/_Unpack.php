@@ -29,6 +29,7 @@ trait _Unpack
                 if (!array_key_exists($segment, $temp)) {
                     $temp[$segment] = [];
                 }
+
                 $temp = &$temp[$segment];
             }
 

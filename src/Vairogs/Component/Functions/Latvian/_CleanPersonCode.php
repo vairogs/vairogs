@@ -30,6 +30,7 @@ trait _CleanPersonCode
                 use Text\_KeepNumeric;
             };
         }
+
         $personCode = $_helper->keepNumeric(text: $personCode);
         $personCode = (string) str_replace(search: '-', replace: '', subject: $personCode);
 
