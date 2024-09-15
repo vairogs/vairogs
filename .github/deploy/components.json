@@ -8,24 +8,12 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/functions.git"
     },
     {
-        "path": "src/Vairogs/Component/Settings",
-        "repo": "https://GH_TOKEN@github.com/vairogs/settings.git"
-    },
-    {
         "path": "src/Vairogs/Component/Mapper",
         "repo": "https://GH_TOKEN@github.com/vairogs/mapper.git"
     },
     {
         "path": "src/Vairogs/Component/DoctrineTools",
         "repo": "https://GH_TOKEN@github.com/vairogs/doctrine-tools.git"
-    },
-    {
-        "path": "src/Vairogs/Component/Cache",
-        "repo": "https://GH_TOKEN@github.com/vairogs/cache.git"
-    },
-    {
-        "path": "src/Vairogs/Component/Audit",
-        "repo": "https://GH_TOKEN@github.com/vairogs/audit.git"
     },
     {
         "path": "src/Vairogs/PhpCsFixerCustomFixers",
