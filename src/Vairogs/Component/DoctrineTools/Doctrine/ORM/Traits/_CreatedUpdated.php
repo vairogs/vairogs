@@ -17,7 +17,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Exception;
 use Vairogs\Component\DoctrineTools\UTCDateTimeImmutable;
 
-#[ORM\HasLifecycleCallbacks]
 trait _CreatedUpdated
 {
     #[ORM\Column(type: Types::DATETIME_IMMUTABLE, options: ['default' => 'CURRENT_TIMESTAMP'])]

@@ -15,7 +15,6 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Types\UuidType;
 use Symfony\Component\Uid;
 
-#[ORM\HasLifecycleCallbacks]
 trait _Uuid
 {
     #[ORM\Column(type: UuidType::NAME, unique: true, options: ['default' => 'gen_random_uuid()'])]
