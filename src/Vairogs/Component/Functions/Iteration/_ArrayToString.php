@@ -11,7 +11,7 @@
 
 namespace Vairogs\Component\Functions\Iteration;
 
-use Vairogs\Component\Functions\Text\_ScalarToString;
+use Vairogs\Component\Functions\Text;
 
 use function array_is_list;
 use function is_array;
@@ -34,7 +34,7 @@ trait _ArrayToString
         if (null === $_helper) {
             $_helper = new class {
                 use _ArrayToString;
-                use _ScalarToString;
+                use Text\_ScalarToString;
             };
         }
 

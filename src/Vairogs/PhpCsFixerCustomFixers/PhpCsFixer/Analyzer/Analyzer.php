@@ -16,7 +16,7 @@ use InvalidArgumentException;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use Vairogs\Component\Functions\Preg\_Match;
+use Vairogs\Component\Functions\Preg;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\Analyzer\Element\Argument;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\Analyzer\Element\ArrayElement;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\Analyzer\Element\CaseElement;
@@ -32,6 +32,7 @@ use function end;
 use function explode;
 use function in_array;
 use function is_array;
+use function is_bool;
 use function is_int;
 use function ksort;
 use function mb_strlen;
@@ -349,7 +350,13 @@ final class Analyzer
         $token = $this->tokens[$start];
         $parts = explode("\n", $token->getContent());
 
-        return end($parts);
+        $result = end($parts);
+
+        if (!is_bool($result)) {
+            return (string) $result;
+        }
+
+        return '';
     }
 
     /**
@@ -368,7 +375,7 @@ final class Analyzer
 
         if (null === $_helper) {
             $_helper = new class {
-                use _Match;
+                use Preg\_Match;
             };
         }
 

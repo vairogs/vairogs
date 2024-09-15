@@ -14,7 +14,7 @@ namespace Vairogs\PhpCsFixerCustomFixers\Fixer;
 use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use SplFileInfo;
-use Vairogs\Component\Functions\Preg\_Replace;
+use Vairogs\Component\Functions\Preg;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\AbstractFixer;
 
 use function assert;
@@ -80,7 +80,7 @@ final class DeclareAfterOpeningTagFixer extends AbstractFixer
 
         if (null === $_helper) {
             $_helper = new class {
-                use _Replace;
+                use Preg\_Replace;
             };
         }
 

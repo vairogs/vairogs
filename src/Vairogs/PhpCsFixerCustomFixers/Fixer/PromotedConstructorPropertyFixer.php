@@ -17,7 +17,7 @@ use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
 use SplFileInfo;
-use Vairogs\Component\Functions\Preg\_Match;
+use Vairogs\Component\Functions\Preg;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\AbstractFixer;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\Analyzer\Analyzer;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\Analyzer\Element\Constructor;
@@ -205,7 +205,7 @@ final class PromotedConstructorPropertyFixer extends AbstractFixer
 
         if (null === $_helper) {
             $_helper = new class {
-                use _Match;
+                use Preg\_Match;
             };
         }
 

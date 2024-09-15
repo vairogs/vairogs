@@ -11,7 +11,7 @@
 
 namespace Vairogs\Component\Functions\Text;
 
-use Vairogs\Component\Functions\Preg\_Replace;
+use Vairogs\Component\Functions\Preg;
 
 use function var_export;
 
@@ -24,7 +24,7 @@ trait _ScalarToString
 
         if (null === $_helper) {
             $_helper = new class {
-                use _Replace;
+                use Preg\_Replace;
             };
         }
 

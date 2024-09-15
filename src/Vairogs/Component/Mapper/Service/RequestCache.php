@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Bundle\Service;
+namespace Vairogs\Component\Mapper\Service;
 
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
-use Vairogs\Bundle\Collection\SimpleArrayCollection;
-use Vairogs\Bundle\Collection\SimpleObjectCollection;
-use Vairogs\Bundle\Constants\Context;
-use Vairogs\Bundle\Contracts\SimpleCollection;
+use Vairogs\Component\Functions\Collection\Contracts\SimpleCollection;
+use Vairogs\Component\Functions\Collection\SimpleArrayCollection;
+use Vairogs\Component\Functions\Collection\SimpleObjectCollection;
+use Vairogs\Component\Mapper\Constants\Context;
 
 #[Autoconfigure(public: true)]
 final readonly class RequestCache

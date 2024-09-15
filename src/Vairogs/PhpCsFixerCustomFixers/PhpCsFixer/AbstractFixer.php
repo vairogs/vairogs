@@ -21,9 +21,8 @@ use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\WhitespacesFixerConfig;
 use SplFileInfo;
-use Vairogs\Component\Functions\Preg\_Match;
-use Vairogs\Component\Functions\Preg\_Replace;
-use Vairogs\Component\Functions\Text\_SnakeCaseFromCamelCase;
+use Vairogs\Component\Functions\Preg;
+use Vairogs\Component\Functions\Text;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\Analyzer\Analyzer;
 
 use function array_map;
@@ -137,7 +136,7 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
 
         if (null === $_helper) {
             $_helper = new class {
-                use _SnakeCaseFromCamelCase;
+                use Text\_SnakeCaseFromCamelCase;
             };
         }
 
@@ -252,7 +251,7 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
 
         if (null === $_helper) {
             $_helper = new class {
-                use _Replace;
+                use Preg\_Replace;
             };
         }
 
@@ -272,7 +271,7 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
 
         if (null === $_helper) {
             $_helper = new class {
-                use _Replace;
+                use Preg\_Replace;
             };
         }
 
@@ -293,7 +292,7 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
 
         if (null === $_helper) {
             $_helper = new class {
-                use _Match;
+                use Preg\_Match;
             };
         }
 
@@ -315,7 +314,7 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
 
         if (null === $_helper) {
             $_helper = new class {
-                use _Match;
+                use Preg\_Match;
             };
         }
 

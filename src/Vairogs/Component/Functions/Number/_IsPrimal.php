@@ -11,7 +11,7 @@
 
 namespace Vairogs\Component\Functions\Number;
 
-use Vairogs\Component\Functions\Preg\_Match;
+use Vairogs\Component\Functions\Preg;
 
 use function array_fill;
 use function array_key_exists;
@@ -26,7 +26,7 @@ trait _IsPrimal
 
         if (null === $_helper) {
             $_helper = new class {
-                use _Match;
+                use Preg\_Match;
             };
         }
 

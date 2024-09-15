@@ -11,7 +11,7 @@
 
 namespace Vairogs\Component\Functions\Date;
 
-use Vairogs\Component\Functions\Date as D;
+use Vairogs\Component\Functions\Date;
 use Vairogs\Component\Functions\Text;
 
 use function substr;
@@ -37,10 +37,23 @@ trait _ValidateDate
             return false;
         }
 
-        $daysInMonth = [D::JAN, D::FEB, D::MAR, D::APR, D::MAY, D::JUN, D::JUL, D::AUG, D::SEP, D::OCT, D::NOV, D::DEC];
+        $daysInMonth = [
+            Date::JAN,
+            Date::FEB,
+            Date::MAR,
+            Date::APR,
+            Date::MAY,
+            Date::JUN,
+            Date::JUL,
+            Date::AUG,
+            Date::SEP,
+            Date::OCT,
+            Date::NOV,
+            Date::DEC,
+        ];
 
         if (0 === (int) substr(string: $date, offset: 4, length: 2) % 4) {
-            $daysInMonth[1] = D::FEB_LONG;
+            $daysInMonth[1] = Date::FEB_LONG;
         }
 
         return 0 < $day && $daysInMonth[$month - 1] >= $day;

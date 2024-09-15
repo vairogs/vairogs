@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Bundle\Constants;
+namespace Vairogs\Component\Mapper\Constants;
 
 enum Context: string
 {

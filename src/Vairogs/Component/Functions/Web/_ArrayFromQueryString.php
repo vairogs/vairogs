@@ -11,7 +11,7 @@
 
 namespace Vairogs\Component\Functions\Web;
 
-use Vairogs\Component\Functions\Preg\_ReplaceCallback;
+use Vairogs\Component\Functions\Preg;
 
 use function array_combine;
 use function array_keys;
@@ -29,7 +29,7 @@ trait _ArrayFromQueryString
 
         if (null === $_helper) {
             $_helper = new class {
-                use _ReplaceCallback;
+                use Preg\_ReplaceCallback;
             };
         }
 

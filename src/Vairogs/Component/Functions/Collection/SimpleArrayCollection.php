@@ -9,13 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Bundle\Collection;
+namespace Vairogs\Component\Functions\Collection;
 
 use ArrayAccess;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
-use Vairogs\Bundle\Contracts\SimpleCollection;
 
 use function array_filter;
 use function array_key_exists;
@@ -27,7 +26,7 @@ use function in_array;
 
 use const ARRAY_FILTER_USE_BOTH;
 
-final class SimpleArrayCollection implements Countable, IteratorAggregate, ArrayAccess, SimpleCollection
+final class SimpleArrayCollection implements Countable, IteratorAggregate, ArrayAccess, Contracts\SimpleCollection
 {
     public function __construct(
         private array $elements = [],

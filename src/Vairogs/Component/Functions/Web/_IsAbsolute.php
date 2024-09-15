@@ -11,7 +11,7 @@
 
 namespace Vairogs\Component\Functions\Web;
 
-use Vairogs\Component\Functions\Preg\_Match;
+use Vairogs\Component\Functions\Preg;
 
 trait _IsAbsolute
 {
@@ -22,7 +22,7 @@ trait _IsAbsolute
 
         if (null === $_helper) {
             $_helper = new class {
-                use _Match;
+                use Preg\_Match;
             };
         }
 

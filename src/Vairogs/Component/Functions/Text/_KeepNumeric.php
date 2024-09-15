@@ -11,7 +11,7 @@
 
 namespace Vairogs\Component\Functions\Text;
 
-use Vairogs\Component\Functions\Preg\_Replace;
+use Vairogs\Component\Functions\Preg;
 
 trait _KeepNumeric
 {
@@ -22,7 +22,7 @@ trait _KeepNumeric
 
         if (null === $_helper) {
             $_helper = new class {
-                use _Replace;
+                use Preg\_Replace;
             };
         }
 

@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Bundle\Collection;
+namespace Vairogs\Component\Functions\Collection;
 
 use ArrayAccess;
 use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 use stdClass;
-use Vairogs\Bundle\Contracts\SimpleCollection;
 use Vairogs\Component\Functions\Text\_UniqueId;
 
 use function count;
 use function property_exists;
 
-class SimpleObjectCollection implements Countable, IteratorAggregate, ArrayAccess, SimpleCollection
+class SimpleObjectCollection implements Countable, IteratorAggregate, ArrayAccess, Contracts\SimpleCollection
 {
     private object $elements;
 

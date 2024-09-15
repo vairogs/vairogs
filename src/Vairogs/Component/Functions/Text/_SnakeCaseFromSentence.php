@@ -11,7 +11,7 @@
 
 namespace Vairogs\Component\Functions\Text;
 
-use Vairogs\Component\Functions\Preg\_Replace;
+use Vairogs\Component\Functions\Preg;
 
 use function mb_strtolower;
 use function str_replace;
@@ -27,7 +27,7 @@ trait _SnakeCaseFromSentence
         if (null === $_helper) {
             $_helper = new class {
                 use _CamelCase;
-                use _Replace;
+                use Preg\_Replace;
             };
         }
 

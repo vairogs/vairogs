@@ -11,7 +11,7 @@
 
 namespace Vairogs\Component\Functions\Text;
 
-use Vairogs\Component\Functions\Iteration\_ArrayToString;
+use Vairogs\Component\Functions\Iteration;
 
 use function is_array;
 
@@ -24,8 +24,8 @@ trait _ToString
 
         if (null === $_helper) {
             $_helper = new class {
-                use _ArrayToString;
                 use _ScalarToString;
+                use Iteration\_ArrayToString;
             };
         }
 

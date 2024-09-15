@@ -11,21 +11,13 @@
 
 namespace Vairogs\Component\Functions\Text;
 
-use Vairogs\Component\Functions\Preg;
+use const PHP_EOL;
 
-trait _IsHex
+trait _Br2nl
 {
-    public function isHex(
+    public function br2nl(
         string $string,
-    ): bool {
-        static $_helper = null;
-
-        if (null === $_helper) {
-            $_helper = new class {
-                use Preg\_Match;
-            };
-        }
-
-        return $_helper->match('/^(?:0x)?[0-9a-f]*$/', $string);
+    ): string {
+        return preg_replace('/<br(\s*)?\/?>/i', PHP_EOL, $string);
     }
 }

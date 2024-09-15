@@ -28,16 +28,17 @@ trait _NewPregException
         string $method,
         array|string $pattern,
     ): RuntimeException {
-        static $_helper = null;
-
-        if (null === $_helper) {
-            $_helper = new class {
-                use _Match;
-                use _Replace;
-            };
-        }
-        $processPattern = static function (string $pattern) use ($error, $errorMsg, $method, $_helper): RuntimeException {
+        $processPattern = static function (string $pattern) use ($error, $errorMsg, $method): RuntimeException {
             $errorMessage = null;
+
+            static $_helper = null;
+
+            if (null === $_helper) {
+                $_helper = new class {
+                    use _Match;
+                    use _Replace;
+                };
+            }
 
             try {
                 $result = SkipErrorHandler::execute(static fn () => $_helper->match($pattern, ''));

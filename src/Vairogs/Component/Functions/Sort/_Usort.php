@@ -12,7 +12,7 @@
 namespace Vairogs\Component\Functions\Sort;
 
 use Closure;
-use Vairogs\Component\Functions\Php\_Parameter;
+use Vairogs\Component\Functions\Php;
 
 trait _Usort
 {
@@ -25,7 +25,7 @@ trait _Usort
 
             if (null === $_helper) {
                 $_helper = new class {
-                    use _Parameter;
+                    use Php\_Parameter;
                 };
             }
 

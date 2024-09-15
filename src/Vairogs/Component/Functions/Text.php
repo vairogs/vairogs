@@ -13,6 +13,7 @@ namespace Vairogs\Component\Functions;
 
 final class Text
 {
+    use Text\_Br2nl;
     use Text\_CamelCase;
     use Text\_CleanText;
     use Text\_Compare;
@@ -28,6 +29,7 @@ final class Text
     use Text\_LimitChars;
     use Text\_LimitWords;
     use Text\_LongestSubstrLength;
+    use Text\_Nl2br;
     use Text\_NormalizedValue;
     use Text\_OneSpace;
     use Text\_PascalCase;

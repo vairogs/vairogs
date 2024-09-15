@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Bundle\Contracts;
+namespace Vairogs\Component\Functions\Collection\Contracts;
 
 use ArrayIterator;
 

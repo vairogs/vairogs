@@ -11,21 +11,13 @@
 
 namespace Vairogs\Component\Functions\Text;
 
-use Vairogs\Component\Functions\Preg;
+use function str_replace;
 
-trait _IsHex
+trait _Nl2br
 {
-    public function isHex(
+    public function nl2br(
         string $string,
-    ): bool {
-        static $_helper = null;
-
-        if (null === $_helper) {
-            $_helper = new class {
-                use Preg\_Match;
-            };
-        }
-
-        return $_helper->match('/^(?:0x)?[0-9a-f]*$/', $string);
+    ): string {
+        return str_replace(["\r\n", "\r", "\n"], '<br />', $string);
     }
 }
