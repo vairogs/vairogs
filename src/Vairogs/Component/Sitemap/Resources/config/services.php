@@ -20,6 +20,6 @@ return static function (
         ->autowire()
         ->autoconfigure();
 
-    $services->load(namespace: 'Vairogs\\Component\\Cache\\', resource: __DIR__ . '/../../*')
+    $services->load(namespace: 'Vairogs\\Component\\Sitemap\\', resource: __DIR__ . '/../../*')
         ->exclude(excludes: [__DIR__ . '/../../{Entity,Resources}']);
 };

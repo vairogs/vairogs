@@ -9,10 +9,21 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Cache\DependencyInjection;
+namespace Vairogs\Component\Sitemap\Contracts;
 
-use Vairogs\Bundle\DependencyInjection\AbstractDependencyConfiguration;
-
-final class CacheConfiguration extends AbstractDependencyConfiguration
+interface Builder
 {
+    public function build(
+        &$buffer,
+    ): void;
+
+    public function end(
+        &$buffer,
+    ): void;
+
+    public function getType(): string;
+
+    public function start(
+        &$buffer,
+    ): void;
 }
