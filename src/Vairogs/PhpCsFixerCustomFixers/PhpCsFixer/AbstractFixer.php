@@ -11,13 +11,11 @@
 
 namespace Vairogs\PhpCsFixerCustomFixers\PhpCsFixer;
 
-use InvalidArgumentException;
 use PhpCsFixer\Fixer\FixerInterface;
 use PhpCsFixer\Fixer\WhitespacesAwareFixerInterface;
 use PhpCsFixer\FixerDefinition\CodeSample;
 use PhpCsFixer\FixerDefinition\FixerDefinition;
 use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
-use PhpCsFixer\Tokenizer\Token;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\WhitespacesFixerConfig;
 use SplFileInfo;
@@ -32,11 +30,8 @@ use function count;
 use function explode;
 use function is_array;
 use function is_int;
-use function ltrim;
 use function sprintf;
-use function str_replace;
 use function strlen;
-use function strrchr;
 use function substr;
 
 use const T_CLASS;
@@ -112,18 +107,6 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
         SplFileInfo $file,
     ): bool {
         return true;
-    }
-
-    public static function calculateTrailingWhitespaceIndent(
-        Token $token,
-    ): string {
-        if (!$token->isWhitespace()) {
-            throw new InvalidArgumentException(sprintf('The given token must be whitespace, got "%s".', $token->getName()));
-        }
-
-        $str = strrchr(str_replace(["\r\n", "\r"], "\n", $token->getContent()), "\n");
-
-        return false === $str ? '' : ltrim($str, "\n");
     }
 
     final public static function getNameForClass(

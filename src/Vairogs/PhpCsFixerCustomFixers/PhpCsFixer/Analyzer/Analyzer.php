@@ -13,60 +13,38 @@ namespace Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\Analyzer;
 
 use Exception;
 use InvalidArgumentException;
-use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use RuntimeException;
 use Vairogs\Component\Functions\Preg;
-use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\Analyzer\Element\Argument;
-use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\Analyzer\Element\ArrayElement;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\Analyzer\Element\CaseElement;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\Analyzer\Element\Constructor;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\Analyzer\Element\SwitchElement;
 
-use function array_keys;
 use function assert;
 use function call_user_func_array;
 use function count;
 use function current;
 use function end;
 use function explode;
-use function in_array;
 use function is_array;
 use function is_bool;
 use function is_int;
-use function ksort;
 use function mb_strlen;
 use function mb_strpos;
-use function mb_strtolower;
-use function reset;
 use function sprintf;
 
-use const T_ARRAY;
-use const T_ATTRIBUTE;
 use const T_CASE;
 use const T_CLASS;
-use const T_CONST;
 use const T_DEFAULT;
-use const T_DOUBLE_ARROW;
 use const T_ENDSWITCH;
-use const T_FUNCTION;
-use const T_ISSET;
-use const T_PRIVATE;
-use const T_PROTECTED;
-use const T_STATIC;
 use const T_STRING;
 use const T_SWITCH;
-use const T_VARIABLE;
 
 /**
  * @internal
  */
 final class Analyzer
 {
-    public const int TYPINT_OPTIONAL = 10022;
-    public const int TYPINT_DOUBLE_DOTS = 10025;
-
     private TokensAnalyzer $analyzer;
 
     public function __construct(
@@ -80,41 +58,6 @@ final class Analyzer
         array $arguments,
     ): mixed {
         return call_user_func_array([$this->analyzer, $name], $arguments);
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function endOfTheStatement(
-        ?int $index,
-    ): ?int {
-        return $this->findBlockEndMatchingOpeningToken($index, '}', '{');
-    }
-
-    public function findAllSequences(
-        array $seqs,
-        mixed $start = null,
-        mixed $end = null,
-    ): array {
-        $sequences = [];
-
-        foreach ($seqs as $seq) {
-            $index = $start ?? 0;
-
-            do {
-                $extract = $this->tokens->findSequence($seq, (int) $index, $end);
-
-                if (null !== $extract) {
-                    $keys = array_keys($extract);
-                    $index = end($keys) + 1;
-                    $sequences[reset($keys)] = $extract;
-                }
-            } while (null !== $extract);
-        }
-
-        ksort($sequences);
-
-        return $sequences;
     }
 
     public function findNonAbstractConstructor(
@@ -145,28 +88,6 @@ final class Analyzer
         return null;
     }
 
-    public function getArrayElements(
-        int $index,
-    ): array {
-        $startIndex = null;
-        $endIndex = null;
-
-        if ($this->tokens[$index]->isGivenKind(CT::T_ARRAY_SQUARE_BRACE_OPEN)) {
-            $startIndex = $this->tokens->getNextMeaningfulToken($index);
-            $endIndex = $this->tokens->getPrevMeaningfulToken($this->tokens->findBlockEnd(Tokens::BLOCK_TYPE_ARRAY_SQUARE_BRACE, $index));
-        } elseif ($this->tokens[$index]->isGivenKind(T_ARRAY)) {
-            $arrayOpenBraceIndex = $this->tokens->getNextTokenOfKind($index, ['(']);
-            $startIndex = $this->tokens->getNextMeaningfulToken($arrayOpenBraceIndex);
-            $endIndex = $this->tokens->getPrevMeaningfulToken($this->tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $arrayOpenBraceIndex));
-        }
-
-        if (!is_int($startIndex) || !is_int($endIndex)) {
-            throw new InvalidArgumentException(sprintf('Index %d is not an array.', $index));
-        }
-
-        return $this->getElementsForArrayContent($startIndex, $endIndex);
-    }
-
     public function getBeginningOfTheLine(
         int $index,
     ): ?int {
@@ -177,15 +98,6 @@ final class Analyzer
         }
 
         return null;
-    }
-
-    /**
-     * @throws Exception
-     */
-    public function getClosingAttribute(
-        int $index,
-    ): ?int {
-        return $this->findBlockEndMatchingOpeningToken($index, CT::T_ATTRIBUTE_CLOSE, T_ATTRIBUTE);
     }
 
     /**
@@ -215,79 +127,6 @@ final class Analyzer
         return $this->findBlockEndMatchingOpeningToken($index, ')', '(');
     }
 
-    public function getElements(
-        ?int $startIndex = null,
-    ): array {
-        if (null === $startIndex) {
-            foreach ($this->tokens as $index => $token) {
-                if (!$token->isClassy()) {
-                    continue;
-                }
-
-                $index = $this->tokens->getNextTokenOfKind($index, ['{']);
-
-                break;
-            }
-            $startIndex = $index ?? $startIndex;
-        }
-
-        $startIndex++;
-        $elements = [];
-
-        while (true) {
-            $element = [
-                'start' => $startIndex,
-                'visibility' => 'public',
-                'static' => false,
-            ];
-
-            for ($i = $startIndex;; $i++) {
-                $token = $this->tokens[$i];
-
-                if ('}' === $token->getContent()) {
-                    return $elements;
-                }
-
-                if ($token->isGivenKind(T_STATIC)) {
-                    $element['static'] = true;
-
-                    continue;
-                }
-
-                if ($token->isGivenKind([T_PROTECTED, T_PRIVATE])) {
-                    $element['visibility'] = mb_strtolower($token->getContent());
-
-                    continue;
-                }
-
-                if (!$token->isGivenKind([CT::T_USE_TRAIT, T_CONST, T_VARIABLE, T_FUNCTION])) {
-                    continue;
-                }
-
-                $type = $this->detectElementType($i);
-                $element['type'] = $type;
-
-                switch ($type) {
-                    case 'method':
-                        $element['methodName'] = $this->tokens[$this->tokens->getNextMeaningfulToken($i)]->getContent();
-
-                        break;
-
-                    case 'property':
-                        $element['propertyName'] = $token->getContent();
-
-                        break;
-                }
-                $element['end'] = $this->findElementEnd($i);
-
-                break;
-            }
-
-            $elements[] = $element;
-            $startIndex = $element['end'] + 1;
-        }
-    }
-
     public function getEndOfTheLine(
         int $index,
     ): ?int {
@@ -298,50 +137,6 @@ final class Analyzer
         }
 
         return null;
-    }
-
-    public function getFunctionArguments(
-        ?int $index,
-    ): array {
-        $argumentsRange = $this->getArgumentsRange($index);
-
-        if (null === $argumentsRange) {
-            return [];
-        }
-
-        [$argumentStartIndex, $argumentsEndIndex] = $argumentsRange;
-
-        $arguments = [];
-        $index = $currentArgumentStart = $argumentStartIndex;
-
-        while ($index < $argumentsEndIndex) {
-            $blockType = Tokens::detectBlockType($this->tokens[$index]);
-
-            if (null !== $blockType && $blockType['isStart']) {
-                $index = $this->tokens->findBlockEnd($blockType['type'], $index);
-
-                continue;
-            }
-
-            $index = $this->tokens->getNextMeaningfulToken($index);
-            assert(is_int($index));
-
-            if (!$this->tokens[$index]->equals(',')) {
-                continue;
-            }
-
-            $currentArgumentEnd = $this->tokens->getPrevMeaningfulToken($index);
-            assert(is_int($currentArgumentEnd));
-
-            $arguments[] = $this->createArgumentAnalysis($currentArgumentStart, $currentArgumentEnd);
-
-            $currentArgumentStart = $this->tokens->getNextMeaningfulToken($index);
-            assert(is_int($currentArgumentStart));
-        }
-
-        $arguments[] = $this->createArgumentAnalysis($currentArgumentStart, $argumentsEndIndex);
-
-        return $arguments;
     }
 
     public function getLineIndentation(
@@ -367,7 +162,7 @@ final class Analyzer
         int $index,
     ): array {
         $methodName = $this->tokens->getNextMeaningfulToken($index);
-        $openParenthesis = $this->tokens->getNextMeaningfulToken($methodName);
+        $openParenthesis = (int) $this->tokens->getNextMeaningfulToken($methodName);
         $closeParenthesis = $this->getClosingParenthesis($openParenthesis);
 
         $arguments = [];
@@ -456,60 +251,10 @@ final class Analyzer
         return count($this->getMethodArguments($index));
     }
 
-    /**
-     * @throws Exception
-     */
-    public function getReturnedType(
-        int $index,
-    ): array|string|null {
-        if (!$this->tokens[$index]->isGivenKind(T_FUNCTION)) {
-            throw new RuntimeException(sprintf('Expected token: T_FUNCTION Token %d id contains %s.', $index, $this->tokens[$index]->getContent()));
-        }
-
-        $methodName = $this->tokens->getNextMeaningfulToken($index);
-        $openParenthesis = $this->tokens->getNextMeaningfulToken($methodName);
-        $closeParenthesis = $this->getClosingParenthesis($openParenthesis);
-
-        $next = $this->tokens->getNextMeaningfulToken($closeParenthesis);
-
-        if (null === $next) {
-            return null;
-        }
-
-        if (!$this->tokens[$next]->isGivenKind(self::TYPINT_DOUBLE_DOTS)) {
-            return null;
-        }
-
-        $next = $this->tokens->getNextMeaningfulToken($next);
-
-        if (null === $next) {
-            return null;
-        }
-
-        $optionnal = $this->tokens[$next]->isGivenKind(self::TYPINT_OPTIONAL);
-
-        $next = $optionnal
-            ? $this->tokens->getNextMeaningfulToken($next)
-            : $next;
-
-        do {
-            $return = $this->tokens[$next]->getContent();
-            $next++;
-
-            if ($this->tokens[$next]->isWhitespace() || ';' === $this->tokens[$next]->getContent()) {
-                return $optionnal
-                    ? [$return, null]
-                    : $return;
-            }
-        } while (!in_array($this->tokens[$index]->getContent(), ['{', ';'], true));
-
-        return null;
-    }
-
     public function getSizeOfTheLine(
         int $index,
     ): int {
-        $start = $this->getBeginningOfTheLine($index);
+        $start = (int) $this->getBeginningOfTheLine($index);
         $end = $this->getEndOfTheLine($index);
         $size = 0;
 
@@ -555,125 +300,6 @@ final class Analyzer
     /**
      * @throws Exception
      */
-    public function isInsideSwitchCase(
-        int $index,
-    ): bool {
-        $switches = $this->findAllSequences([[[T_SWITCH]]]);
-        $intervals = [];
-
-        foreach ($switches as $i => $switch) {
-            $start = $this->tokens->getNextTokenOfKind($i, ['{']);
-            $end = $this->getClosingCurlyBracket($start);
-
-            $intervals[] = [$start, $end];
-        }
-
-        foreach ($intervals as $interval) {
-            [$start, $end] = $interval;
-
-            if ($index >= $start && $index <= $end) {
-                return true;
-            }
-        }
-
-        return false;
-    }
-
-    private function createArgumentAnalysis(
-        int $startIndex,
-        int $endIndex,
-    ): Argument {
-        $isConstant = true;
-
-        for ($index = $startIndex; $index <= $endIndex; $index++) {
-            if ($this->tokens[$index]->isGivenKind(T_VARIABLE)) {
-                $isConstant = false;
-            }
-
-            if ($this->tokens[$index]->equals('(')) {
-                $prevParenthesisIndex = $this->tokens->getPrevMeaningfulToken($index);
-                assert(is_int($prevParenthesisIndex));
-
-                if (!$this->tokens[$prevParenthesisIndex]->isGivenKind(T_ARRAY)) {
-                    $isConstant = false;
-                }
-            }
-        }
-
-        return new Argument($startIndex, $endIndex, $isConstant);
-    }
-
-    private function createArrayElementAnalysis(
-        int $startIndex,
-        int $endIndex,
-    ): ArrayElement {
-        $index = $startIndex;
-
-        while ($endIndex > $index = $this->nextCandidateIndex($index)) {
-            if (!$this->tokens[$index]->isGivenKind(T_DOUBLE_ARROW)) {
-                continue;
-            }
-
-            $keyEndIndex = $this->tokens->getPrevMeaningfulToken($index);
-            assert(is_int($keyEndIndex));
-
-            $valueStartIndex = $this->tokens->getNextMeaningfulToken($index);
-            assert(is_int($valueStartIndex));
-
-            return new ArrayElement($startIndex, $keyEndIndex, $valueStartIndex, $endIndex);
-        }
-
-        return new ArrayElement(null, null, $startIndex, $endIndex);
-    }
-
-    private function detectElementType(
-        int $index,
-    ): array|string {
-        $token = $this->tokens[$index];
-
-        if ($token->isGivenKind(CT::T_USE_TRAIT)) {
-            return 'use_trait';
-        }
-
-        if ($token->isGivenKind(T_CONST)) {
-            return 'constant';
-        }
-
-        if ($token->isGivenKind(T_VARIABLE)) {
-            return 'property';
-        }
-
-        $nameToken = $this->tokens[$this->tokens->getNextMeaningfulToken($index)];
-
-        if ($nameToken->equals([T_STRING, '__construct'], false)) {
-            return 'construct';
-        }
-
-        if ($nameToken->equals([T_STRING, '__destruct'], false)) {
-            return 'destruct';
-        }
-
-        if (
-            $nameToken->equalsAny([
-                [T_STRING, 'setUpBeforeClass'],
-                [T_STRING, 'tearDownAfterClass'],
-                [T_STRING, 'setUp'],
-                [T_STRING, 'tearDown'],
-            ], false)
-        ) {
-            return ['phpunit', mb_strtolower($nameToken->getContent())];
-        }
-
-        if (0 === mb_strpos($nameToken->getContent(), '__')) {
-            return 'magic';
-        }
-
-        return 'method';
-    }
-
-    /**
-     * @throws Exception
-     */
     private function findBlockEndMatchingOpeningToken(
         ?int $index,
         string|int $closingToken,
@@ -700,58 +326,6 @@ final class Analyzer
         } while ($closingToken !== $this->tokens[$index]->getContent());
 
         return $index;
-    }
-
-    private function findElementEnd(
-        ?int $index,
-    ): int {
-        $index = $this->tokens->getNextTokenOfKind($index, ['{', ';']);
-
-        if ('{' === $this->tokens[$index]->getContent()) {
-            $index = $this->tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $index);
-        }
-
-        $index++;
-
-        while ($index < count($this->tokens) && ($this->tokens[$index]->isWhitespace(" \t") || $this->tokens[$index]->isComment())) {
-            $index++;
-        }
-
-        return $this->tokens[$index - 1]->isWhitespace() ? $index - 2 : $index - 1;
-    }
-
-    private function getArgumentsRange(
-        int $index,
-    ): ?array {
-        if (!$this->tokens[$index]->isGivenKind([T_ISSET, T_STRING])) {
-            throw new InvalidArgumentException(sprintf('Index %d is not a function.', $index));
-        }
-
-        $openParenthesis = $this->tokens->getNextMeaningfulToken($index);
-        assert(is_int($openParenthesis));
-
-        if (!$this->tokens[$openParenthesis]->equals('(')) {
-            throw new InvalidArgumentException(sprintf('Index %d is not a function.', $index));
-        }
-
-        $closeParenthesis = $this->tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $openParenthesis);
-
-        $argumentsEndIndex = $this->tokens->getPrevMeaningfulToken($closeParenthesis);
-        assert(is_int($argumentsEndIndex));
-
-        if ($openParenthesis === $argumentsEndIndex) {
-            return null;
-        }
-
-        if ($this->tokens[$argumentsEndIndex]->equals(',')) {
-            $argumentsEndIndex = $this->tokens->getPrevMeaningfulToken($argumentsEndIndex);
-            assert(is_int($argumentsEndIndex));
-        }
-
-        $argumentStartIndex = $this->tokens->getNextMeaningfulToken($openParenthesis);
-        assert(is_int($argumentStartIndex));
-
-        return [$argumentStartIndex, $argumentsEndIndex];
     }
 
     private function getCaseAnalysis(
@@ -819,35 +393,6 @@ final class Analyzer
         };
     }
 
-    private function getElementsForArrayContent(
-        ?int $startIndex,
-        int $endIndex,
-    ): array {
-        $elements = [];
-
-        $index = $startIndex;
-
-        while ($endIndex >= $index = $this->nextCandidateIndex($index)) {
-            if (!$this->tokens[$index]->equals(',')) {
-                continue;
-            }
-
-            $elementEndIndex = $this->tokens->getPrevMeaningfulToken($index);
-            assert(is_int($elementEndIndex));
-
-            $elements[] = $this->createArrayElementAnalysis($startIndex, $elementEndIndex);
-
-            $startIndex = $this->tokens->getNextMeaningfulToken($index);
-            assert(is_int($startIndex));
-        }
-
-        if ($startIndex <= $endIndex) {
-            $elements[] = $this->createArrayElementAnalysis($startIndex, $endIndex);
-        }
-
-        return $elements;
-    }
-
     private function getNextSameLevelToken(
         ?int $index,
     ): int {
@@ -879,30 +424,5 @@ final class Analyzer
         assert(is_int($functionNameIndex));
 
         return $this->tokens[$functionNameIndex]->equals([T_STRING, '__construct'], false);
-    }
-
-    private function nextCandidateIndex(
-        int $index,
-    ): int {
-        if ($this->tokens[$index]->equals('{')) {
-            return $this->tokens->findBlockEnd(Tokens::BLOCK_TYPE_CURLY_BRACE, $index) + 1;
-        }
-
-        if ($this->tokens[$index]->equals('(')) {
-            return $this->tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $index) + 1;
-        }
-
-        if ($this->tokens[$index]->isGivenKind(CT::T_ARRAY_SQUARE_BRACE_OPEN)) {
-            return $this->tokens->findBlockEnd(Tokens::BLOCK_TYPE_ARRAY_SQUARE_BRACE, $index) + 1;
-        }
-
-        if ($this->tokens[$index]->isGivenKind(T_ARRAY)) {
-            $arrayOpenBraceIndex = $this->tokens->getNextTokenOfKind($index, ['(']);
-            assert(is_int($arrayOpenBraceIndex));
-
-            return $this->tokens->findBlockEnd(Tokens::BLOCK_TYPE_PARENTHESIS_BRACE, $arrayOpenBraceIndex) + 1;
-        }
-
-        return $index + 1;
     }
 }

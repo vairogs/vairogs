@@ -32,9 +32,4 @@ final readonly class Argument
     {
         return $this->startIndex;
     }
-
-    public function isConstant(): bool
-    {
-        return $this->isConstant;
-    }
 }
