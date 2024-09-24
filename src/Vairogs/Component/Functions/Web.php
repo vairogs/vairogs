@@ -27,6 +27,7 @@ final class Web
     use Web\_IsHttps;
     use Web\_IsIE;
     use Web\_IsUrl;
+    use Web\_LatestReleaseTag;
     use Web\_ParseHeaders;
     use Web\_RawHeaders;
     use Web\_RemoteIp;

@@ -38,6 +38,7 @@ final class Php
     use Php\_SetNonStatic;
     use Php\_SetStatic;
     use Php\_ShortName;
+    use Php\_SystemInfo;
     use Php\_Void;
     use Php\_VoidFunction;
     use Php\_VoidObject;

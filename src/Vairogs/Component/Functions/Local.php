@@ -13,6 +13,7 @@ namespace Vairogs\Component\Functions;
 
 final class Local
 {
+    use Local\_CurlUA;
     use Local\_Exists;
     use Local\_FileExistsCwd;
     use Local\_GetClassFromFile;
