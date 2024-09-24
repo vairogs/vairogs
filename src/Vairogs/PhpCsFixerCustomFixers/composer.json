@@ -21,9 +21,7 @@
         "php": ">=8.3",
         "friendsofphp/php-cs-fixer": "*",
         "symfony/finder": "*",
-        "vairogs/functions": "*"
-    },
-    "suggest": {
+        "vairogs/functions": "*",
         "doctrine/migrations": "*"
     },
     "conflict": {

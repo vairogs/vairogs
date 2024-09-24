@@ -16,6 +16,7 @@ use InvalidArgumentException;
 use PhpCsFixer\Tokenizer\CT;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
+use RuntimeException;
 use Vairogs\Component\Functions\Preg;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\Analyzer\Element\Argument;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\Analyzer\Element\ArrayElement;
@@ -462,7 +463,7 @@ final class Analyzer
         int $index,
     ): array|string|null {
         if (!$this->tokens[$index]->isGivenKind(T_FUNCTION)) {
-            throw new Exception(sprintf('Expected token: T_FUNCTION Token %d id contains %s.', $index, $this->tokens[$index]->getContent()));
+            throw new RuntimeException(sprintf('Expected token: T_FUNCTION Token %d id contains %s.', $index, $this->tokens[$index]->getContent()));
         }
 
         $methodName = $this->tokens->getNextMeaningfulToken($index);

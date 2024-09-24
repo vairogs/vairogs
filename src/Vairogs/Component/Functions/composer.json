@@ -23,8 +23,10 @@
         "ext-json": "*",
         "ext-random": "*",
         "composer-runtime-api": "^2",
+        "doctrine/persistence": "*",
         "symfony/http-foundation": "*",
         "symfony/intl": "*",
+        "symfony/process": "*",
         "symfony/property-access": "*",
         "symfony/routing": "*",
         "symfony/type-info": "*"

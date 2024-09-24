@@ -16,7 +16,7 @@ use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 use stdClass;
-use Vairogs\Component\Functions\Text\_UniqueId;
+use Vairogs\Component\Functions\Text;
 
 use function count;
 use function property_exists;
@@ -256,7 +256,7 @@ class SimpleObjectCollection implements Countable, IteratorAggregate, ArrayAcces
 
         if (null === $_helper) {
             $_helper = new class {
-                use _UniqueId;
+                use Text\_UniqueId;
             };
         }
 

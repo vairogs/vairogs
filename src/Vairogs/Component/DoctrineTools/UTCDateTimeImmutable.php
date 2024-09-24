@@ -43,7 +43,7 @@ class UTCDateTimeImmutable extends DateTimeImmutable
     ): static|false {
         $object = parent::createFromFormat(format: $format, datetime: $datetime, timezone: $timezone ?? self::getUTCTimeZone());
 
-        if (false !== $object) {
+        if (false !== $object || false !== self::getLastErrors()) {
             return self::createFromInterface(object: $object);
         }
 

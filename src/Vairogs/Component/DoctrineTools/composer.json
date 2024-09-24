@@ -30,7 +30,8 @@
         "symfony/finder": "*",
         "symfony/serializer": "*",
         "symfony/uid": "*",
-        "vairogs/bundle": "*"
+        "vairogs/bundle": "*",
+        "doctrine/doctrine-bundle": "*"
     },
     "conflict": {
         "doctrine/dbal": "<4.0"
