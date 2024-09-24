@@ -18,5 +18,9 @@
     {
         "path": "src/Vairogs/PhpCsFixerCustomFixers",
         "repo": "https://GH_TOKEN@github.com/vairogs/php-cs-fixer-custom-fixers.git"
+    },
+    {
+        "path": "src/Vairogs/Component/CacheWarmer",
+        "repo": "https://GH_TOKEN@github.com/vairogs/cache-warmer.git"
     }
 ]

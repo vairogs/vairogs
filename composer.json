@@ -19,10 +19,10 @@
     },
     "replace": {
         "vairogs/bundle": "self.version",
+        "vairogs/cache-warmer": "self.version",
         "vairogs/doctrine-tools": "self.version",
         "vairogs/functions": "self.version",
         "vairogs/mapper": "self.version",
-        "vairogs/package": "self.version",
         "vairogs/php-cs-fixer-custom-fixers": "self.version"
     },
     "require": {
