@@ -12,15 +12,22 @@
 namespace Vairogs\Component\Functions\Php;
 
 use Exception;
-use ReflectionClass;
 
 trait _Namespace
 {
     public function namespace(
         string $class,
     ): string {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _GetReflection;
+            };
+        }
+
         try {
-            return (new ReflectionClass(objectOrClass: $class))->getNamespaceName();
+            return $_helper->getReflection($class)->getNamespaceName();
         } catch (Exception) {
             return '\\';
         }

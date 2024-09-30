@@ -14,7 +14,6 @@ namespace Vairogs\Component\Functions\Php;
 use BadFunctionCallException;
 use Exception;
 use InvalidArgumentException;
-use ReflectionClass;
 use ReflectionClassConstant;
 use RuntimeException;
 
@@ -27,8 +26,16 @@ trait _ClassConstants
     public function classConstants(
         string $class,
     ): array {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _GetReflection;
+            };
+        }
+
         try {
-            return (new ReflectionClass(objectOrClass: $class))->getConstants(filter: ReflectionClassConstant::IS_PUBLIC);
+            return $_helper->getReflection($class)->getConstants(filter: ReflectionClassConstant::IS_PUBLIC);
         } catch (Exception $e) {
             throw new BadFunctionCallException(message: $e->getMessage(), code: $e->getCode(), previous: $e);
         }

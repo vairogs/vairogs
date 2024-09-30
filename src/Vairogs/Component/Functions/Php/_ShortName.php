@@ -12,15 +12,22 @@
 namespace Vairogs\Component\Functions\Php;
 
 use Exception;
-use ReflectionClass;
 
 trait _ShortName
 {
     public function shortName(
         string $class,
     ): string {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _GetReflection;
+            };
+        }
+
         try {
-            return (new ReflectionClass(objectOrClass: $class))->getShortName();
+            return $_helper->getReflection($class)->getShortName();
         } catch (Exception) {
             // exception === can't get short name
         }
