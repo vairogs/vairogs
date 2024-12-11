@@ -33,6 +33,7 @@ final class Text
     use Text\_NormalizedValue;
     use Text\_OneSpace;
     use Text\_PascalCase;
+    use Text\_Pluralize;
     use Text\_RandomString;
     use Text\_ReverseUTF8;
     use Text\_Sanitize;
@@ -40,6 +41,7 @@ final class Text
     use Text\_ScalarToString;
     use Text\_Sha;
     use Text\_Shuffle;
+    use Text\_Singularize;
     use Text\_SnakeCaseFromCamelCase;
     use Text\_SnakeCaseFromSentence;
     use Text\_StripSpace;

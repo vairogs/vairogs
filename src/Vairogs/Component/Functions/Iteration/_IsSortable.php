@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Sort;
+namespace Vairogs\Component\Functions\Iteration;
 
 use function array_key_exists;
 use function is_array;

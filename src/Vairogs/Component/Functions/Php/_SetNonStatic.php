@@ -28,7 +28,7 @@ trait _SetNonStatic
         mixed $value,
     ): object {
         try {
-            if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
+            if (new ReflectionProperty(class: $object, property: $property)->isStatic()) {
                 throw new InvalidArgumentException(message: 'non static property');
             }
         } catch (Exception) {

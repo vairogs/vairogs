@@ -9,20 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Sort;
+namespace Vairogs\Component\Functions\Iteration;
 
-trait _Swap
+trait _SwapArray
 {
-    public function swap(
-        mixed &$foo,
-        mixed &$bar,
+    public function swapArray(
+        array &$array,
+        mixed $foo,
+        mixed $bar,
     ): void {
-        if ($foo === $bar) {
+        if ($array[$foo] === $array[$bar]) {
             return;
         }
 
-        $tmp = $foo;
-        $foo = $bar;
-        $bar = $tmp;
+        [$array[$foo], $array[$bar]] = [$array[$bar], $array[$foo]];
     }
 }

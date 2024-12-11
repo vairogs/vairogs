@@ -9,21 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Sort;
+namespace Vairogs\Component\Functions\Number;
 
-trait _SwapArray
+trait _Swap
 {
-    public function swapArray(
-        array &$array,
-        mixed $foo,
-        mixed $bar,
+    public function swap(
+        mixed &$foo,
+        mixed &$bar,
     ): void {
-        if ($array[$foo] === $array[$bar]) {
+        if ($foo === $bar) {
             return;
         }
 
-        $tmp = $array[$foo];
-        $array[$foo] = $array[$bar];
-        $array[$bar] = $tmp;
+        [$foo, $bar] = [$bar, $foo];
     }
 }

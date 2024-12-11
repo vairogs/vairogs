@@ -11,6 +11,8 @@
 
 namespace Vairogs\Component\Functions\Sort;
 
+use Vairogs\Component\Functions\Iteration;
+
 use function count;
 
 trait _BubbleSort
@@ -23,7 +25,7 @@ trait _BubbleSort
 
         if (null === $_helper) {
             $_helper = new class {
-                use _SwapArray;
+                use Iteration\_SwapArray;
             };
         }
 

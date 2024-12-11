@@ -12,17 +12,18 @@
 namespace Vairogs\Component\Functions\Sort;
 
 use InvalidArgumentException;
+use Vairogs\Component\Functions\Iteration;
 
 use function count;
 use function current;
 use function usort;
 
-trait _Sort
+trait _SortByParameter
 {
     /**
      * @throws InvalidArgumentException
      */
-    public function sort(
+    public function sortByParameter(
         array|object $data,
         string $parameter,
         string $order = 'ASC',
@@ -35,8 +36,8 @@ trait _Sort
 
         if (null === $_helper) {
             $_helper = new class {
-                use _IsSortable;
                 use _Usort;
+                use Iteration\_IsSortable;
             };
         }
 

@@ -23,4 +23,5 @@ final class Number
     use Number\_IsPrimeBelow1000;
     use Number\_IsPrimeGmp;
     use Number\_LeastCommonMultiple;
+    use Number\_Swap;
 }

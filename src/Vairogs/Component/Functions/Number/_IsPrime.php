@@ -30,8 +30,8 @@ trait _IsPrime
         }
 
         $function = (new FunctionHandler(function: 'isPrimal', instance: $_helper));
-        $below = (new FunctionHandler(function: 'isPrimeBelow1000', instance: $_helper))->next(handler: $function);
+        $below = new FunctionHandler(function: 'isPrimeBelow1000', instance: $_helper)->next(handler: $function);
 
-        return (bool) (new FunctionHandler(function: 'isPrimeGmp', instance: $_helper))->next(handler: $below)->handle($number, $override);
+        return (bool) new FunctionHandler(function: 'isPrimeGmp', instance: $_helper)->next(handler: $below)->handle($number, $override);
     }
 }

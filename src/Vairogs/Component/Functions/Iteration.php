@@ -25,6 +25,8 @@ final class Iteration
     use Iteration\_IsAssociative;
     use Iteration\_IsEmpty;
     use Iteration\_IsMultiDimentional;
+    use Iteration\_IsSortable;
+    use Iteration\_IsSortedAscendingInts;
     use Iteration\_JsonDecode;
     use Iteration\_JsonEncode;
     use Iteration\_MakeMultiDimensional;
@@ -32,6 +34,7 @@ final class Iteration
     use Iteration\_Pick;
     use Iteration\_RecursiveKSort;
     use Iteration\_RemoveFromArray;
+    use Iteration\_SwapArray;
     use Iteration\_Unique;
     use Iteration\_UniqueMap;
     use Iteration\_Unpack;

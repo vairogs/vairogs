@@ -36,7 +36,7 @@ trait _GetStatic
         }
 
         try {
-            if ((new ReflectionProperty(class: $object, property: $property))->isStatic()) {
+            if (new ReflectionProperty(class: $object, property: $property)->isStatic()) {
                 return $_helper->return(static fn () => $object::${$property}, $object, ...$arguments);
             }
         } catch (Exception) {

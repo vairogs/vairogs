@@ -17,32 +17,7 @@ use function round;
 
 trait _MergeSort
 {
-    public function mergeSort(
-        array $array,
-    ): array {
-        if (1 >= count(value: $array)) {
-            return $array;
-        }
-
-        static $_helper = null;
-
-        if (null === $_helper) {
-            $_helper = new class {
-                use _MergeSort;
-            };
-        }
-
-        $middle = (int) round(num: count(value: $array) / 2);
-        $left = array_slice(array: $array, offset: 0, length: $middle);
-        $right = array_slice(array: $array, offset: $middle);
-
-        $left = $_helper->mergeSort(array: $left);
-        $right = $_helper->mergeSort(array: $right);
-
-        return $_helper->merge(left: $left, right: $right);
-    }
-
-    private function merge(
+    public function merge(
         array $left,
         array $right,
     ): array {
@@ -73,5 +48,30 @@ trait _MergeSort
         }
 
         return $result;
+    }
+
+    public function mergeSort(
+        array $array,
+    ): array {
+        if (1 >= count(value: $array)) {
+            return $array;
+        }
+
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use _MergeSort;
+            };
+        }
+
+        $middle = (int) round(num: count(value: $array) / 2);
+        $left = array_slice(array: $array, offset: 0, length: $middle);
+        $right = array_slice(array: $array, offset: $middle);
+
+        $left = $_helper->mergeSort(array: $left);
+        $right = $_helper->mergeSort(array: $right);
+
+        return $_helper->merge(left: $left, right: $right);
     }
 }

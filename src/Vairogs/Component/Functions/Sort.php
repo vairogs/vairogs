@@ -14,11 +14,8 @@ namespace Vairogs\Component\Functions;
 final class Sort
 {
     use Sort\_BubbleSort;
-    use Sort\_IsSortable;
     use Sort\_MergeSort;
-    use Sort\_Sort;
+    use Sort\_SortByParameter;
     use Sort\_StableSort;
-    use Sort\_Swap;
-    use Sort\_SwapArray;
     use Sort\_Usort;
 }

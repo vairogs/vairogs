@@ -28,7 +28,7 @@ trait _ArrayFromObject
             };
         }
 
-        foreach ((new ReflectionObject(object: $object))->getProperties() as $reflectionProperty) {
+        foreach (new ReflectionObject(object: $object)->getProperties() as $reflectionProperty) {
             $input[$name = $reflectionProperty->getName()] = $_helper->get(object: $object, property: $name);
         }
 
