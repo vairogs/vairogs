@@ -158,7 +158,7 @@ final class NoUselessDirnameCallFixer extends AbstractFixer
             return null;
         }
 
-        if (!(new FunctionsAnalyzer())->isGlobalFunctionCall($tokens, $dirnameCallIndex)) {
+        if (!new FunctionsAnalyzer()->isGlobalFunctionCall($tokens, $dirnameCallIndex)) {
             return null;
         }
         $updates[$dirnameCallIndex] = '';

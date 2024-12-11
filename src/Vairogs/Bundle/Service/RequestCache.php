@@ -9,15 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Settings\Constants;
+namespace Vairogs\Bundle\Service;
 
-use Vairogs\Component\Functions\Iteration;
+use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
+use Vairogs\Component\Functions\Memoize;
 
-enum Storage: string
+#[Autoconfigure(public: true, shared: true)]
+final class RequestCache extends Memoize
 {
-    use Iteration\_Cases;
-
-    case FILE = 'file';
-    case MEMORY = 'memory';
-    case ORM = 'orm';
 }

@@ -16,6 +16,7 @@ use ArrayIterator;
 use Countable;
 use IteratorAggregate;
 
+use function array_any;
 use function array_filter;
 use function array_key_exists;
 use function array_map;
@@ -84,13 +85,7 @@ final class SimpleArrayCollection implements Countable, IteratorAggregate, Array
     public function forAll(
         callable $predicate,
     ): bool {
-        foreach ($this->elements as $key => $element) {
-            if (!$predicate($key, $element)) {
-                return false;
-            }
-        }
-
-        return true;
+        return !array_any($this->elements, static fn ($element, $key) => !$predicate($key, $element));
     }
 
     public function get(
@@ -112,7 +107,7 @@ final class SimpleArrayCollection implements Countable, IteratorAggregate, Array
 
     public function isEmpty(): bool
     {
-        return empty($this->elements);
+        return [] === $this->elements;
     }
 
     public function map(
@@ -170,7 +165,7 @@ final class SimpleArrayCollection implements Countable, IteratorAggregate, Array
     public function remove(
         int|string $key,
     ): mixed {
-        if (array_key_exists($key, $this->elements)) {
+        if ($this->containsKey($key)) {
             $removedElement = $this->elements[$key];
             unset($this->elements[$key]);
 
@@ -183,7 +178,7 @@ final class SimpleArrayCollection implements Countable, IteratorAggregate, Array
     public function removeElement(
         mixed $element,
     ): bool {
-        $key = array_search($element, $this->elements, true);
+        $key = $this->indexOf($element);
 
         if (false !== $key) {
             unset($this->elements[$key]);

@@ -28,6 +28,11 @@ final readonly class Argument
         return $this->endIndex;
     }
 
+    public function getIsConstant(): bool
+    {
+        return $this->isConstant;
+    }
+
     public function getStartIndex(): int
     {
         return $this->startIndex;

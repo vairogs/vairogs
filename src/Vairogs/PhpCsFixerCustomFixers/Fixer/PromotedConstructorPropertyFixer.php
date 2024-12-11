@@ -103,7 +103,7 @@ final class PromotedConstructorPropertyFixer extends AbstractFixer
     ): array {
         $properties = [];
 
-        foreach ((new TokensAnalyzer($tokens))->getClassyElements() as $index => $element) {
+        foreach (new TokensAnalyzer($tokens)->getClassyElements() as $index => $element) {
             if ($element['classIndex'] !== $classIndex) {
                 continue;
             }
@@ -209,7 +209,7 @@ final class PromotedConstructorPropertyFixer extends AbstractFixer
             };
         }
 
-        foreach ((new DocBlock($tokens[$phpDocIndex]->getContent()))->getAnnotations() as $annotation) {
+        foreach (new DocBlock($tokens[$phpDocIndex]->getContent())->getAnnotations() as $annotation) {
             if ($_helper->match('/\\*\\h+(@Document|@Entity|@Mapping\\\\Entity|@ODM\\\\Document|@ORM\\\\Entity|@ORM\\\\Mapping\\\\Entity)/', $annotation->getContent())) {
                 return true;
             }

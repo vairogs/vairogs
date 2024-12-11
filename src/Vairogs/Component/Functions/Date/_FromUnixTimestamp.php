@@ -24,6 +24,6 @@ trait _FromUnixTimestamp
         int $timestamp = 0,
         ?string $format = null,
     ): string {
-        return (new DateTimeImmutable())->setTimestamp(timestamp: $timestamp)->format(format: $format ?? Date::FORMAT);
+        return new DateTimeImmutable()->setTimestamp(timestamp: $timestamp)->format(format: $format ?? Date::FORMAT);
     }
 }

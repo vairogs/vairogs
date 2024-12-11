@@ -13,13 +13,11 @@ namespace Vairogs\Component\DoctrineTools\Doctrine\ORM\Traits;
 
 use Doctrine\DBAL\Types\Types;
 use Doctrine\ORM\Mapping as ORM;
-use Symfony\Component\Serializer\Annotation\Ignore;
 
 trait _Version
 {
     #[ORM\Column(type: Types::INTEGER)]
     #[ORM\Version]
-    #[Ignore]
     protected ?int $version = null;
 
     public function getVersion(): ?int

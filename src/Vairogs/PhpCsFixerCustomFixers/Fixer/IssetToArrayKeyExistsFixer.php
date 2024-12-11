@@ -39,7 +39,7 @@ final class IssetToArrayKeyExistsFixer extends AbstractFixer
                 continue;
             }
 
-            if (1 !== count((new FunctionsAnalyzer())->getFunctionArguments($tokens, $index))) {
+            if (1 !== count(new FunctionsAnalyzer()->getFunctionArguments($tokens, $index))) {
                 continue;
             }
 

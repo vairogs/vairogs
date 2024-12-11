@@ -30,7 +30,6 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ext-random": "*",
-        "api-platform/core": ">=3.3",
         "composer-runtime-api": "^2",
         "doctrine/collections": "*",
         "doctrine/dbal": "*",
@@ -48,9 +47,25 @@
         "symfony/security-bundle": "*",
         "symfony/security-core": "*",
         "symfony/serializer": "*",
+        "symfony/string": "*",
         "symfony/translation": "*",
         "symfony/type-info": "*",
-        "symfony/uid": "*"
+        "symfony/uid": "*",
+        "api-platform/doctrine-common": "*",
+        "api-platform/doctrine-orm": "*",
+        "api-platform/documentation": "*",
+        "api-platform/http-cache": "*",
+        "api-platform/hydra": "*",
+        "api-platform/json-api": "*",
+        "api-platform/json-schema": "*",
+        "api-platform/jsonld": "*",
+        "api-platform/metadata": "*",
+        "api-platform/openapi": "*",
+        "api-platform/parameter-validator": "*",
+        "api-platform/serializer": "*",
+        "api-platform/state": "*",
+        "api-platform/symfony": "*",
+        "api-platform/validator": "*"
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "*",
@@ -59,6 +74,7 @@
     },
     "conflict": {
         "doctrine/dbal": "<4.0",
-        "friendsofphp/php-cs-fixer": "<3.57.0"
+        "friendsofphp/php-cs-fixer": "<3.57.0",
+        "api-platform/symfony": "<4.0.0"
     }
 }

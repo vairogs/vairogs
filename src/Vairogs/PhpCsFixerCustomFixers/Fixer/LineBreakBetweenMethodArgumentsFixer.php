@@ -17,6 +17,7 @@ use PhpCsFixer\Tokenizer\Tokens;
 use SplFileInfo;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\AbstractFixer;
 
+use function array_filter;
 use function array_reverse;
 use function assert;
 use function is_int;
@@ -73,13 +74,7 @@ final class LineBreakBetweenMethodArgumentsFixer extends AbstractFixer
         SplFileInfo $file,
         Tokens $tokens,
     ): void {
-        $functions = [];
-
-        foreach ($tokens as $index => $token) {
-            if (T_FUNCTION === $token->getId()) {
-                $functions[$index] = $token;
-            }
-        }
+        $functions = array_filter($tokens->toArray(), static fn ($token) => T_FUNCTION === $token->getId());
 
         foreach (array_reverse($functions, true) as $index => $token) {
             $nextIndex = $tokens->getNextMeaningfulToken($index);
@@ -157,7 +152,7 @@ final class LineBreakBetweenMethodArgumentsFixer extends AbstractFixer
     ): void {
         $this->mergeArgs($tokens, $index);
 
-        $openBraceIndex = $tokens->getNextTokenOfKind($index, ['(']);
+        $openBraceIndex = (int) $tokens->getNextTokenOfKind($index, ['(']);
         $closeBraceIndex = $this->analyze($tokens)->getClosingParenthesis($openBraceIndex);
 
         if (0 === $closeBraceIndex) {

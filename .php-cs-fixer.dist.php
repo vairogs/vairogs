@@ -23,15 +23,15 @@ $fileHeaderComment = <<<'EOF'
     EOF;
 
 $finder = Finder::create()
-    ->in(dirs: [getcwd(), ])
-    ->exclude(dirs: ['vendor', 'var', '.github', ]);
+    ->in([getcwd(), ])
+    ->exclude(['vendor', 'var', '.github', ]);
 
 $fixers = new Vairogs\PhpCsFixerCustomFixers\Fixers();
 
-return (new Config())
+return new Config()
     ->setParallelConfig(ParallelConfigFactory::detect())
     ->registerCustomFixers($fixers)
-    ->setRules(rules: [
+    ->setRules([
         ...$fixers::getFixers(),
         '@PER-CS2.0' => true,
         '@PER-CS2.0:risky' => true,
@@ -39,6 +39,7 @@ return (new Config())
         '@PHP81Migration' => true,
         '@PHP82Migration' => true,
         '@PHP83Migration' => true,
+        '@PHP84Migration' => true,
         '@PHPUnit100Migration:risky' => true,
         '@Symfony' => true,
         '@Symfony:risky' => true,
@@ -71,7 +72,6 @@ return (new Config())
         'no_superfluous_phpdoc_tags' => ['allow_mixed' => true, 'remove_inheritdoc' => true, ],
         'no_trailing_comma_in_singleline' => ['elements' => [], ],
         'no_unneeded_braces' => true,
-        'no_unset_on_property' => true,
         'no_useless_else' => true,
         'no_useless_sprintf' => true,
         'ordered_class_elements' => ['sort_algorithm' => 'alpha', 'case_sensitive' => true, 'order' => ['use_trait', 'public', 'protected', 'private', 'case', 'constant', 'constant_public', 'constant_protected', 'constant_private', 'property', 'property_static', 'property_public', 'property_public_readonly', 'property_public_static', 'property_protected', 'property_protected_readonly', 'property_protected_static', 'property_private', 'property_private_readonly', 'property_private_static', 'construct', 'destruct', 'magic', 'method', 'method_abstract', 'method_static', 'method_public_abstract', 'method_public_abstract_static', 'method_public', 'method_public_static', 'method_protected_abstract', 'method_protected_abstract_static', 'method_protected', 'method_protected_static', 'method_private_abstract', 'method_private_abstract_static', 'method_private', 'method_private_static'], ],
@@ -87,6 +87,6 @@ return (new Config())
         'types_spaces' => ['space' => 'none', ],
         'yoda_style' => true,
     ])
-    ->setRiskyAllowed(isRiskyAllowed: true)
-    ->setCacheFile(cacheFile: getcwd() . '/.php-cs-fixer.cache')
-    ->setFinder(finder: $finder);
+    ->setRiskyAllowed(true)
+    ->setCacheFile(getcwd() . '/.php-cs-fixer.cache')
+    ->setFinder($finder);

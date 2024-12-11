@@ -18,7 +18,7 @@ use Vairogs\Bundle\DependencyInjection\AbstractDependencyConfiguration;
 use Vairogs\Bundle\VairogsBundle;
 use Vairogs\Component\DoctrineTools\Doctrine\DBAL;
 use Vairogs\Component\Functions\Preg;
-use Vairogs\Component\Functions\Text\_SnakeCaseFromCamelCase;
+use Vairogs\Component\Functions\Text;
 
 use function array_keys;
 use function class_exists;
@@ -66,8 +66,8 @@ final class DoctrineToolsConfiguration extends AbstractDependencyConfiguration
 
             if (null === $_helper) {
                 $_helper = new class {
-                    use _SnakeCaseFromCamelCase;
                     use Preg\_Match;
+                    use Text\_SnakeCaseFromCamelCase;
                 };
             }
 

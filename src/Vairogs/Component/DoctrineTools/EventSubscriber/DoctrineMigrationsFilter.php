@@ -18,7 +18,7 @@ use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Vairogs\Component\Functions\Local\_Exists;
+use Vairogs\Component\Functions\Local;
 
 #[AutoconfigureTag('doctrine.dbal.schema_filter')]
 class DoctrineMigrationsFilter implements EventSubscriberInterface
@@ -36,7 +36,7 @@ class DoctrineMigrationsFilter implements EventSubscriberInterface
 
         if (null === $_helper) {
             $_helper = new class {
-                use _Exists;
+                use Local\_Exists;
             };
         }
 
@@ -48,7 +48,7 @@ class DoctrineMigrationsFilter implements EventSubscriberInterface
             $asset = $asset->getName();
         }
 
-        return $asset !== (new TableMetadataStorageConfiguration())->getTableName();
+        return $asset !== new TableMetadataStorageConfiguration()->getTableName();
     }
 
     public function onConsoleCommand(

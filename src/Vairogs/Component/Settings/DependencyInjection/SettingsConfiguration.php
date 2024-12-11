@@ -14,7 +14,7 @@ namespace Vairogs\Component\Settings\DependencyInjection;
 use InvalidArgumentException;
 use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Vairogs\Bundle\DependencyInjection\AbstractDependencyConfiguration;
-use Vairogs\Component\Functions\Vairogs;
+use Vairogs\Bundle\VairogsBundle;
 use Vairogs\Component\Settings\Constants\Storage;
 
 use function class_exists;
@@ -30,14 +30,14 @@ final class SettingsConfiguration extends AbstractDependencyConfiguration
         $rootNode
             ->children()
                 ->arrayNode($component)
-                    ->{$enableIfStandalone(sprintf('%s/%s', Vairogs::VAIROGS, $component), self::class)}()
+                    ->{$enableIfStandalone(sprintf('%s/%s', VairogsBundle::VAIROGS, $component), self::class)}()
                     ->children()
                         ->enumNode('storage')->values(Storage::getCases())->defaultValue(Storage::FILE->value)->end()
                         ->arrayNode(Storage::FILE->value)
                             ->canBeEnabled()
                             ->children()
                                 ->enumNode('type')->values(['json', 'php', ])->defaultValue('json')->end()
-                                ->scalarNode('directory')->defaultValue(sprintf('%%kernel.project_dir%%/var/%s/', Vairogs::VAIROGS))->end()
+                                ->scalarNode('directory')->defaultValue(sprintf('%%kernel.project_dir%%/var/%s/', VairogsBundle::VAIROGS))->end()
                                 ->scalarNode('filename')->defaultValue($component)->end()
                             ->end()
                         ->end()
@@ -75,7 +75,7 @@ final class SettingsConfiguration extends AbstractDependencyConfiguration
                     ),
                 )
                 ->then(static function (array $v) use ($component): void {
-                    throw new InvalidArgumentException(sprintf('Class "%s" configured in %s.%s.orm.entity_class does not exist', $v[$component][Storage::ORM->value]['entity_class'], Vairogs::VAIROGS, $component));
+                    throw new InvalidArgumentException(sprintf('Class "%s" configured in %s.%s.orm.entity_class does not exist', $v[$component][Storage::ORM->value]['entity_class'], VairogsBundle::VAIROGS, $component));
                 })
             ->end();
     }

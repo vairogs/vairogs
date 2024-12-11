@@ -174,15 +174,7 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
     protected function getComments(
         Tokens $tokens,
     ): array {
-        $comments = [];
-
-        foreach ($tokens as $index => $token) {
-            if ($token->isComment()) {
-                $comments[$index] = $token;
-            }
-        }
-
-        return $comments;
+        return array_filter($tokens->toArray(), static fn ($token) => $token->isComment());
     }
 
     protected function getUseStatements(

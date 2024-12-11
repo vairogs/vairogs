@@ -29,6 +29,7 @@
         "symfony/process": "*",
         "symfony/property-access": "*",
         "symfony/routing": "*",
+        "symfony/string": "*",
         "symfony/type-info": "*"
     },
     "suggest": {
