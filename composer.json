@@ -26,7 +26,7 @@
         "vairogs/php-cs-fixer-custom-fixers": "self.version"
     },
     "require": {
-        "php": ">=8.3",
+        "php": ">=8.4",
         "ext-curl": "*",
         "ext-json": "*",
         "ext-random": "*",
