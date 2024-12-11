@@ -17,7 +17,7 @@ class Unaccent extends BaseFunction
 {
     protected function customFunction(): void
     {
-        $this->setFunctionPrototype('UNACCENT(%s)');
+        $this->setFunctionPrototype('public.UNACCENT(%s)');
         $this->addNodeMapping('StringPrimary');
     }
 }

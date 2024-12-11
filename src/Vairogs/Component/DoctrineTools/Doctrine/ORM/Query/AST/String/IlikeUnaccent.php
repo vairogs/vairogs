@@ -17,7 +17,7 @@ class IlikeUnaccent extends BaseFunction
 {
     protected function customFunction(): void
     {
-        $this->setFunctionPrototype('UNACCENT(LOWER(%s)) ILIKE UNACCENT(LOWER(%s))');
+        $this->setFunctionPrototype('public.UNACCENT(LOWER(%s)) ILIKE public.UNACCENT(LOWER(%s))');
         $this->addNodeMapping('StringPrimary');
         $this->addNodeMapping('StringPrimary');
     }

@@ -14,22 +14,22 @@ namespace Vairogs\Component\DoctrineTools\Migrations;
 use Doctrine\DBAL\Schema\Schema;
 use Doctrine\Migrations\AbstractMigration;
 
-final class VersionAddExtensionPGCrypto extends AbstractMigration
+final class VersionAddExtensionUnaccent extends AbstractMigration
 {
     public function down(
         Schema $schema,
     ): void {
-        $this->addSql('DROP EXTENSION IF EXISTS pgcrypto');
+        $this->addSql('DROP EXTENSION IF EXISTS unaccent');
     }
 
     public function getDescription(): string
     {
-        return 'CREATE EXTENSION IF NOT EXISTS pgcrypto';
+        return 'CREATE EXTENSION IF NOT EXISTS unaccent';
     }
 
     public function up(
         Schema $schema,
     ): void {
-        $this->addSql('CREATE EXTENSION IF NOT EXISTS pgcrypto');
+        $this->addSql('CREATE EXTENSION IF NOT EXISTS unaccent');
     }
 }
