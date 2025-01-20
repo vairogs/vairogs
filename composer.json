@@ -61,7 +61,6 @@
         "api-platform/jsonld": "*",
         "api-platform/metadata": "*",
         "api-platform/openapi": "*",
-        "api-platform/parameter-validator": "*",
         "api-platform/serializer": "*",
         "api-platform/state": "*",
         "api-platform/symfony": "*",

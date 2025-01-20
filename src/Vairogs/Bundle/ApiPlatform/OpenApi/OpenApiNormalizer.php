@@ -9,14 +9,14 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Mapper\OpenApi;
+namespace Vairogs\Bundle\ApiPlatform\OpenApi;
 
 use ArrayObject;
 use Symfony\Component\DependencyInjection\Attribute\AsDecorator;
 use Symfony\Component\Serializer\Normalizer\NormalizerInterface;
+use Vairogs\Bundle\Constants\BundleContext;
 use Vairogs\Bundle\Service\RequestCache;
 use Vairogs\Component\Functions\Text;
-use Vairogs\Component\Mapper\Constants\MapperContext;
 
 #[AsDecorator(decorates: 'api_platform.openapi.normalizer.api_gateway')]
 readonly class OpenApiNormalizer implements NormalizerInterface
@@ -63,7 +63,7 @@ readonly class OpenApiNormalizer implements NormalizerInterface
             };
         }
 
-        return $this->requestCache->memoize(MapperContext::PLURAL, $word, static fn (): string => $_helper->pluralize($word));
+        return $this->requestCache->memoize(BundleContext::PLURAL, $word, static fn (): string => $_helper->pluralize($word));
     }
 
     protected function singularize(
@@ -77,6 +77,6 @@ readonly class OpenApiNormalizer implements NormalizerInterface
             };
         }
 
-        return $this->requestCache->memoize(MapperContext::PLURAL, $word, static fn (): string => $_helper->singularize($word));
+        return $this->requestCache->memoize(BundleContext::PLURAL, $word, static fn (): string => $_helper->singularize($word));
     }
 }

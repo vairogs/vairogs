@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Mapper\Traits;
+namespace Vairogs\Bundle\Traits;
 
 use ReflectionClass;
 use ReflectionException;
+use Vairogs\Bundle\Constants\BundleContext;
 use Vairogs\Bundle\Service\RequestCache;
 use Vairogs\Component\Functions\Php;
-use Vairogs\Component\Mapper\Constants\Context;
 
 use function is_object;
 
@@ -42,8 +42,8 @@ trait _LoadReflection
             };
         }
 
-        $reflection = $requestCache->memoize(Context::REFLECTION, $class, static fn () => $_helper->getReflection($objectOrClass));
-        $requestCache->memoize(Context::REFLECTION, $reflection->getName(), static fn () => $reflection);
+        $reflection = $requestCache->memoize(BundleContext::REFLECTION, $class, static fn () => $_helper->getReflection($objectOrClass));
+        $requestCache->memoize(BundleContext::REFLECTION, $reflection->getName(), static fn () => $reflection);
 
         return $reflection;
     }

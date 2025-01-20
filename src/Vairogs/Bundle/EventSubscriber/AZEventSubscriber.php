@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Mapper\EventSubscriber;
+namespace Vairogs\Bundle\EventSubscriber;
 
 use ApiPlatform\Symfony\EventListener\EventPriorities;
 use ReflectionException;
@@ -17,11 +17,10 @@ use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 use Symfony\Component\HttpKernel\Event\ResponseEvent;
 use Symfony\Component\HttpKernel\Event\ViewEvent;
 use Symfony\Component\HttpKernel\KernelEvents;
+use Vairogs\Bundle\ApiPlatform\Functions;
 use Vairogs\Bundle\Service\RequestCache;
+use Vairogs\Bundle\Traits\_GetReadProperty;
 use Vairogs\Component\Functions\Iteration;
-use Vairogs\Component\Mapper\Constants\MappingType;
-use Vairogs\Component\Mapper\Contracts\MapperInterface;
-use Vairogs\Component\Mapper\Traits;
 
 use function array_key_exists;
 use function array_map;
@@ -34,7 +33,7 @@ use const JSON_PRETTY_PRINT;
 readonly class AZEventSubscriber implements EventSubscriberInterface
 {
     public function __construct(
-        private MapperInterface $mapper,
+        private Functions $functions,
         private RequestCache $requestCache,
     ) {
     }
@@ -87,23 +86,23 @@ readonly class AZEventSubscriber implements EventSubscriberInterface
         if ($request->attributes->has('_api_resource_class')) {
             $class = $request->attributes->get('_api_resource_class');
 
-            if ($this->mapper->isMappedType($class, MappingType::RESOURCE)) {
+            if ($this->functions->isResource($class)) {
                 $serialized = $event->getControllerResult();
 
                 static $_helper = null;
 
                 if (null === $_helper) {
                     $_helper = new class {
+                        use _GetReadProperty;
                         use Iteration\_JsonDecode;
                         use Iteration\_JsonEncode;
-                        use Traits\_GetReadProperty;
                     };
                 }
 
                 $data = $_helper->jsonDecode($serialized, Iteration::ASSOCIATIVE);
                 $rp = $_helper->getReadProperty($class, $this->requestCache);
 
-                if (array_key_exists('@type', $data)) {
+                if (null !== $data && array_key_exists('@type', $data)) {
                     if ('Collection' === $data['@type']) {
                         $data['member'] = array_map(function ($item) use ($rp) {
                             ksort($item);

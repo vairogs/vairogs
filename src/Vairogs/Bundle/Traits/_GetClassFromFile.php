@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Mapper\Traits;
+namespace Vairogs\Bundle\Traits;
 
 use PhpToken;
+use Vairogs\Bundle\Constants\BundleContext;
 use Vairogs\Bundle\Service\RequestCache;
-use Vairogs\Component\Mapper\Constants\Context;
 
 use function array_slice;
 use function file_get_contents;
@@ -33,7 +33,7 @@ trait _GetClassFromFile
             return null;
         }
 
-        return $requestCache->memoize(Context::CLASS_FROM_FILE, $file, static function () use ($file) {
+        return $requestCache->memoize(BundleContext::CALLER_CLASS, $file, static function () use ($file) {
             $namespace = '';
             $tokens = PhpToken::tokenize(code: file_get_contents(filename: $file));
 

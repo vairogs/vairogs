@@ -9,10 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Mapper\Constants;
+namespace Vairogs\Bundle\Constants;
 
-enum MappingType
+enum BundleContext: string
 {
-    case ENTITY;
-    case RESOURCE;
+    case CALLER_CLASS = 'VAIROGS_BUNDLE_CALL_CLASS';
+    case PLURAL = 'VAIROGS_BUNDLE_PLURAL';
+    case READ_PROPERTY = 'VAIROGS_BUNDLE_READ_PROPERTY';
+    case REFLECTION = 'VAIROGS_BUNDLE_REFLECTION';
 }

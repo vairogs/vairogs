@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Mapper\Traits;
+namespace Vairogs\Bundle\Traits;
 
 use ApiPlatform\Metadata\ApiProperty;
 use ReflectionException;
+use Vairogs\Bundle\Constants\BundleContext;
 use Vairogs\Bundle\Service\RequestCache;
-use Vairogs\Component\Mapper\Constants\Context;
 use Vairogs\Component\Mapper\Exception\MappingException;
 
 use function is_object;
@@ -32,7 +32,7 @@ trait _GetReadProperty
             $class = $class::class;
         }
 
-        return $requestCache->memoize(Context::READ_PROPERTY, $class, static function () use ($class, $requestCache) {
+        return $requestCache->memoize(BundleContext::READ_PROPERTY, $class, static function () use ($class, $requestCache) {
             $property = null;
 
             static $_helper = null;
