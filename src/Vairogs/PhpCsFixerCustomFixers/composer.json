@@ -21,8 +21,10 @@
         "php": ">=8.4",
         "friendsofphp/php-cs-fixer": "*",
         "symfony/finder": "*",
-        "vairogs/functions": "*",
-        "doctrine/migrations": "*"
+        "vairogs/functions": "*"
+    },
+    "suggest": {
+        "doctrine/migrations": "To fix doctrine migration files"
     },
     "conflict": {
         "friendsofphp/php-cs-fixer": "<3.57.0"
