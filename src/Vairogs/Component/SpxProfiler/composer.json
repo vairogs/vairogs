@@ -26,9 +26,9 @@
         "symfony/dependency-injection": "*",
         "symfony/framework-bundle": "*",
         "symfony/http-foundation": "*",
-        "vairogs/bundle": "*",
-        "vairogs/functions-iteration": "*",
-        "vairogs/functions-text": "*"
+        "vairogs/bundle": "self.version",
+        "vairogs/functions-iteration": "self.version",
+        "vairogs/functions-text": "self.version"
     },
     "suggest": {
         "ext-spx": "*",

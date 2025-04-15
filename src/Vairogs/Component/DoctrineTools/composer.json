@@ -16,7 +16,7 @@
         "symfony/finder": "*",
         "symfony/serializer": "*",
         "symfony/uid": "*",
-        "vairogs/bundle": "*",
+        "vairogs/bundle": "self.version",
         "vairogs/functions-preg": "self.version",
         "vairogs/functions-text": "self.version"
     },

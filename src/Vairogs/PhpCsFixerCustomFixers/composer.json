@@ -6,7 +6,7 @@
         "php": ">=8.4",
         "friendsofphp/php-cs-fixer": "*",
         "symfony/finder": "*",
-        "vairogs/functions-preg": "*"
+        "vairogs/functions-preg": "self.version"
     },
     "conflict": {
         "friendsofphp/php-cs-fixer": "<3.57.0"
