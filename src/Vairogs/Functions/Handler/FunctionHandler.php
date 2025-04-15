@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Handler;
+namespace Vairogs\Functions\Handler;
 
-use Vairogs\Component\Functions\Php;
+use Vairogs\Functions\Php;
 
 use function is_object;
 
@@ -30,8 +30,8 @@ class FunctionHandler extends AbstractHandler
 
         if (null === $_helper) {
             $_helper = new class {
-                use Php\_ReturnFunction;
-                use Php\_ReturnObject;
+                use Php\Traits\_ReturnFunction;
+                use Php\Traits\_ReturnObject;
             };
         }
 

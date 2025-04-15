@@ -1,0 +1,42 @@
+{
+    "name": "vairogs/functions-handler",
+    "description": "A PHP library providing function handling utilities including a Chain of Responsibility pattern implementation and function execution utilities",
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "keywords": [
+        "php",
+        "handler",
+        "chain",
+        "pipeline",
+        "function",
+        "execution",
+        "vairogs",
+        "symfony"
+    ],
+    "authors": [
+        {
+            "name": "Davis Zalitis (k0d3r1s)",
+            "homepage": "https://me.k0d3r1s.com"
+        }
+    ],
+    "homepage": "https://github.com/vairogs/vairogs",
+    "require": {
+        "php": ">=8.4",
+        "vairogs/functions-php": "self.version"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false,
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\Functions\\Handler\\": ""
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}

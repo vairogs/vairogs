@@ -9,23 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Handler;
+namespace Vairogs\Functions\Handler;
 
-abstract class AbstractHandler implements Handler
+interface Handler
 {
-    private ?Handler $handler = null;
-
     public function handle(
         ...$arguments,
-    ): mixed {
-        return $this->handler?->handle(...$arguments);
-    }
+    ): mixed;
 
     public function next(
-        Handler $handler,
-    ): Handler {
-        $this->handler = $handler;
-
-        return $this;
-    }
+        self $handler,
+    ): self;
 }
