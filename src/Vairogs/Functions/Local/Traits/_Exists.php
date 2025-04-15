@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Local;
+namespace Vairogs\Functions\Local\Traits;
 
 use function class_exists;
 use function interface_exists;

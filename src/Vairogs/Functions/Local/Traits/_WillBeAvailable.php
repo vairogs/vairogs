@@ -9,11 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Local;
+namespace Vairogs\Functions\Local\Traits;
 
 use Composer\InstalledVersions;
 use LogicException;
-use Vairogs\Component\Functions\Vairogs;
 
 use function class_exists;
 use function sprintf;
@@ -24,7 +23,7 @@ trait _WillBeAvailable
         string $package,
         string $class,
         array $parentPackages,
-        string $rootPackageCheck = Vairogs::VAIROGS . '/' . Vairogs::VAIROGS,
+        string $rootPackageCheck = 'vairogs/vairogs',
     ): bool {
         if (!class_exists(class: InstalledVersions::class)) {
             throw new LogicException(message: sprintf('Calling "%s" when dependencies have been installed with Composer 1 is not supported. Consider upgrading to Composer 2.', __METHOD__));
