@@ -18,8 +18,8 @@ use Exception;
 
 class UTCDateTimeImmutable extends DateTimeImmutable
 {
-    public const string UTC = 'UTC';
     public const string FORMAT = 'Y-m-d H:i:s.u';
+    public const string UTC = 'UTC';
     public static ?DateTimeZone $timezone = null;
 
     /**

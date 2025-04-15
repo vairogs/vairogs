@@ -1,25 +1,11 @@
 {
     "name": "vairogs/doctrine-tools",
-    "type": "library",
     "license": "BSD-3-Clause",
-    "autoload": {
-        "psr-4": {
-            "Vairogs\\Component\\DoctrineTools\\": ""
-        }
-    },
-    "minimum-stability": "dev",
-    "prefer-stable": false,
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.1.x-dev"
-        }
-    },
+    "type": "library",
     "require": {
         "php": ">=8.4",
         "doctrine/dbal": "*",
+        "doctrine/doctrine-bundle": "*",
         "doctrine/migrations": "*",
         "doctrine/orm": "*",
         "symfony/config": "*",
@@ -31,9 +17,25 @@
         "symfony/serializer": "*",
         "symfony/uid": "*",
         "vairogs/bundle": "*",
-        "doctrine/doctrine-bundle": "*"
+        "vairogs/functions-preg": "self.version",
+        "vairogs/functions-text": "self.version"
     },
     "conflict": {
         "doctrine/dbal": "<4.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false,
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\Component\\DoctrineTools\\": ""
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
     }
 }

@@ -14,7 +14,7 @@ namespace Vairogs\Component\Sitemap\Response;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationListInterface;
-use Vairogs\Component\Functions\Web;
+use Vairogs\Functions\Web;
 
 readonly class ErrorResponse
 {
@@ -24,7 +24,7 @@ readonly class ErrorResponse
         private ConstraintViolationListInterface $violations,
     ) {
         $this->response = new Response();
-        $this->response->headers->set('Content-Type', Web::XML);
+        $this->response->headers->set('Content-Type', Web\Functions::XML);
         $this->response->setStatusCode(Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
@@ -35,7 +35,7 @@ readonly class ErrorResponse
 ';
 
         foreach ($this->violations as $violation) {
-            /* @var ConstraintViolation $violation */
+            /** @var ConstraintViolation $violation */
             $buffer .= "\t" . '<error>' .
                 "\n\t\t" . '<property_path>' . $violation->getPropertyPath() . '</property_path>' .
                 "\n\t\t" . '<message>' . $violation->getMessage() . '</message>' .

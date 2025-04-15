@@ -16,7 +16,7 @@ use Generator;
 use IteratorAggregate;
 use PhpCsFixer\Fixer\FixerInterface;
 use Symfony\Component\Finder\Finder;
-use Vairogs\Component\Functions\Preg;
+use Vairogs\Functions\Preg;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\AbstractFixer;
 
 use function assert;
@@ -60,7 +60,7 @@ final class Fixers implements IteratorAggregate
 
         if (null === $_helper) {
             $_helper = new class {
-                use Preg\_Match;
+                use Preg\Traits\_Match;
             };
         }
 

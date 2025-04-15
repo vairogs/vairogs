@@ -15,7 +15,7 @@ use Exception;
 use InvalidArgumentException;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\Tokenizer\TokensAnalyzer;
-use Vairogs\Component\Functions\Preg;
+use Vairogs\Functions\Preg;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\Analyzer\Element\CaseElement;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\Analyzer\Element\Constructor;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\Analyzer\Element\SwitchElement;
@@ -171,7 +171,7 @@ final class Analyzer
 
         if (null === $_helper) {
             $_helper = new class {
-                use Preg\_Match;
+                use Preg\Traits\_Match;
             };
         }
 

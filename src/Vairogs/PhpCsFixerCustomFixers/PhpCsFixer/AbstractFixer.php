@@ -19,8 +19,7 @@ use PhpCsFixer\FixerDefinition\FixerDefinitionInterface;
 use PhpCsFixer\Tokenizer\Tokens;
 use PhpCsFixer\WhitespacesFixerConfig;
 use SplFileInfo;
-use Vairogs\Component\Functions\Preg;
-use Vairogs\Component\Functions\Text;
+use Vairogs\Functions\Preg;
 use Vairogs\PhpCsFixerCustomFixers\PhpCsFixer\Analyzer\Analyzer;
 
 use function array_map;
@@ -115,15 +114,7 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
         $parts = explode('\\', $class);
         $name = substr($parts[count($parts) - 1], 0, -strlen('Fixer'));
 
-        static $_helper = null;
-
-        if (null === $_helper) {
-            $_helper = new class {
-                use Text\_SnakeCaseFromCamelCase;
-            };
-        }
-
-        return sprintf('%s/%s', self::PREFIX, $_helper->snakeCaseFromCamelCase($name));
+        return sprintf('%s/%s', self::PREFIX, self::snakeCaseFromCamelCase($name));
     }
 
     public static function removeWithLinesIfPossible(
@@ -226,7 +217,7 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
 
         if (null === $_helper) {
             $_helper = new class {
-                use Preg\_Replace;
+                use Preg\Traits\_Replace;
             };
         }
 
@@ -246,7 +237,7 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
 
         if (null === $_helper) {
             $_helper = new class {
-                use Preg\_Replace;
+                use Preg\Traits\_Replace;
             };
         }
 
@@ -267,7 +258,7 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
 
         if (null === $_helper) {
             $_helper = new class {
-                use Preg\_Match;
+                use Preg\Traits\_Match;
             };
         }
 
@@ -289,7 +280,7 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
 
         if (null === $_helper) {
             $_helper = new class {
-                use Preg\_Match;
+                use Preg\Traits\_Match;
             };
         }
 
@@ -314,5 +305,20 @@ abstract class AbstractFixer implements FixerInterface, WhitespacesAwareFixerInt
         int $index,
     ): bool {
         return !self::hasMeaningTokenInLineBefore($tokens, $index) && !self::hasMeaningTokenInLineAfter($tokens, $index);
+    }
+
+    protected static function snakeCaseFromCamelCase(
+        string $string,
+        string $separator = '_',
+    ): string {
+        static $_helper = null;
+
+        if (null === $_helper) {
+            $_helper = new class {
+                use Preg\Traits\_Replace;
+            };
+        }
+
+        return mb_strtolower(string: $_helper->replace(pattern: '#(?!^)[[:upper:]]+#', replacement: $separator . '$0', subject: $string));
     }
 }

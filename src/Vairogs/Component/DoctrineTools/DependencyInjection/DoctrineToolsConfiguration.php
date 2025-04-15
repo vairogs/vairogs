@@ -17,8 +17,8 @@ use Symfony\Component\Finder\Finder;
 use Vairogs\Bundle\DependencyInjection\AbstractDependencyConfiguration;
 use Vairogs\Bundle\VairogsBundle;
 use Vairogs\Component\DoctrineTools\Doctrine\DBAL;
-use Vairogs\Component\Functions\Preg;
-use Vairogs\Component\Functions\Text;
+use Vairogs\Functions\Preg;
+use Vairogs\Functions\Text;
 
 use function array_keys;
 use function class_exists;
@@ -66,8 +66,8 @@ final class DoctrineToolsConfiguration extends AbstractDependencyConfiguration
 
             if (null === $_helper) {
                 $_helper = new class {
-                    use Preg\_Match;
-                    use Text\_SnakeCaseFromCamelCase;
+                    use Preg\Traits\_Match;
+                    use Text\Traits\_SnakeCaseFromCamelCase;
                 };
             }
 

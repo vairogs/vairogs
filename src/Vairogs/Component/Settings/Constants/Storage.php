@@ -11,11 +11,11 @@
 
 namespace Vairogs\Component\Settings\Constants;
 
-use Vairogs\Component\Functions\Iteration;
+use Vairogs\Functions\Iteration;
 
 enum Storage: string
 {
-    use Iteration\_Cases;
+    use Iteration\Traits\_Cases;
 
     case FILE = 'file';
     case MEMORY = 'memory';

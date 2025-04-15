@@ -1,21 +1,58 @@
 {
     "name": "vairogs/vairogs",
-    "type": "library",
     "license": "BSD-3-Clause",
-    "autoload": {
-        "psr-4": {
-            "Vairogs\\": "src/Vairogs/"
-        }
+    "type": "library",
+    "require": {
+        "php": ">=8.4",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-random": "*",
+        "api-platform/core": "*",
+        "api-platform/doctrine-common": "*",
+        "api-platform/doctrine-orm": "*",
+        "api-platform/metadata": "*",
+        "api-platform/openapi": "*",
+        "api-platform/state": "*",
+        "api-platform/symfony": "*",
+        "api-platform/validator": "*",
+        "composer-runtime-api": "^2",
+        "doctrine/collections": "*",
+        "doctrine/dbal": "*",
+        "doctrine/doctrine-bundle": "*",
+        "doctrine/migrations": "*",
+        "doctrine/orm": "*",
+        "doctrine/persistence": "*",
+        "psr/log": "*",
+        "symfony/config": "*",
+        "symfony/console": "*",
+        "symfony/dependency-injection": "*",
+        "symfony/doctrine-bridge": "*",
+        "symfony/event-dispatcher": "*",
+        "symfony/finder": "*",
+        "symfony/framework-bundle": "*",
+        "symfony/http-client": "*",
+        "symfony/http-client-contracts": "*",
+        "symfony/http-foundation": "*",
+        "symfony/http-kernel": "*",
+        "symfony/intl": "*",
+        "symfony/process": "*",
+        "symfony/property-access": "*",
+        "symfony/property-info": "*",
+        "symfony/routing": "*",
+        "symfony/security-bundle": "*",
+        "symfony/security-core": "*",
+        "symfony/security-http": "*",
+        "symfony/serializer": "*",
+        "symfony/string": "*",
+        "symfony/translation": "*",
+        "symfony/translation-contracts": "*",
+        "symfony/type-info": "*",
+        "symfony/uid": "*",
+        "symfony/validator": "*"
     },
-    "minimum-stability": "dev",
-    "prefer-stable": false,
-    "config": {
-        "sort-packages": true
-    },
-    "extra": {
-        "branch-alias": {
-            "dev-master": "0.1.x-dev"
-        }
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "*",
+        "roave/security-advisories": "dev-latest"
     },
     "replace": {
         "vairogs/bundle": "self.version",
@@ -23,57 +60,28 @@
         "vairogs/doctrine-tools": "self.version",
         "vairogs/functions": "self.version",
         "vairogs/mapper": "self.version",
-        "vairogs/php-cs-fixer-custom-fixers": "self.version"
-    },
-    "require": {
-        "php": ">=8.4",
-        "ext-curl": "*",
-        "ext-json": "*",
-        "ext-random": "*",
-        "composer-runtime-api": "^2",
-        "doctrine/collections": "*",
-        "doctrine/dbal": "*",
-        "doctrine/doctrine-bundle": "*",
-        "doctrine/orm": "*",
-        "doctrine/persistence": "*",
-        "symfony/config": "*",
-        "symfony/dependency-injection": "*",
-        "symfony/doctrine-bridge": "*",
-        "symfony/http-foundation": "*",
-        "symfony/http-kernel": "*",
-        "symfony/intl": "*",
-        "symfony/property-access": "*",
-        "symfony/routing": "*",
-        "symfony/security-bundle": "*",
-        "symfony/security-core": "*",
-        "symfony/serializer": "*",
-        "symfony/string": "*",
-        "symfony/translation": "*",
-        "symfony/type-info": "*",
-        "symfony/uid": "*",
-        "api-platform/doctrine-common": "*",
-        "api-platform/doctrine-orm": "*",
-        "api-platform/documentation": "*",
-        "api-platform/http-cache": "*",
-        "api-platform/hydra": "*",
-        "api-platform/json-api": "*",
-        "api-platform/json-schema": "*",
-        "api-platform/jsonld": "*",
-        "api-platform/metadata": "*",
-        "api-platform/openapi": "*",
-        "api-platform/serializer": "*",
-        "api-platform/state": "*",
-        "api-platform/symfony": "*",
-        "api-platform/validator": "*"
-    },
-    "require-dev": {
-        "friendsofphp/php-cs-fixer": "*",
-        "roave/security-advisories": "dev-latest",
-        "vairogs/php-cs-fixer-custom-fixers": "*"
+        "vairogs/php-cs-fixer-custom-fixers": "self.version",
+        "vairogs/spx-profiler": "self.version"
     },
     "conflict": {
+        "api-platform/symfony": "<4.0.0",
         "doctrine/dbal": "<4.0",
         "friendsofphp/php-cs-fixer": "<3.57.0",
-        "api-platform/symfony": "<4.0.0"
+        "symfony/framework-bundle": "<7.2.0"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false,
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\": "src/Vairogs/"
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
     }
 }

@@ -18,7 +18,7 @@ use Symfony\Component\Console\ConsoleEvents;
 use Symfony\Component\Console\Event\ConsoleCommandEvent;
 use Symfony\Component\DependencyInjection\Attribute\AutoconfigureTag;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
-use Vairogs\Component\Functions\Local;
+use Vairogs\Functions\Local;
 
 #[AutoconfigureTag('doctrine.dbal.schema_filter')]
 class DoctrineMigrationsFilter implements EventSubscriberInterface
@@ -36,7 +36,7 @@ class DoctrineMigrationsFilter implements EventSubscriberInterface
 
         if (null === $_helper) {
             $_helper = new class {
-                use Local\_Exists;
+                use Local\Traits\_Exists;
             };
         }
 

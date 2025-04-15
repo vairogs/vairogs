@@ -1,14 +1,26 @@
 {
     "name": "vairogs/php-cs-fixer-custom-fixers",
-    "type": "library",
     "license": "BSD-3-Clause",
+    "type": "library",
+    "require": {
+        "php": ">=8.4",
+        "friendsofphp/php-cs-fixer": "*",
+        "symfony/finder": "*",
+        "vairogs/functions-preg": "*"
+    },
+    "conflict": {
+        "friendsofphp/php-cs-fixer": "<3.57.0"
+    },
+    "suggest": {
+        "doctrine/migrations": "To fix doctrine migration files"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false,
     "autoload": {
         "psr-4": {
             "Vairogs\\PhpCsFixerCustomFixers\\": ""
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": false,
     "config": {
         "sort-packages": true
     },
@@ -16,17 +28,5 @@
         "branch-alias": {
             "dev-master": "0.1.x-dev"
         }
-    },
-    "require": {
-        "php": ">=8.4",
-        "friendsofphp/php-cs-fixer": "*",
-        "symfony/finder": "*",
-        "vairogs/functions": "*"
-    },
-    "suggest": {
-        "doctrine/migrations": "To fix doctrine migration files"
-    },
-    "conflict": {
-        "friendsofphp/php-cs-fixer": "<3.57.0"
     }
 }

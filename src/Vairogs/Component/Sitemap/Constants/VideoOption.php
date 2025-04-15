@@ -11,11 +11,11 @@
 
 namespace Vairogs\Component\Sitemap\Constants;
 
-use Vairogs\Component\Functions\Iteration;
+use Vairogs\Functions\Iteration;
 
 enum VideoOption: string
 {
-    use Iteration\_Cases;
+    use Iteration\Traits\_Cases;
 
     case OPTION_NO = 'no';
     case OPTION_YES = 'yes';
@@ -33,7 +33,7 @@ enum VideoOption: string
 
         if (null === $_helper) {
             $_helper = new class {
-                use Iteration\_ArrayValuesFiltered;
+                use Iteration\Traits\_ArrayValuesFiltered;
             };
         }
 
@@ -46,7 +46,7 @@ enum VideoOption: string
 
         if (null === $_helper) {
             $_helper = new class {
-                use Iteration\_ArrayValuesFiltered;
+                use Iteration\Traits\_ArrayValuesFiltered;
             };
         }
 
@@ -59,7 +59,7 @@ enum VideoOption: string
 
         if (null === $_helper) {
             $_helper = new class {
-                use Iteration\_ArrayValuesFiltered;
+                use Iteration\Traits\_ArrayValuesFiltered;
             };
         }
 
