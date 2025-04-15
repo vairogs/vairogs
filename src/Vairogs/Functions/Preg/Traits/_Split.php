@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Preg;
+namespace Vairogs\Functions\Preg\Traits;
 
 use function preg_last_error;
 use function preg_last_error_msg;

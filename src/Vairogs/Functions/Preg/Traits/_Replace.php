@@ -9,23 +9,23 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Preg;
+namespace Vairogs\Functions\Preg\Traits;
 
 use function preg_last_error;
 use function preg_last_error_msg;
-use function preg_match;
+use function preg_replace;
 
 use const PREG_NO_ERROR;
 
-trait _Match
+trait _Replace
 {
-    public function match(
-        string $pattern,
-        string $subject,
-        ?array &$matches = null,
-        int $flags = 0,
-        int $offset = 0,
-    ): bool {
+    public function replace(
+        array|string $pattern,
+        string $replacement,
+        $subject,
+        int $limit = -1,
+        ?int &$count = null,
+    ): string {
         static $_helper = null;
 
         if (null === $_helper) {
@@ -36,16 +36,16 @@ trait _Match
             };
         }
 
-        $result = @preg_match($_helper->addUtf8Modifier($pattern), $subject, $matches, $flags, $offset);
+        $result = @preg_replace($_helper->addUtf8Modifier($pattern), $replacement, $subject, $limit, $count);
 
-        if (false !== $result && PREG_NO_ERROR === preg_last_error()) {
-            return 1 === $result;
+        if (null !== $result && PREG_NO_ERROR === preg_last_error()) {
+            return $result;
         }
 
-        $result = @preg_match($_helper->removeUtf8Modifier($pattern), $subject, $matches, $flags, $offset);
+        $result = @preg_replace($_helper->removeUtf8Modifier($pattern), $replacement, $subject, $limit, $count);
 
-        if (false !== $result && PREG_NO_ERROR === preg_last_error()) {
-            return 1 === $result;
+        if (null !== $result && PREG_NO_ERROR === preg_last_error()) {
+            return $result;
         }
 
         throw $_helper->newPregException(preg_last_error(), preg_last_error_msg(), __METHOD__, $pattern);

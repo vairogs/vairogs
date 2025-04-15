@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Preg;
+namespace Vairogs\Functions\Preg\Traits;
 
 use function is_array;
 use function str_replace;

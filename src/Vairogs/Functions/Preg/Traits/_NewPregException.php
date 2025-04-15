@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Preg;
+namespace Vairogs\Functions\Preg\Traits;
 
 use RuntimeException;
-use Vairogs\Component\Functions\Handler\SkipErrorHandler;
+use Vairogs\Functions\Preg\SkipErrorHandler;
 
 use function is_array;
 use function preg_last_error;
