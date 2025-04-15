@@ -1,0 +1,46 @@
+{
+    "name": "vairogs/functions-text",
+    "description": "A PHP library providing enhanced text manipulation functions for string operations, formatting, and transformations",
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "keywords": [
+        "php",
+        "text",
+        "string",
+        "manipulation",
+        "formatting",
+        "transformation",
+        "vairogs",
+        "symfony"
+    ],
+    "authors": [
+        {
+            "name": "Davis Zalitis (k0d3r1s)",
+            "homepage": "https://me.k0d3r1s.com"
+        }
+    ],
+    "homepage": "https://github.com/vairogs/vairogs",
+    "require": {
+        "php": ">=8.4",
+        "symfony/intl": "*",
+        "symfony/string": "*",
+        "vairogs/functions-iteration": "self.version",
+        "vairogs/functions-local": "self.version",
+        "vairogs/functions-preg": "self.version"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false,
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\Functions\\Text\\": ""
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
