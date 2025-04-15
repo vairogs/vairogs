@@ -1,0 +1,49 @@
+{
+    "name": "vairogs/functions-web",
+    "description": "A PHP library providing a collection of web-related utility functions for handling HTTP requests, validating web data, and working with URLs",
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "keywords": [
+        "php",
+        "web",
+        "http",
+        "url",
+        "validation",
+        "request",
+        "vairogs",
+        "symfony"
+    ],
+    "authors": [
+        {
+            "name": "Davis Zalitis (k0d3r1s)",
+            "homepage": "https://me.k0d3r1s.com"
+        }
+    ],
+    "homepage": "https://github.com/vairogs/vairogs",
+    "require": {
+        "php": ">=8.4",
+        "ext-curl": "*",
+        "symfony/http-foundation": "*",
+        "symfony/routing": "*",
+        "vairogs/functions-iteration": "self.version",
+        "vairogs/functions-local": "self.version",
+        "vairogs/functions-php": "self.version",
+        "vairogs/functions-preg": "self.version",
+        "vairogs/functions-text": "self.version"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false,
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\Functions\\Web\\": ""
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
