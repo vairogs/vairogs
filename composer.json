@@ -52,7 +52,8 @@
     },
     "require-dev": {
         "friendsofphp/php-cs-fixer": "*",
-        "roave/security-advisories": "dev-latest"
+        "roave/security-advisories": "dev-latest",
+        "phpunit/phpunit": "*"
     },
     "replace": {
         "vairogs/bundle": "self.version",
@@ -74,6 +75,12 @@
     "autoload": {
         "psr-4": {
             "Vairogs\\": "src/Vairogs/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Vairogs\\Tests\\": "tests/Vairogs/Tests/",
+            "Vairogs\\Assets\\": "tests/Vairogs/Assets/"
         }
     },
     "config": {
