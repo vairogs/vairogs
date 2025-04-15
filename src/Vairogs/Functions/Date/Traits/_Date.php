@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Date;
+namespace Vairogs\Functions\Date\Traits;
 
 use DateTimeImmutable;
 use DateTimeInterface;

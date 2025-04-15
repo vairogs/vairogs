@@ -9,16 +9,16 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Date;
+namespace Vairogs\Functions\Date\Traits;
 
 use DateTimeImmutable;
-use Vairogs\Component\Functions\Date;
+use Vairogs\Functions\Date\Functions;
 
 trait _ValidateDateBasic
 {
     public function validateDateBasic(
         mixed $date,
-        string $format = Date::FORMAT,
+        string $format = Functions::FORMAT,
     ): bool {
         $object = DateTimeImmutable::createFromFormat(format: '!' . $format, datetime: $date);
 

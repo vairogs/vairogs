@@ -9,19 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Date;
+namespace Vairogs\Functions\Date\Traits;
 
 use DateTimeImmutable;
-use Vairogs\Component\Functions\Date;
+use Vairogs\Functions\Date\Functions;
 
 trait _FormatDate
 {
     public function formatDate(
         string $string,
-        string $format = Date::FORMAT,
+        string $format = Functions::FORMAT,
     ): string|bool {
         if (($date = DateTimeImmutable::createFromFormat(format: '!' . $format, datetime: $string)) instanceof DateTimeImmutable) {
-            return $date->format(format: Date::FORMAT);
+            return $date->format(format: Functions::FORMAT);
         }
 
         return false;

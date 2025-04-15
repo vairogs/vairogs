@@ -9,12 +9,12 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Date;
+namespace Vairogs\Functions\Date\Traits;
 
 use DateTimeImmutable;
 use DateTimeInterface;
-use Vairogs\Component\Functions\Date;
-use Vairogs\Component\Functions\Php;
+use Vairogs\Functions\Date\Functions;
+use Vairogs\Functions\Php;
 
 use function array_merge;
 
@@ -28,11 +28,11 @@ trait _DateWithoutFormat
 
         if (null === $_helper) {
             $_helper = new class {
-                use Php\_ClassConstantsValues;
+                use Php\Traits\_ClassConstantsValues;
             };
         }
 
-        $formats = array_merge($_helper->classConstantsValues(class: DateTimeImmutable::class), Date::EXTRA_FORMATS, $guesses);
+        $formats = array_merge($_helper->classConstantsValues(class: DateTimeImmutable::class), Functions::EXTRA_FORMATS, $guesses);
 
         foreach ($formats as $format) {
             $datetime = DateTimeImmutable::createFromFormat(format: '!' . $format, datetime: $date);

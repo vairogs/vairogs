@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Date;
+namespace Vairogs\Functions\Date\Traits;
 
-use Vairogs\Component\Functions\Date;
+use Vairogs\Functions\Date\Functions;
 
 use function gmdate;
 
@@ -19,7 +19,7 @@ trait _ExcelDate
 {
     public function excelDate(
         int $timestamp,
-        string $format = Date::FORMAT,
+        string $format = Functions::FORMAT,
     ): string {
         $base = 25569;
 

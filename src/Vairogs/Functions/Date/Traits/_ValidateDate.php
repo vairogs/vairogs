@@ -9,10 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Date;
+namespace Vairogs\Functions\Date\Traits;
 
-use Vairogs\Component\Functions\Date;
-use Vairogs\Component\Functions\Text;
+use Vairogs\Functions\Text;
 
 use function substr;
 
@@ -25,7 +24,7 @@ trait _ValidateDate
 
         if (null === $_helper) {
             $_helper = new class {
-                use Text\_KeepNumeric;
+                use Text\Traits\_KeepNumeric;
             };
         }
 
@@ -38,22 +37,22 @@ trait _ValidateDate
         }
 
         $daysInMonth = [
-            Date::JAN,
-            Date::FEB,
-            Date::MAR,
-            Date::APR,
-            Date::MAY,
-            Date::JUN,
-            Date::JUL,
-            Date::AUG,
-            Date::SEP,
-            Date::OCT,
-            Date::NOV,
-            Date::DEC,
+            31,
+            28,
+            31,
+            30,
+            31,
+            30,
+            31,
+            31,
+            30,
+            31,
+            30,
+            31,
         ];
 
         if (0 === (int) substr(string: $date, offset: 4, length: 2) % 4) {
-            $daysInMonth[1] = Date::FEB_LONG;
+            $daysInMonth[1] = 29;
         }
 
         return 0 < $day && $daysInMonth[$month - 1] >= $day;

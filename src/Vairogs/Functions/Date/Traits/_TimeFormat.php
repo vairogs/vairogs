@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Date;
+namespace Vairogs\Functions\Date\Traits;
 
-use Vairogs\Component\Functions\Date;
+use Vairogs\Functions\Date\Functions;
 
 use function floor;
 use function round;
@@ -26,7 +26,7 @@ trait _TimeFormat
         $timestamp = round(num: $timestamp * 1000);
         $result = $asArray ? [] : '';
 
-        foreach (Date::TIME as $unit => $value) {
+        foreach (Functions::TIME as $unit => $value) {
             if ($timestamp >= $value) {
                 $time = (int) floor(num: $timestamp / $value);
 

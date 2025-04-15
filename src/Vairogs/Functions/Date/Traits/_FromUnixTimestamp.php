@@ -9,11 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Date;
+namespace Vairogs\Functions\Date\Traits;
 
 use DateTimeImmutable;
 use Exception;
-use Vairogs\Component\Functions\Date;
+use Vairogs\Functions\Date\Functions;
 
 trait _FromUnixTimestamp
 {
@@ -24,6 +24,6 @@ trait _FromUnixTimestamp
         int $timestamp = 0,
         ?string $format = null,
     ): string {
-        return new DateTimeImmutable()->setTimestamp(timestamp: $timestamp)->format(format: $format ?? Date::FORMAT);
+        return new DateTimeImmutable()->setTimestamp(timestamp: $timestamp)->format(format: $format ?? Functions::FORMAT);
     }
 }
