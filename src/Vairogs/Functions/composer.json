@@ -1,0 +1,68 @@
+{
+    "name": "vairogs/functions",
+    "description": "A comprehensive collection of PHP utility functions and helpers for various tasks including date manipulation, web operations, text processing, and more",
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "keywords": [
+        "php",
+        "utility",
+        "functions",
+        "helpers",
+        "vairogs",
+        "symfony"
+    ],
+    "authors": [
+        {
+            "name": "Davis Zalitis (k0d3r1s)",
+            "homepage": "https://me.k0d3r1s.com"
+        }
+    ],
+    "homepage": "https://github.com/vairogs/vairogs",
+    "require": {
+        "php": ">=8.4",
+        "ext-curl": "*",
+        "ext-json": "*",
+        "ext-random": "*",
+        "composer-runtime-api": "^2",
+        "symfony/http-foundation": "*",
+        "symfony/intl": "*",
+        "symfony/process": "*",
+        "symfony/property-access": "*",
+        "symfony/routing": "*",
+        "symfony/string": "*"
+    },
+    "replace": {
+        "vairogs/functions-date": "self.version",
+        "vairogs/functions-handler": "self.version",
+        "vairogs/functions-iteration": "self.version",
+        "vairogs/functions-latvian": "self.version",
+        "vairogs/functions-local": "self.version",
+        "vairogs/functions-memoize": "self.version",
+        "vairogs/functions-number": "self.version",
+        "vairogs/functions-pagination": "self.version",
+        "vairogs/functions-php": "self.version",
+        "vairogs/functions-preg": "self.version",
+        "vairogs/functions-sort": "self.version",
+        "vairogs/functions-text": "self.version",
+        "vairogs/functions-web": "self.version"
+    },
+    "suggest": {
+        "ext-gmp": "*",
+        "doctrine/persistence": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false,
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\Functions\\": ""
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}

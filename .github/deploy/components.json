@@ -4,23 +4,79 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/bundle.git"
     },
     {
-        "path": "src/Vairogs/Component/Functions",
-        "repo": "https://GH_TOKEN@github.com/vairogs/functions.git"
-    },
-    {
-        "path": "src/Vairogs/Component/Mapper",
-        "repo": "https://GH_TOKEN@github.com/vairogs/mapper.git"
+        "path": "src/Vairogs/Component/CacheWarmer",
+        "repo": "https://GH_TOKEN@github.com/vairogs/cache-warmer.git"
     },
     {
         "path": "src/Vairogs/Component/DoctrineTools",
         "repo": "https://GH_TOKEN@github.com/vairogs/doctrine-tools.git"
     },
     {
-        "path": "src/Vairogs/PhpCsFixerCustomFixers",
-        "repo": "https://GH_TOKEN@github.com/vairogs/php-cs-fixer-custom-fixers.git"
+        "path": "src/Vairogs/Component/Mapper",
+        "repo": "https://GH_TOKEN@github.com/vairogs/mapper.git"
     },
     {
-        "path": "src/Vairogs/Component/CacheWarmer",
-        "repo": "https://GH_TOKEN@github.com/vairogs/cache-warmer.git"
+        "path": "src/Vairogs/Component/SpxProfiler",
+        "repo": "https://GH_TOKEN@github.com/vairogs/spx-profiler.git"
+    },
+    {
+        "path": "src/Vairogs/Functions",
+        "repo": "https://GH_TOKEN@github.com/vairogs/functions.git"
+    },
+    {
+        "path": "src/Vairogs/Functions/Date",
+        "repo": "https://GH_TOKEN@github.com/vairogs/functions-date.git"
+    },
+    {
+        "path": "src/Vairogs/Functions/Handler",
+        "repo": "https://GH_TOKEN@github.com/vairogs/functions-handler.git"
+    },
+    {
+        "path": "src/Vairogs/Functions/Iteration",
+        "repo": "https://GH_TOKEN@github.com/vairogs/functions-iteration.git"
+    },
+    {
+        "path": "src/Vairogs/Functions/Latvian",
+        "repo": "https://GH_TOKEN@github.com/vairogs/functions-latvian.git"
+    },
+    {
+        "path": "src/Vairogs/Functions/Local",
+        "repo": "https://GH_TOKEN@github.com/vairogs/functions-local.git"
+    },
+    {
+        "path": "src/Vairogs/Functions/Memoize",
+        "repo": "https://GH_TOKEN@github.com/vairogs/functions-memoize.git"
+    },
+    {
+        "path": "src/Vairogs/Functions/Number",
+        "repo": "https://GH_TOKEN@github.com/vairogs/functions-number.git"
+    },
+    {
+        "path": "src/Vairogs/Functions/Pagination",
+        "repo": "https://GH_TOKEN@github.com/vairogs/functions-pagination.git"
+    },
+    {
+        "path": "src/Vairogs/Functions/Php",
+        "repo": "https://GH_TOKEN@github.com/vairogs/functions-php.git"
+    },
+    {
+        "path": "src/Vairogs/Functions/Preg",
+        "repo": "https://GH_TOKEN@github.com/vairogs/functions-preg.git"
+    },
+    {
+        "path": "src/Vairogs/Functions/Sort",
+        "repo": "https://GH_TOKEN@github.com/vairogs/functions-sort.git"
+    },
+    {
+        "path": "src/Vairogs/Functions/Text",
+        "repo": "https://GH_TOKEN@github.com/vairogs/functions-text.git"
+    },
+    {
+        "path": "src/Vairogs/Functions/Web",
+        "repo": "https://GH_TOKEN@github.com/vairogs/functions-web.git"
+    },
+    {
+        "path": "src/Vairogs/PhpCsFixerCustomFixers",
+        "repo": "https://GH_TOKEN@github.com/vairogs/php-cs-fixer-custom-fixers.git"
     }
 ]
