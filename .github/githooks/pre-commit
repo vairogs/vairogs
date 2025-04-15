@@ -1,0 +1,28 @@
+#!/bin/sh
+
+# Run the sort_composer_json.php script to sort dependencies in composer.json files
+php "$(git rev-parse --show-toplevel)/.github/sort_composer_json.php"
+
+# If the script exits with a non-zero status, abort the commit
+if [ $? -ne 0 ]; then
+  echo "Error: sort_composer_json.php script failed for composer.json files. Aborting commit."
+  exit 1
+fi
+
+# Run the sort_composer_json.php script to sort the components.json file
+php "$(git rev-parse --show-toplevel)/.github/sort_composer_json.php" "$(git rev-parse --show-toplevel)/.github/deploy" "components.json"
+
+# If the script exits with a non-zero status, abort the commit
+if [ $? -ne 0 ]; then
+  echo "Error: sort_composer_json.php script failed for components.json file. Aborting commit."
+  exit 1
+fi
+
+# Add any modified composer.json files to the commit
+git diff --name-only --cached | grep -E 'composer\.json$' | xargs -r git add
+
+# Add any modified components.json files to the commit
+git diff --name-only --cached | grep -E 'components\.json$' | xargs -r git add
+
+# Continue with the commit
+exit 0
