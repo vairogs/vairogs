@@ -9,15 +9,15 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Number;
+namespace Vairogs\Functions\Number\Traits;
 
 use function is_numeric;
 
-trait _IsInt
+trait _IsFloat
 {
-    public function isInt(
+    public function isFloat(
         mixed $value,
     ): bool {
-        return is_numeric(value: $value) && ctype_digit(text: (string) $value);
+        return is_numeric(value: $value) && !ctype_digit(text: (string) $value);
     }
 }

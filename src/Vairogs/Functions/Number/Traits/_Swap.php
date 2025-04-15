@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Number;
+namespace Vairogs\Functions\Number\Traits;
 
 trait _Swap
 {

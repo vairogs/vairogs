@@ -1,0 +1,48 @@
+{
+    "name": "vairogs/functions-number",
+    "description": "A PHP library providing various number-related functions including prime number checking, distance calculations, and mathematical operations",
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "keywords": [
+        "php",
+        "number",
+        "math",
+        "prime",
+        "distance",
+        "calculation",
+        "gcd",
+        "lcm",
+        "vairogs",
+        "symfony"
+    ],
+    "authors": [
+        {
+            "name": "Davis Zalitis (k0d3r1s)",
+            "homepage": "https://me.k0d3r1s.com"
+        }
+    ],
+    "homepage": "https://github.com/vairogs/vairogs",
+    "require": {
+        "php": ">=8.4",
+        "vairogs/functions-handler": "self.version",
+        "vairogs/functions-preg": "self.version"
+    },
+    "suggest": {
+        "ext-gmp": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false,
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\Functions\\Number\\": ""
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}

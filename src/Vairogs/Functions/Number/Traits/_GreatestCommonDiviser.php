@@ -9,14 +9,18 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Number;
+namespace Vairogs\Functions\Number\Traits;
 
-trait _LeastCommonMultiple
+trait _GreatestCommonDiviser
 {
-    public function leastCommonMultiple(
+    public function greatestCommonDivisor(
         int $first,
         int $second,
     ): int {
+        if (0 === $second) {
+            return $first;
+        }
+
         static $_helper = null;
 
         if (null === $_helper) {
@@ -25,6 +29,6 @@ trait _LeastCommonMultiple
             };
         }
 
-        return (int) ($first * $second / $_helper->greatestCommonDivisor(first: $first, second: $second));
+        return $_helper->greatestCommonDivisor(first: $second, second: $first % $second);
     }
 }

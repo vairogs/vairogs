@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Number;
+namespace Vairogs\Functions\Number\Traits;
 
-use Vairogs\Component\Functions\Preg;
+use Vairogs\Functions\Preg;
 
 use function array_fill;
 use function array_key_exists;
@@ -26,7 +26,7 @@ trait _IsPrimal
 
         if (null === $_helper) {
             $_helper = new class {
-                use Preg\_Match;
+                use Preg\Traits\_Match;
             };
         }
 

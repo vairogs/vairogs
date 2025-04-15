@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Number;
+namespace Vairogs\Functions\Number\Traits;
 
-use Vairogs\Component\Functions\Handler\FunctionHandler;
+use Vairogs\Functions\Handler\FunctionHandler;
 
 trait _IsPrime
 {
