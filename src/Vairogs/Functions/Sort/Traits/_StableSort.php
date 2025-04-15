@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Sort;
+namespace Vairogs\Functions\Sort\Traits;
 
 use function array_map;
 use function array_walk;

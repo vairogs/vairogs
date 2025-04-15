@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions;
+namespace Vairogs\Functions\Sort;
 
-final class Sort
+final class Functions
 {
-    use Sort\_BubbleSort;
-    use Sort\_MergeSort;
-    use Sort\_SortByParameter;
-    use Sort\_StableSort;
-    use Sort\_Usort;
+    use Traits\_BubbleSort;
+    use Traits\_MergeSort;
+    use Traits\_SortByParameter;
+    use Traits\_StableSort;
+    use Traits\_Usort;
 }

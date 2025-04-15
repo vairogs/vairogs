@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Sort;
+namespace Vairogs\Functions\Sort\Traits;
 
 use function array_slice;
 use function count;

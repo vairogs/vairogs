@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Sort;
+namespace Vairogs\Functions\Sort\Traits;
 
 use InvalidArgumentException;
-use Vairogs\Component\Functions\Iteration;
+use Vairogs\Functions\Iteration;
 
 use function count;
 use function current;
@@ -37,7 +37,7 @@ trait _SortByParameter
         if (null === $_helper) {
             $_helper = new class {
                 use _Usort;
-                use Iteration\_IsSortable;
+                use Iteration\Traits\_IsSortable;
             };
         }
 

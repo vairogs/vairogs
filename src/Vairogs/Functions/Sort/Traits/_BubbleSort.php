@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Sort;
+namespace Vairogs\Functions\Sort\Traits;
 
-use Vairogs\Component\Functions\Iteration;
+use Vairogs\Functions\Iteration;
 
 use function count;
 
@@ -25,7 +25,7 @@ trait _BubbleSort
 
         if (null === $_helper) {
             $_helper = new class {
-                use Iteration\_SwapArray;
+                use Iteration\Traits\_SwapArray;
             };
         }
 

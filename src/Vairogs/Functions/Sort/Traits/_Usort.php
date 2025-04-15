@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Sort;
+namespace Vairogs\Functions\Sort\Traits;
 
 use Closure;
-use Vairogs\Component\Functions\Php;
+use Vairogs\Functions\Php;
 
 trait _Usort
 {
@@ -25,7 +25,7 @@ trait _Usort
 
             if (null === $_helper) {
                 $_helper = new class {
-                    use Php\_Parameter;
+                    use Php\Traits\_Parameter;
                 };
             }
 
