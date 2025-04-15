@@ -1,0 +1,52 @@
+{
+    "name": "vairogs/spx-profiler",
+    "description": "A Symfony profiler data collector for the SPX PHP profiler, which collects and displays profiling data for PHP applications",
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "keywords": [
+        "php",
+        "profiler",
+        "spx",
+        "symfony",
+        "performance",
+        "debugging",
+        "profiling",
+        "vairogs",
+        "data-collector"
+    ],
+    "authors": [
+        {
+            "name": "Davis Zalitis (k0d3r1s)",
+            "homepage": "https://me.k0d3r1s.com"
+        }
+    ],
+    "homepage": "https://github.com/vairogs/vairogs",
+    "require": {
+        "php": ">=8.4",
+        "symfony/dependency-injection": "*",
+        "symfony/framework-bundle": "*",
+        "symfony/http-foundation": "*",
+        "vairogs/bundle": "*",
+        "vairogs/functions-iteration": "*",
+        "vairogs/functions-text": "*"
+    },
+    "suggest": {
+        "ext-spx": "*",
+        "symfony/twig-bundle": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false,
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\Component\\SpxProfiler\\": ""
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
