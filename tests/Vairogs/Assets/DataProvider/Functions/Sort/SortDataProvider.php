@@ -12,15 +12,7 @@
 namespace Vairogs\Assets\DataProvider\Functions\Sort;
 
 use InvalidArgumentException;
-
-class TestObject
-{
-    public function __construct(
-        public readonly int $id,
-        public readonly string $name,
-    ) {
-    }
-}
+use Vairogs\Assets\Model\Functions\Sort\TestObject;
 
 class SortDataProvider
 {
