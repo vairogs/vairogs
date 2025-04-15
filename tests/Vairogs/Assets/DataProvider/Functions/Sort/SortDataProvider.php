@@ -216,8 +216,10 @@ class SortDataProvider
         ];
     }
 
-    private static function createTestObject(int $id, string $name): TestObject
-    {
+    private static function createTestObject(
+        int $id,
+        string $name,
+    ): TestObject {
         return new TestObject($id, $name);
     }
-} 
+}

@@ -29,12 +29,14 @@ class SortTest extends TestCase
     use _Usort;
 
     #[DataProviderExternal(SortDataProvider::class, 'provideBubbleSortMethod')]
-    public function testBubbleSort(array $array, array $expectedResult): void
-    {
+    public function testBubbleSort(
+        array $array,
+        array $expectedResult,
+    ): void {
         $originalArray = $array;
         $this->bubbleSort($array);
         $this->assertEquals($expectedResult, $array);
-        
+
         // Only check for modification if the original array was not already sorted
         if (!empty($originalArray) && $originalArray !== $expectedResult) {
             $this->assertNotEquals($originalArray, $array, 'Array should be modified in place');
@@ -42,8 +44,10 @@ class SortTest extends TestCase
     }
 
     #[DataProviderExternal(SortDataProvider::class, 'provideMergeSortMethod')]
-    public function testMergeSort(array $array, array $expectedResult): void
-    {
+    public function testMergeSort(
+        array $array,
+        array $expectedResult,
+    ): void {
         $originalArray = $array;
         $result = $this->mergeSort($array);
         $this->assertEquals($expectedResult, $result);
@@ -70,17 +74,26 @@ class SortTest extends TestCase
     }
 
     #[DataProviderExternal(SortDataProvider::class, 'provideStableSortMethod')]
-    public function testStableSort(array $elements, callable $getComparedValue, callable $compareValues, array $expectedResult): void
-    {
+    public function testStableSort(
+        array $elements,
+        callable $getComparedValue,
+        callable $compareValues,
+        array $expectedResult,
+    ): void {
         $result = $this->stableSort($elements, $getComparedValue, $compareValues);
         $this->assertEquals($expectedResult, $result);
     }
 
     #[DataProviderExternal(SortDataProvider::class, 'provideUsortMethod')]
-    public function testUsort(string $parameter, string $order, array|object $first, array|object $second, int $expectedResult): void
-    {
+    public function testUsort(
+        string $parameter,
+        string $order,
+        array|object $first,
+        array|object $second,
+        int $expectedResult,
+    ): void {
         $callback = $this->usort($parameter, $order);
         $result = $callback($first, $second);
         $this->assertEquals($expectedResult, $result);
     }
-} 
+}
