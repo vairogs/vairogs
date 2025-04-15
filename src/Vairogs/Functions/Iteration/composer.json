@@ -1,0 +1,46 @@
+{
+    "name": "vairogs/functions-iteration",
+    "description": "A PHP library providing enhanced array and iteration utility functions for array manipulation, transformation, and validation",
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "keywords": [
+        "php",
+        "array",
+        "iteration",
+        "manipulation",
+        "transformation",
+        "validation",
+        "vairogs",
+        "symfony"
+    ],
+    "authors": [
+        {
+            "name": "Davis Zalitis (k0d3r1s)",
+            "homepage": "https://me.k0d3r1s.com"
+        }
+    ],
+    "homepage": "https://github.com/vairogs/vairogs",
+    "require": {
+        "php": ">=8.4",
+        "ext-json": "*",
+        "symfony/property-access": "*",
+        "vairogs/functions-local": "self.version",
+        "vairogs/functions-php": "self.version",
+        "vairogs/functions-text": "self.version"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false,
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\Functions\\Iteration\\": ""
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}
