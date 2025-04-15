@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Latvian;
+namespace Vairogs\Functions\Latvian\Traits;
 
-use Vairogs\Component\Functions\Iteration;
-use Vairogs\Component\Functions\Text;
+use Vairogs\Functions\Iteration;
+use Vairogs\Functions\Text;
 
 trait _Compare
 {
@@ -25,8 +25,8 @@ trait _Compare
 
         if (null === $_helper) {
             $_helper = new class {
-                use Iteration\_Value;
-                use Text\_Compare;
+                use Iteration\Traits\_Value;
+                use Text\Traits\_Compare;
             };
         }
 

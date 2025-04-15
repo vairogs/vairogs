@@ -9,7 +9,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Latvian;
+namespace Vairogs\Functions\Latvian\Traits;
 
 use function usort;
 

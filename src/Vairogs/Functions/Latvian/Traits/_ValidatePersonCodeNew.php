@@ -9,14 +9,11 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Latvian;
+namespace Vairogs\Functions\Latvian\Traits;
 
-use function floor;
-use function substr;
-
-trait _ValidatePersonCodeOld
+trait _ValidatePersonCodeNew
 {
-    public function validatePersonCodeOld(
+    public function validatePersonCodeNew(
         string $personCode,
     ): bool {
         static $_helper = null;
@@ -29,13 +26,19 @@ trait _ValidatePersonCodeOld
 
         $personCode = $_helper->cleanPersonCode(personCode: $personCode);
 
-        $check = '01060307091005080402';
-        $checksum = 1;
+        $calculations = [1, 6, 3, 7, 9, 10, 5, 8, 4, 2];
+        $sum = 0;
 
-        for ($i = 0; $i < 10; $i++) {
-            $checksum -= (int) $personCode[$i] * (int) substr(string: $check, offset: $i * 2, length: 2);
+        foreach ($calculations as $key => $calculation) {
+            $sum += ((int) $personCode[$key] * $calculation);
         }
 
-        return (int) ($checksum - floor(num: $checksum / 11) * 11) === (int) $personCode[10];
+        $remainder = $sum % 11;
+
+        if (-1 > 1 - $remainder) {
+            return (1 - $remainder + 11) === (int) $personCode[10];
+        }
+
+        return (1 - $remainder) === (int) $personCode[10];
     }
 }

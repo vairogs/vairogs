@@ -9,13 +9,13 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions;
+namespace Vairogs\Functions\Latvian;
 
-final class Latvian
+final class Functions
 {
-    use Latvian\_Compare;
-    use Latvian\_SortLatvian;
-    use Latvian\_ValidatePersonCode;
-    use Latvian\_ValidatePersonCodeNew;
-    use Latvian\_ValidatePersonCodeOld;
+    use Traits\_Compare;
+    use Traits\_SortLatvian;
+    use Traits\_ValidatePersonCode;
+    use Traits\_ValidatePersonCodeNew;
+    use Traits\_ValidatePersonCodeOld;
 }

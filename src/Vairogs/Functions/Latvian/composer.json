@@ -1,0 +1,45 @@
+{
+    "name": "vairogs/functions-latvian",
+    "description": "A PHP library providing functions specific to Latvian language and data formats, including Latvian text comparison, sorting according to Latvian alphabet rules, and validation of Latvian personal identification codes",
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "keywords": [
+        "php",
+        "latvian",
+        "language",
+        "sorting",
+        "comparison",
+        "validation",
+        "personal code",
+        "vairogs",
+        "symfony"
+    ],
+    "authors": [
+        {
+            "name": "Davis Zalitis (k0d3r1s)",
+            "homepage": "https://me.k0d3r1s.com"
+        }
+    ],
+    "homepage": "https://github.com/vairogs/vairogs",
+    "require": {
+        "php": ">=8.4",
+        "vairogs/functions-date": "self.version",
+        "vairogs/functions-iteration": "self.version",
+        "vairogs/functions-text": "self.version"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false,
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\Functions\\Latvian\\": ""
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}

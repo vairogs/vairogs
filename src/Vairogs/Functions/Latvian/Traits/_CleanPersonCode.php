@@ -9,10 +9,10 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Latvian;
+namespace Vairogs\Functions\Latvian\Traits;
 
 use InvalidArgumentException;
-use Vairogs\Component\Functions\Text;
+use Vairogs\Functions\Text;
 
 use function sprintf;
 use function str_replace;
@@ -27,7 +27,7 @@ trait _CleanPersonCode
 
         if (null === $_helper) {
             $_helper = new class {
-                use Text\_KeepNumeric;
+                use Text\Traits\_KeepNumeric;
             };
         }
 

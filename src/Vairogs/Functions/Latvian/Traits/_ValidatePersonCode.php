@@ -9,9 +9,9 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Component\Functions\Latvian;
+namespace Vairogs\Functions\Latvian\Traits;
 
-use Vairogs\Component\Functions\Date;
+use Vairogs\Functions\Date;
 
 use function substr;
 
@@ -27,7 +27,7 @@ trait _ValidatePersonCode
                 use _CleanPersonCode;
                 use _ValidatePersonCodeNew;
                 use _ValidatePersonCodeOld;
-                use Date\_ValidateDate;
+                use Date\Traits\_ValidateDate;
             };
         }
 
