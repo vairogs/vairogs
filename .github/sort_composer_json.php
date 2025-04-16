@@ -77,6 +77,8 @@ foreach ($jsonFiles as $file) {
         // Write the updated composer.json file
         $updatedContent = json_encode($json, JSON_PRETTY_PRINT | JSON_UNESCAPED_SLASHES);
         $updatedContent = str_replace('    ', '    ', $updatedContent); // Ensure 4 spaces indentation
+        // Ensure exactly one newline at the end of the file
+        $updatedContent = rtrim($updatedContent) . "\n";
         file_put_contents($file, $updatedContent);
 
         $processedFiles++;

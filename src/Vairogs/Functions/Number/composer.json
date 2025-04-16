@@ -24,8 +24,7 @@
     "homepage": "https://github.com/vairogs/vairogs",
     "require": {
         "php": ">=8.4",
-        "vairogs/functions-handler": "self.version",
-        "vairogs/functions-preg": "self.version"
+        "vairogs/functions-handler": "self.version"
     },
     "suggest": {
         "ext-gmp": "*"
