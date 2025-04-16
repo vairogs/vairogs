@@ -14,26 +14,14 @@ namespace Vairogs\Tests\Functions\Preg;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;
 use Vairogs\Assets\DataProvider\Functions\Preg\PregDataProvider;
-use Vairogs\Functions\Preg\Traits\_AddUtf8Modifier;
 use Vairogs\Functions\Preg\Traits\_Match;
 use Vairogs\Functions\Preg\Traits\_MatchAll;
-use Vairogs\Functions\Preg\Traits\_NewPregException;
-use Vairogs\Functions\Preg\Traits\_RemoveUtf8Modifier;
 use Vairogs\Functions\Preg\Traits\_Replace;
 use Vairogs\Functions\Preg\Traits\_ReplaceCallback;
 use Vairogs\Functions\Preg\Traits\_Split;
 
 class PregTest extends TestCase
 {
-    use _AddUtf8Modifier;
-    use _Match;
-    use _MatchAll;
-    use _NewPregException;
-    use _RemoveUtf8Modifier;
-    use _Replace;
-    use _ReplaceCallback;
-    use _Split;
-
     #[DataProviderExternal(PregDataProvider::class, 'provideMatchMethod')]
     public function testMatch(
         string|array $pattern,
@@ -49,7 +37,9 @@ class PregTest extends TestCase
             $this->expectException($expectedException);
         }
 
-        $result = $this->match($pattern, $subject, $matches, $flags, $offset);
+        $result = new class {
+            use _Match;
+        }->match($pattern, $subject, $matches, $flags, $offset);
 
         if (null === $expectedException) {
             $this->assertEquals($expectedResult, $result);
@@ -75,7 +65,9 @@ class PregTest extends TestCase
             $this->expectException($expectedException);
         }
 
-        $result = $this->matchAll($pattern, $subject, $matches, $flags, $offset);
+        $result = new class {
+            use _MatchAll;
+        }->matchAll($pattern, $subject, $matches, $flags, $offset);
 
         if (null === $expectedException) {
             $this->assertEquals($expectedResult, $result);
@@ -101,7 +93,9 @@ class PregTest extends TestCase
             $this->expectException($expectedException);
         }
 
-        $result = $this->replace($pattern, $replacement, $subject, $limit, $count);
+        $result = new class {
+            use _Replace;
+        }->replace($pattern, $replacement, $subject, $limit, $count);
 
         if (null === $expectedException) {
             $this->assertEquals($expectedResult, $result);
@@ -127,7 +121,9 @@ class PregTest extends TestCase
             $this->expectException($expectedException);
         }
 
-        $result = $this->replaceCallback($pattern, $callback, $subject, $limit, $count);
+        $result = new class {
+            use _ReplaceCallback;
+        }->replaceCallback($pattern, $callback, $subject, $limit, $count);
 
         if (null === $expectedException) {
             $this->assertEquals($expectedResult, $result);
@@ -151,7 +147,9 @@ class PregTest extends TestCase
             $this->expectException($expectedException);
         }
 
-        $result = $this->split($pattern, $subject, $limit, $flags);
+        $result = new class {
+            use _Split;
+        }->split($pattern, $subject, $limit, $flags);
 
         if (null === $expectedException) {
             $this->assertEquals($expectedResult, $result);

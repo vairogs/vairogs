@@ -22,19 +22,15 @@ use Vairogs\Functions\Sort\Traits\_Usort;
 
 class SortTest extends TestCase
 {
-    use _BubbleSort;
-    use _MergeSort;
-    use _SortByParameter;
-    use _StableSort;
-    use _Usort;
-
     #[DataProviderExternal(SortDataProvider::class, 'provideBubbleSortMethod')]
     public function testBubbleSort(
         array $array,
         array $expectedResult,
     ): void {
         $originalArray = $array;
-        $this->bubbleSort($array);
+        new class {
+            use _BubbleSort;
+        }->bubbleSort($array);
         $this->assertEquals($expectedResult, $array);
 
         // Only check for modification if the original array was not already sorted
@@ -49,7 +45,9 @@ class SortTest extends TestCase
         array $expectedResult,
     ): void {
         $originalArray = $array;
-        $result = $this->mergeSort($array);
+        $result = new class {
+            use _MergeSort;
+        }->mergeSort($array);
         $this->assertEquals($expectedResult, $result);
         $this->assertEquals($originalArray, $array, 'Original array should not be modified');
     }
@@ -66,7 +64,9 @@ class SortTest extends TestCase
             $this->expectException($expectedException);
         }
 
-        $result = $this->sortByParameter($data, $parameter, $order);
+        $result = new class {
+            use _SortByParameter;
+        }->sortByParameter($data, $parameter, $order);
 
         if (null === $expectedException) {
             $this->assertEquals($expectedResult, $result);
@@ -80,7 +80,9 @@ class SortTest extends TestCase
         callable $compareValues,
         array $expectedResult,
     ): void {
-        $result = $this->stableSort($elements, $getComparedValue, $compareValues);
+        $result = new class {
+            use _StableSort;
+        }->stableSort($elements, $getComparedValue, $compareValues);
         $this->assertEquals($expectedResult, $result);
     }
 
@@ -92,7 +94,9 @@ class SortTest extends TestCase
         array|object $second,
         int $expectedResult,
     ): void {
-        $callback = $this->usort($parameter, $order);
+        $callback = new class {
+            use _Usort;
+        }->usort($parameter, $order);
         $result = $callback($first, $second);
         $this->assertEquals($expectedResult, $result);
     }
