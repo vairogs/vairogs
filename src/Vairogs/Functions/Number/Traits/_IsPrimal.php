@@ -11,27 +11,29 @@
 
 namespace Vairogs\Functions\Number\Traits;
 
-use Vairogs\Functions\Preg;
-
-use function array_fill;
-use function array_key_exists;
-use function implode;
-
 trait _IsPrimal
 {
     public function isPrimal(
         int $number,
     ): bool {
-        static $_helper = null;
-
-        if (null === $_helper) {
-            $_helper = new class {
-                use Preg\Traits\_Match;
-            };
+        if ($number <= 1) {
+            return false;
         }
 
-        $_helper->match(pattern: '#^1?$|^(11+?)\1+$#', subject: implode(separator: '1', array: array_fill(start_index: 0, count: $number, value: null)), matches: $matches);
+        if ($number <= 3) {
+            return true;
+        }
 
-        return array_key_exists(1, $matches);
+        if (0 === $number % 2 || 0 === $number % 3) {
+            return false;
+        }
+
+        for ($i = 5; $i * $i <= $number; $i += 6) {
+            if (0 === $number % $i || 0 === $number % ($i + 2)) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }

@@ -17,6 +17,10 @@ trait _LeastCommonMultiple
         int $first,
         int $second,
     ): int {
+        if (0 === $first || 0 === $second) {
+            return 0;
+        }
+
         static $_helper = null;
 
         if (null === $_helper) {
@@ -25,6 +29,6 @@ trait _LeastCommonMultiple
             };
         }
 
-        return (int) ($first * $second / $_helper->greatestCommonDivisor(first: $first, second: $second));
+        return (int) abs($first * $second / $_helper->greatestCommonDivisor(first: $first, second: $second));
     }
 }

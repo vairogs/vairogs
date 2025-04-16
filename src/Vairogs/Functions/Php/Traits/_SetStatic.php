@@ -37,9 +37,7 @@ trait _SetStatic
 
         try {
             if (new ReflectionProperty(class: $object, property: $property)->isStatic()) {
-                $_helper->void(function: static function () use ($object, $property, $value): void {
-                    $object::${$property} = $value;
-                }, clone: $object);
+                $_helper->void(fn () => $object::${$property} = $value, $object);
 
                 return $object;
             }

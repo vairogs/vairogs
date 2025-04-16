@@ -17,6 +17,9 @@ trait _GreatestCommonDiviser
         int $first,
         int $second,
     ): int {
+        $first = abs($first);
+        $second = abs($second);
+
         if (0 === $second) {
             return $first;
         }

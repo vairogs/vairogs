@@ -11,12 +11,18 @@
 
 namespace Vairogs\Functions\Php\Traits;
 
+use function function_exists;
+
 trait _ReturnFunction
 {
     public function returnFunction(
         string $function,
         ...$arguments,
     ): mixed {
+        if (!function_exists($function)) {
+            return null;
+        }
+
         return $function(...$arguments);
     }
 }

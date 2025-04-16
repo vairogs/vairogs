@@ -35,10 +35,10 @@ class FunctionHandler extends AbstractHandler
             };
         }
 
-        if (!is_object(value: $this->instance)) {
-            return $_helper->returnFunction($this->function, ...$arguments) ?? parent::handle(...$arguments);
-        }
+        $result = !is_object(value: $this->instance)
+            ? $_helper->returnFunction($this->function, ...$arguments)
+            : $_helper->returnObject($this->instance, $this->function, ...$arguments);
 
-        return $_helper->returnObject($this->instance, $this->function, ...$arguments) ?? parent::handle(...$arguments);
+        return parent::handle(...$arguments) ?? $result;
     }
 }
