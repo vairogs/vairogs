@@ -25,7 +25,7 @@ trait _WillBeAvailable
         array $parentPackages,
         string $rootPackageCheck = 'vairogs/vairogs',
     ): bool {
-        if (!class_exists(class: InstalledVersions::class)) {
+        if (!$this->classExists(InstalledVersions::class)) {
             throw new LogicException(message: sprintf('Calling "%s" when dependencies have been installed with Composer 1 is not supported. Consider upgrading to Composer 2.', __METHOD__));
         }
 
@@ -58,5 +58,11 @@ trait _WillBeAvailable
         }
 
         return false;
+    }
+
+    protected function classExists(
+        string $class,
+    ): bool {
+        return class_exists($class);
     }
 }

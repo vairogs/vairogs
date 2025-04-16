@@ -22,7 +22,7 @@ trait _CurlUA
 {
     public function getCurlUserAgent(): string
     {
-        $process = new Process(['curl', '--version']);
+        $process = $this->createProcess(['curl', '--version']);
         $process->run();
 
         if (!$process->isSuccessful()) {
@@ -31,10 +31,16 @@ trait _CurlUA
 
         $output = trim(explode("\n", $process->getOutput(), 2)[0]);
 
-        if (preg_match('/curl\s([\d.]+(?:-DEV)?)/', $output, $matches)) {
+        if (preg_match('/curl\s+([\d.]+(?:-(?:DEV|alpha\d+|beta\d+|rc\d+|[A-Za-z0-9#]+))?)(?:\s|\()/', $output, $matches)) {
             return 'curl/' . $matches[1];
         }
 
         return $output;
+    }
+
+    protected function createProcess(
+        array $command,
+    ): Process {
+        return new Process($command);
     }
 }

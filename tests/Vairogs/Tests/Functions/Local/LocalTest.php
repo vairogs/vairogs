@@ -11,12 +11,14 @@
 
 namespace Vairogs\Tests\Functions\Local;
 
+use LogicException;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Process\Exception\ProcessFailedException;
 use Symfony\Component\Process\Process;
 use UnexpectedValueException;
 use Vairogs\Assets\DataProvider\Functions\Local\LocalDataProvider;
+use Vairogs\Assets\Mock\Functions\Local\InstalledVersions as MockInstalledVersions;
 use Vairogs\Functions\Local\Traits\_CurlUA;
 use Vairogs\Functions\Local\Traits\_Exists;
 use Vairogs\Functions\Local\Traits\_FileExistsCwd;
@@ -28,6 +30,8 @@ use Vairogs\Functions\Local\Traits\_RmDir;
 use Vairogs\Functions\Local\Traits\_WillBeAvailable;
 
 use function sprintf;
+
+class_alias(MockInstalledVersions::class, 'Composer\\InstalledVersions');
 
 class LocalTest extends TestCase
 {
@@ -41,20 +45,21 @@ class LocalTest extends TestCase
             use _CurlUA;
 
             public function __construct(
-                private string $mockOutput,
-                private bool $isSuccessful,
+                private readonly string $mockOutput,
+                private readonly bool $isSuccessful,
             ) {
             }
 
-            public function getCurlUserAgent(): string
-            {
-                $process = new class(['curl', '--version'], $this->mockOutput, $this->isSuccessful) extends Process {
+            protected function createProcess(
+                array $command,
+            ): Process {
+                return new class($command, $this->mockOutput, $this->isSuccessful) extends Process {
                     private bool $started = false;
 
                     public function __construct(
                         array $command,
-                        private string $mockOutput,
-                        private bool $isSuccessful,
+                        private readonly string $mockOutput,
+                        private readonly bool $isSuccessful,
                     ) {
                         parent::__construct($command);
                     }
@@ -92,20 +97,6 @@ class LocalTest extends TestCase
                         return $this->started;
                     }
                 };
-
-                $process->run();
-
-                if (!$process->isSuccessful()) {
-                    throw new ProcessFailedException($process);
-                }
-
-                $output = trim(explode("\n", $process->getOutput(), 2)[0]);
-
-                if (preg_match('/curl\s([\d.]+(?:-DEV)?)/', $output, $matches)) {
-                    return 'curl/' . $matches[1];
-                }
-
-                return $output;
             }
         };
 
@@ -119,6 +110,27 @@ class LocalTest extends TestCase
             $this->assertIsString($result);
             $this->assertSame($expected, $result);
         }
+    }
+
+    public function testCurlUAWithRealProcess(): void
+    {
+        $object = new class {
+            use _CurlUA;
+
+            public function test(): array
+            {
+                return ['test'];
+            }
+        };
+
+        $command = $object->test();
+
+        self::assertIsArray($command);
+        self::assertSame(['test'], $command);
+
+        $result = $object->getCurlUserAgent();
+        $this->assertIsString($result);
+        $this->assertMatchesRegularExpression('/^curl\/[\d.]+(?:-(?:DEV|alpha\d+|beta\d+|rc\d+|[A-Za-z0-9#]+))?$/', $result);
     }
 
     #[DataProviderExternal(LocalDataProvider::class, 'provideExistsMethod')]
@@ -177,6 +189,11 @@ class LocalTest extends TestCase
         bool $dev,
         bool $expected,
     ): void {
+        MockInstalledVersions::setMockInstalled([
+            'vairogs/vairogs' => 'prod',
+            'json' => 'prod',
+        ]);
+
         $object = new class {
             use _IsInstalled;
         };
@@ -221,15 +238,37 @@ class LocalTest extends TestCase
         string $rootPackageCheck,
         bool $expected,
     ): void {
+        MockInstalledVersions::setMockInstalled([
+            'vairogs/functions-local' => 'prod',
+            'vairogs/functions' => 'prod',
+            'vairogs/vairogs' => 'dev',
+            'phpunit/phpunit' => 'dev',
+        ]);
+        MockInstalledVersions::setMockRootPackage([
+            'name' => 'vairogs/vairogs',
+        ]);
+
         $object = new class {
             use _WillBeAvailable;
         };
 
-        // Test helper reuse by calling twice
-        if ('Vairogs\Functions\Local\Traits\_Exists' === $class && empty($parentPackages) && 'vairogs/vairogs' === $rootPackageCheck) {
-            $object->willBeAvailable($package, $class, $parentPackages, $rootPackageCheck);
-        }
-
         self::assertSame($expected, $object->willBeAvailable($package, $class, $parentPackages, $rootPackageCheck));
+    }
+
+    public function testWillBeAvailableComposer1(): void
+    {
+        $object = new class {
+            use _WillBeAvailable;
+
+            protected function classExists(
+                string $class,
+            ): bool {
+                return false;
+            }
+        };
+
+        $this->expectException(LogicException::class);
+        $this->expectExceptionMessage('Calling "Vairogs\Functions\Local\Traits\_WillBeAvailable::willBeAvailable" when dependencies have been installed with Composer 1 is not supported. Consider upgrading to Composer 2.');
+        $object->willBeAvailable('test/package', 'TestClass', [], 'test/package');
     }
 }
