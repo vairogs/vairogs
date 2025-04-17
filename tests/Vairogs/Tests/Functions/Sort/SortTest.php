@@ -13,7 +13,7 @@ namespace Vairogs\Tests\Functions\Sort;
 
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;
-use Vairogs\Assets\DataProvider\Functions\Sort\SortDataProvider;
+use Vairogs\Assets\Functions\Sort\DataProvider\SortDataProvider;
 use Vairogs\Functions\Sort\Traits\_BubbleSort;
 use Vairogs\Functions\Sort\Traits\_MergeSort;
 use Vairogs\Functions\Sort\Traits\_SortByParameter;

@@ -14,7 +14,7 @@ namespace Vairogs\Tests\Functions\Memoize;
 use BackedEnum;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;
-use Vairogs\Assets\DataProvider\Functions\Memoize\MemoizeDataProvider;
+use Vairogs\Assets\Functions\Memoize\DataProvider\MemoizeDataProvider;
 use Vairogs\Functions\Memoize\Memoize;
 
 class MemoizeTest extends TestCase

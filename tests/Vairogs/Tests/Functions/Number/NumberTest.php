@@ -13,7 +13,7 @@ namespace Vairogs\Tests\Functions\Number;
 
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;
-use Vairogs\Assets\DataProvider\Functions\Number\NumberDataProvider;
+use Vairogs\Assets\Functions\Number\DataProvider\NumberDataProvider;
 use Vairogs\Functions\Number\Traits\_DistanceBetweenPoints;
 use Vairogs\Functions\Number\Traits\_DistanceInKm;
 use Vairogs\Functions\Number\Traits\_GreatestCommonDiviser;

@@ -15,7 +15,7 @@ use Closure;
 use InvalidArgumentException;
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;
-use Vairogs\Assets\DataProvider\Functions\Php\PhpDataProvider;
+use Vairogs\Assets\Functions\Php\DataProvider\PhpDataProvider;
 use Vairogs\Functions\Php\Traits\_Bind;
 use Vairogs\Functions\Php\Traits\_Get;
 use Vairogs\Functions\Php\Traits\_GetNonStatic;

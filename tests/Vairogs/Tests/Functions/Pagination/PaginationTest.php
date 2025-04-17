@@ -13,7 +13,7 @@ namespace Vairogs\Tests\Functions\Pagination;
 
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;
-use Vairogs\Assets\DataProvider\Functions\Pagination\PaginationDataProvider;
+use Vairogs\Assets\Functions\Pagination\DataProvider\PaginationDataProvider;
 use Vairogs\Functions\Pagination\Pagination;
 
 class PaginationTest extends TestCase

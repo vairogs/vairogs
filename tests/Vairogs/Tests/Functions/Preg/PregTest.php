@@ -13,7 +13,7 @@ namespace Vairogs\Tests\Functions\Preg;
 
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;
-use Vairogs\Assets\DataProvider\Functions\Preg\PregDataProvider;
+use Vairogs\Assets\Functions\Preg\DataProvider\PregDataProvider;
 use Vairogs\Functions\Preg\Traits\_Match;
 use Vairogs\Functions\Preg\Traits\_MatchAll;
 use Vairogs\Functions\Preg\Traits\_Replace;

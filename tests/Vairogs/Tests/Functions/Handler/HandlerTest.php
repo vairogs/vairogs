@@ -13,7 +13,7 @@ namespace Vairogs\Tests\Functions\Handler;
 
 use PHPUnit\Framework\Attributes\DataProviderExternal;
 use PHPUnit\Framework\TestCase;
-use Vairogs\Assets\DataProvider\Functions\Handler\HandlerDataProvider;
+use Vairogs\Assets\Functions\Handler\DataProvider\HandlerDataProvider;
 use Vairogs\Functions\Handler\AbstractHandler;
 use Vairogs\Functions\Handler\Chain;
 use Vairogs\Functions\Handler\FunctionHandler;
@@ -28,7 +28,7 @@ class HandlerTest extends TestCase
         $handler2 = new class extends AbstractHandler {
             public function handle(
                 ...$arguments,
-            ): mixed {
+            ): string {
                 return $arguments[0] . '_modified';
             }
         };
