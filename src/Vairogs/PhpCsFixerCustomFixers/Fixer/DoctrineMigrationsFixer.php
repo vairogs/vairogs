@@ -25,9 +25,6 @@ use function trim;
 
 use const T_COMMENT;
 
-/**
- * @internal
- */
 final class DoctrineMigrationsFixer extends AbstractFixer
 {
     public function getDocumentation(): string

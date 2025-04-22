@@ -33,9 +33,6 @@ use const T_SWITCH;
 use const T_WHILE;
 use const T_WHITESPACE;
 
-/**
- * @internal
- */
 final class LineBreakBetweenStatementsFixer extends AbstractFixer
 {
     private const array HANDLERS = [

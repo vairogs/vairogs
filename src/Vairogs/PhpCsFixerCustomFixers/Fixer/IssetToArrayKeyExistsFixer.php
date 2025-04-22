@@ -25,9 +25,6 @@ use const T_ISSET;
 use const T_STRING;
 use const T_WHITESPACE;
 
-/**
- * @internal
- */
 final class IssetToArrayKeyExistsFixer extends AbstractFixer
 {
     public function applyFix(

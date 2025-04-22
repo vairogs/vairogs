@@ -39,9 +39,6 @@ use const T_VAR;
 use const T_VARIABLE;
 use const T_WHITESPACE;
 
-/**
- * @internal
- */
 final class PromotedConstructorPropertyFixer extends AbstractFixer
 {
     private array $tokensToInsert;

@@ -26,9 +26,6 @@ use const T_DECLARE;
 use const T_OPEN_TAG;
 use const T_WHITESPACE;
 
-/**
- * @internal
- */
 final class DeclareAfterOpeningTagFixer extends AbstractFixer
 {
     public function applyFix(

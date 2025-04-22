@@ -27,9 +27,6 @@ use const T_FUNCTION;
 use const T_STRING;
 use const T_WHITESPACE;
 
-/**
- * @internal
- */
 final class LineBreakBetweenMethodArgumentsFixer extends AbstractFixer
 {
     public const int T_TYPEHINT_SEMI_COLON = 10025;

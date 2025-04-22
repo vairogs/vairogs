@@ -28,9 +28,6 @@ use const T_LNUMBER;
 use const T_NS_SEPARATOR;
 use const T_STRING;
 
-/**
- * @internal
- */
 final class NoUselessDirnameCallFixer extends AbstractFixer
 {
     public function applyFix(
