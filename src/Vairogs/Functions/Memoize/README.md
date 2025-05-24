@@ -16,7 +16,10 @@ PHP 8.4 or higher
 
 ## Usage
 
-The Memoize class provides a caching mechanism to store and retrieve values based on a context and keys.
+The package provides two classes for memoization:
+
+1. `Memoize` - The base class that provides a caching mechanism to store and retrieve values based on a context and keys.
+2. `MemoizeCache` - A conditional class that extends either `RequestCache` (if available in a Symfony environment) or falls back to `Memoize`. This provides seamless integration with Symfony's dependency injection when used as part of the Vairogs bundle.
 
 ### Basic Usage
 
@@ -45,9 +48,48 @@ $cachedResult = $memoize->value(
 );
 ```
 
+### Using MemoizeCache
+
+```php
+use Vairogs\Functions\Memoize\MemoizeCache;
+use YourNamespace\YourEnum;
+
+// Create a new MemoizeCache instance
+$memoizeCache = new MemoizeCache();
+
+// Use it the same way as Memoize
+$result = $memoizeCache->memoize(
+    YourEnum::SOME_VALUE,  // Context (must be a BackedEnum)
+    'your-key',            // Key
+    function() {           // Callback function whose result will be cached
+        // Expensive operation here
+        return $expensiveResult;
+    }
+);
+```
+
+In a Symfony environment with the Vairogs bundle installed, you can inject MemoizeCache as a service:
+
+```php
+use Vairogs\Functions\Memoize\MemoizeCache;
+
+class YourService
+{
+    public function __construct(
+        private readonly MemoizeCache $memoizeCache,
+    ) {
+    }
+
+    public function someMethod()
+    {
+        // Use $this->memoizeCache
+    }
+}
+```
+
 ### Advanced Usage with Nested Keys
 
-You can use subkeys for more complex caching scenarios:
+You can use subkeys for more complex caching scenarios (this works with both `Memoize` and `MemoizeCache`):
 
 ```php
 // Cache with nested keys
@@ -74,7 +116,7 @@ $cachedResult = $memoize->value(
 
 ### Refreshing the Cache
 
-You can force a refresh of the cached value:
+You can force a refresh of the cached value (this works with both `Memoize` and `MemoizeCache`):
 
 ```php
 $result = $memoize->memoize(

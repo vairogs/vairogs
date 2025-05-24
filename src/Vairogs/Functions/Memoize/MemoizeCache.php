@@ -9,12 +9,19 @@
  * file that was distributed with this source code.
  */
 
-namespace Vairogs\Bundle\Service;
+namespace Vairogs\Functions\Memoize;
 
 use Symfony\Component\DependencyInjection\Attribute\Autoconfigure;
-use Vairogs\Functions\Memoize\Memoize;
 
-#[Autoconfigure(public: true, shared: true)]
-final class RequestCache extends Memoize
-{
+use function class_exists;
+
+if (class_exists(Autoconfigure::class)) {
+    #[Autoconfigure(public: true, shared: true)]
+    class MemoizeCache extends Memoize
+    {
+    }
+} else {
+    class MemoizeCache extends Memoize
+    {
+    }
 }
