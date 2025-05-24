@@ -57,13 +57,26 @@
             <p>Install it with <code>pecl install spx</code> and enable it in your php.ini.</p>
         </div>
     {% elseif not collector.isEnabled %}
-        {# Installed but not enabled state #}
-        <div class="empty">
-            <p>SPX is installed but not enabled.</p>
-            <p>Enable it by:</p>
-            <ul>
-                <li>Setting the <code>SPX_ENABLED=1</code> cookie in your request</li>
-            </ul>
+        <div class="sf-tabs">
+            <div class="tab">
+                {# Installed but not enabled state #}
+                <div class="empty">
+                    <p>SPX is installed but not enabled.</p>
+                    <p>Enable it by:</p>
+                    <ul>
+                        <li>Setting the <code>SPX_ENABLED=1</code> cookie in your request</li>
+                    </ul>
+                </div>
+            </div>
+            {# Control Panel Tab #}
+            <div class="tab">
+                <h3 class="tab-title">SPX Control Panel</h3>
+                <div class="tab-content">
+                    <div class="spx-card">
+                        <iframe src="{{ collector.baseUri }}" class="spx-iframe"></iframe>
+                    </div>
+                </div>
+            </div>
         </div>
     {% else %}
         {# SPX is enabled and working #}
@@ -199,7 +212,6 @@
                     {% endif %}
                 </div>
             </div>
-
             {# Control Panel Tab #}
             <div class="tab">
                 <h3 class="tab-title">SPX Control Panel</h3>
