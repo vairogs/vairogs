@@ -8,6 +8,7 @@
     <testsuites>
         <testsuite name="default">
             <directory>tests/Vairogs/Tests</directory>
+            <directory>tests/Spaghetti/Tests</directory>
         </testsuite>
     </testsuites>
 </phpunit>

@@ -1,0 +1,47 @@
+{
+    "name": "spaghetti/xlsx-parser",
+    "description": "A blazingly fast XLSX parser for PHP 8.1+ that extracts data from spreadsheets with minimal dependencies",
+    "license": "MIT",
+    "type": "library",
+    "keywords": [
+        "excel",
+        "excel-parser",
+        "library",
+        "parser",
+        "php",
+        "vairogs",
+        "xlsx",
+        "xlsx-parser"
+    ],
+    "authors": [
+        {
+            "name": "Davis Zalitis (k0d3r1s)",
+            "homepage": "https://me.k0d3r1s.com"
+        },
+        {
+            "name": "simpletoimplement",
+            "email": "simpletoimplement@gmail.com"
+        }
+    ],
+    "homepage": "https://github.com/vairogs/vairogs",
+    "require": {
+        "php": ">=8.1.0",
+        "ext-xmlreader": "*",
+        "ext-zip": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": true,
+    "autoload": {
+        "psr-4": {
+            "Spaghetti\\": ""
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}

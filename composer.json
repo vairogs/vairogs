@@ -7,6 +7,8 @@
         "ext-curl": "*",
         "ext-json": "*",
         "ext-random": "*",
+        "ext-xmlreader": "*",
+        "ext-zip": "*",
         "api-platform/core": "*",
         "api-platform/doctrine-common": "*",
         "api-platform/doctrine-orm": "*",
@@ -22,6 +24,7 @@
         "doctrine/migrations": "*",
         "doctrine/orm": "*",
         "doctrine/persistence": "*",
+        "phpdocumentor/reflection-docblock": "*",
         "psr/log": "*",
         "symfony/config": "*",
         "symfony/console": "*",
@@ -62,7 +65,8 @@
         "vairogs/functions": "self.version",
         "vairogs/mapper": "self.version",
         "vairogs/php-cs-fixer-custom-fixers": "self.version",
-        "vairogs/spx-profiler": "self.version"
+        "vairogs/spx-profiler": "self.version",
+        "spaghetti/xlsx-parser": "self.version"
     },
     "conflict": {
         "api-platform/symfony": "<4.0.0",
@@ -74,12 +78,14 @@
     "prefer-stable": false,
     "autoload": {
         "psr-4": {
-            "Vairogs\\": "src/Vairogs/"
+            "Vairogs\\": "src/Vairogs/",
+            "Spaghetti\\": "src/Spaghetti/"
         }
     },
     "autoload-dev": {
         "psr-4": {
             "Vairogs\\Tests\\": "tests/Vairogs/Tests/",
+            "Spaghetti\\Tests\\": "tests/Spaghetti/Tests/",
             "Vairogs\\Assets\\": "tests/Vairogs/Assets/"
         }
     },
