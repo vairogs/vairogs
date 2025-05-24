@@ -1,0 +1,43 @@
+{
+    "name": "vairogs/functions-queue",
+    "description": "A PHP library providing a simple and efficient queue implementation for managing collections of items in a FIFO (First-In-First-Out) manner",
+    "license": "BSD-3-Clause",
+    "type": "library",
+    "keywords": [
+        "php",
+        "queue",
+        "fifo",
+        "collection",
+        "data-structure",
+        "vairogs",
+        "symfony"
+    ],
+    "authors": [
+        {
+            "name": "Davis Zalitis (k0d3r1s)",
+            "homepage": "https://me.k0d3r1s.com"
+        }
+    ],
+    "homepage": "https://github.com/vairogs/vairogs",
+    "require": {
+        "php": ">=8.4"
+    },
+    "suggest": {
+        "vairogs/bundle": "*"
+    },
+    "minimum-stability": "dev",
+    "prefer-stable": false,
+    "autoload": {
+        "psr-4": {
+            "Vairogs\\Functions\\Queue\\": ""
+        }
+    },
+    "config": {
+        "sort-packages": true
+    },
+    "extra": {
+        "branch-alias": {
+            "dev-master": "0.1.x-dev"
+        }
+    }
+}

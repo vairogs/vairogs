@@ -42,13 +42,15 @@
         "vairogs/functions-pagination": "self.version",
         "vairogs/functions-php": "self.version",
         "vairogs/functions-preg": "self.version",
+        "vairogs/functions-queue": "self.version",
         "vairogs/functions-sort": "self.version",
         "vairogs/functions-text": "self.version",
         "vairogs/functions-web": "self.version"
     },
     "suggest": {
         "ext-gmp": "*",
-        "doctrine/persistence": "*"
+        "doctrine/persistence": "*",
+        "vairogs/bundle": "*"
     },
     "minimum-stability": "dev",
     "prefer-stable": false,

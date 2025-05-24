@@ -32,6 +32,7 @@ This meta-package includes the following function libraries:
 - [vairogs/functions-pagination](Pagination) - Pagination utilities for arrays and collections
 - [vairogs/functions-php](Php) - PHP language enhancement utilities
 - [vairogs/functions-preg](Preg) - Regular expression utilities
+- [vairogs/functions-queue](Queue) - FIFO queue implementation for managing collections of items
 - [vairogs/functions-sort](Sort) - Sorting algorithms and utilities
 - [vairogs/functions-text](Text) - Text processing and manipulation utilities
 - [vairogs/functions-web](Web) - Web-related utilities for HTTP requests, URLs, etc.

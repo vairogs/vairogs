@@ -80,6 +80,10 @@
         "repo": "https://GH_TOKEN@github.com/vairogs/php-cs-fixer-custom-fixers.git"
     },
     {
+        "path": "src/Vairogs/Functions/Queue",
+        "repo": "https://GH_TOKEN@github.com/vairogs/functions-queue.git"
+    },
+    {
         "path": "src/Spaghetti/XLSXParser",
         "repo": "https://GH_TOKEN@github.com/vairogs/spaghetti-xlsx-parser.git"
     }
